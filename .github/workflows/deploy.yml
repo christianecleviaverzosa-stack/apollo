@@ -1,0 +1,41 @@
+name: Deploy nx app to gitHub pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      app:
+        description: 'Name of the app to deploy (e.g., megaton)'
+        required: true
+        default: 'megaton'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build app
+        run: npx nx run ${{ github.event.inputs.app }}:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: apps/${{ github.event.inputs.app }}/dist
+          destination_dir: ${{ github.event.inputs.app }}
+          enable_jekyll: false

@@ -14,6 +14,7 @@ export default defineConfig(() => ({
     host: 'localhost',
   },
   plugins: [react()],
+  base: '/apollo/megaton/',
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
