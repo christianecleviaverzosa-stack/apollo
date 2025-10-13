@@ -2,7 +2,9 @@
   "name": "@apollo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev:megaton": "nx run megaton:serve"
+  },
   "private": true,
   "devDependencies": {
     "@eslint/js": "^9.8.0",
