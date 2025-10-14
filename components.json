@@ -10,10 +10,8 @@
     "cssVariables": true,
     "prefix": ""
   },
-  "aliases": {
-    "components": "libs/ui/src/lib/components",
-    "@/components": "libs/ui/src/lib/components",
-    "@/lib": "libs/ui/src/lib",
-    "utils": "libs/utils/src"
-  }
+    "aliases": {
+      "components": "libs/ui/src/lib",
+      "utils": "@apollo/ui"
+    }
 }

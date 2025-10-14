@@ -9,6 +9,11 @@
       "import": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./*": {
+      "types": "./src/lib/ui/*.tsx",
+      "import": "./src/lib/ui/*.tsx",
+      "default": "./src/lib/ui/*.tsx"
+    },
     "./package.json": "./package.json"
   }
 }
