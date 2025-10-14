@@ -5,6 +5,12 @@
   "references": [
     {
       "path": "./apps/megaton"
+    },
+    {
+      "path": "./libs/ui"
+    },
+    {
+      "path": "./libs/utils"
     }
   ]
 }
