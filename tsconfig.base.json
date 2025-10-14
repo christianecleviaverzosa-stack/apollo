@@ -1,21 +1,24 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "composite": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "importHelpers": true,
-    "isolatedModules": true,
-    "lib": ["es2022"],
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "skipLibCheck": true,
-    "strict": true,
+    "rootDir": ".",
     "target": "es2022",
-    "customConditions": ["@apollo/source"]
-  }
+    "moduleResolution": "bundler",
+    "lib": ["es2022", "dom"],
+    "sourceMap": true,
+    "declaration": false,
+    "module": "esnext",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "importHelpers": true,
+    "paths": {
+      "@apollo/ui": ["libs/ui/src/index.ts"],
+      "@apollo/ui/*": ["libs/ui/src/lib/ui/*"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
 }
