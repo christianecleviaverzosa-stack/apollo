@@ -1,11 +1,5 @@
-import NxWelcome from './nx-welcome';
-
 export function App() {
-  return (
-    <div>
-      <NxWelcome title="@apollo/megaton" />
-    </div>
-  );
+  return <div>Megaton App</div>;
 }
 
 export default App;
