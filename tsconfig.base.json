@@ -19,7 +19,7 @@
     "customConditions": ["development"],
     "baseUrl": ".",
     "paths": {
-      "@apollo/lib/*": ["libs/ui/src/lib/*"]
+      "@apollo/utils/*": ["libs/utils/src/lib/*"]
     }
   }
 }

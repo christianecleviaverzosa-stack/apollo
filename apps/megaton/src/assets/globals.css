@@ -1,4 +1,4 @@
-@import '../../../../libs/ui/src/global.css';
+@import '../../../../libs/ui/src/lib/styles/global.css';
 
 @layer base {
   :root {
