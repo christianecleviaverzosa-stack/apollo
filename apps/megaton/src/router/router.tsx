@@ -1,6 +1,5 @@
 import {
   createBrowserRouter,
-  Outlet,
   RouteObject,
   RouterProvider,
 } from 'react-router-dom';
@@ -8,16 +7,8 @@ import App from '../app';
 import { Suspense } from 'react';
 import { unAuthRoutes } from './un-auth-routes';
 import { authRoutes } from './auth-routes';
-
-// TODO: Move to features
-const AuthLayout = () => {
-  return <Outlet />;
-};
-
-// TODO: Move to features
-const UnAuthLayout = () => {
-  return <Outlet />;
-};
+import { AuthLayout } from '@apollo/features/auth-layout';
+import { UnAuthLayout } from '@apollo/features/un-auth-layout';
 
 const routes: RouteObject[] = [
   {
@@ -25,7 +16,7 @@ const routes: RouteObject[] = [
     Component: App,
     errorElement: (
       <Suspense>
-        <p>something went wrong</p>
+        <p>[something went wrong]</p>
       </Suspense>
     ),
     children: [
