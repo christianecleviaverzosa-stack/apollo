@@ -1,5 +1,5 @@
 {
-  "name": "@apollo/utils",
+  "name": "@apollo/features",
   "version": "0.0.1",
   "private": true,
   "type": "commonjs",

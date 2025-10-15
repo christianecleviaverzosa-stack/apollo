@@ -3,7 +3,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "target": "es2022",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "lib": ["es2022", "dom"],
     "sourceMap": true,
     "declaration": false,
@@ -17,8 +17,8 @@
     "importHelpers": true,
     "paths": {
       "@apollo/ui/*": ["libs/ui/src/lib/ui/*"],
-      "@apollo/features/*": ["features/src/lib/*"],
-      "@apollo/utils": ["libs/utils/src"] // utils on single entry alias
+      "@apollo/features": ["features/src/index.ts"],
+      "@apollo/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
