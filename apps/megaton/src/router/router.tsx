@@ -7,12 +7,12 @@ import App from '../app';
 import { Suspense } from 'react';
 import { unAuthRoutes } from './un-auth-routes';
 import { authRoutes } from './auth-routes';
-import { AuthLayout } from '@apollo/features';
-import { UnAuthLayout } from '@apollo/features';
+import { AuthLayout, UnAuthLayout } from '@apollo/features';
+import { RoutePath } from '@apollo/constants';
 
 const routes: RouteObject[] = [
   {
-    path: '/',
+    path: RoutePath.Login,
     Component: App,
     errorElement: (
       <Suspense>

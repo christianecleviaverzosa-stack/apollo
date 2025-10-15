@@ -16,8 +16,9 @@
     "experimentalDecorators": false,
     "importHelpers": true,
     "paths": {
-      "@apollo/ui/*": ["libs/ui/src/lib/ui/*"],
+      "@apollo/constants": ["libs/constants/src/index.ts"],
       "@apollo/features": ["features/src/index.ts"],
+      "@apollo/ui/*": ["libs/ui/src/lib/ui/*"],
       "@apollo/utils": ["libs/utils/src/index.ts"]
     }
   },
