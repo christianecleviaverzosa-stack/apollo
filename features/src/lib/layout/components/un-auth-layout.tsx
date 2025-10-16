@@ -2,10 +2,8 @@ import { Outlet } from 'react-router-dom';
 
 export const UnAuthLayout = () => {
   return (
-    <>
-      [un_auth_layout_wrapper]
+    <main data-testid="unauth-layout-container" className="flex min-h-screen flex-col">
       <Outlet />
-      [/un_auth_layout_wrapper]
-    </>
+    </main>
   );
 };
