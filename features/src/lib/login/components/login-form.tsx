@@ -24,7 +24,7 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: LoginFormValues) => {
     console.log('form data:', data);
     navigate(RoutePath.Dashboard);
   };
