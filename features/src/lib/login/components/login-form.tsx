@@ -4,6 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@apollo/ui/input';
 import { Button } from '@apollo/ui/button';
 import { Label } from '@apollo/ui/label';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '@apollo/constants';
 
 const loginFormSchema = z.object({
   username: z.string().min(1, 'Please enter your username'),
@@ -12,6 +14,8 @@ const loginFormSchema = z.object({
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -22,6 +26,7 @@ export const LoginForm = () => {
 
   const onSubmit = (data) => {
     console.log('form data:', data);
+    navigate(RoutePath.Dashboard);
   };
 
   return (
