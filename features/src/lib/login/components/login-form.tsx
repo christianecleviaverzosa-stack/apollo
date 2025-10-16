@@ -1,9 +1,7 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from '@apollo/ui/input';
-import { Button } from '@apollo/ui/button';
-import { Label } from '@apollo/ui/label';
+import { Input, Button, Label } from '@apollo/ui';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '@apollo/constants';
 
