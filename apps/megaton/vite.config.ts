@@ -6,7 +6,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 export default defineConfig(({ command }) => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/megaton',
-  base: command === 'build' ? '/apollo/megaton/' : '/',
+  base: process.env.VERCEL ? '/' : '/apollo/',
   server: {
     port: 3000,
     host: 'localhost',
