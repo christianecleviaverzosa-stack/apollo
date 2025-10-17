@@ -34,18 +34,14 @@ export const LoginForm = () => {
       id="login-form"
     >
       {/** Username */}
-      <Label htmlFor="username" requiredIndicator>
-        Username
-      </Label>
+      <Label requiredIndicator>Username</Label>
       <Input
         placeholder="Enter your username"
         {...register('username')}
         error={errors.username?.message}
       />
       {/** Password */}
-      <Label htmlFor="username" requiredIndicator>
-        Password
-      </Label>
+      <Label requiredIndicator>Password</Label>
       <Input
         placeholder="Enter your password"
         {...register('password')}
