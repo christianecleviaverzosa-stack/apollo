@@ -6,3 +6,4 @@ export * from './lib/ui/dropdown-menu';
 export * from './lib/ui/popover';
 export * from './lib/store';
 export * from './lib/ui/sheet';
+export * from './lib/ui/accordion';

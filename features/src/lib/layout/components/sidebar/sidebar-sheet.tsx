@@ -19,7 +19,7 @@ const SidebarSheet = () => {
 
   return (
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>
-      <SheetContent>
+      <SheetContent side="left">
         <SheetClose />
         <SheetHeader>
           <SheetTitle>title</SheetTitle>
