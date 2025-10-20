@@ -10,6 +10,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  setCurrentSheet,
 } from '@apollo/ui';
 import { User, Bell, Menu } from 'lucide-react';
 
@@ -83,7 +84,9 @@ export const Header = () => {
     >
       {/** Mobile Sidebar Burger Menu */}
       <div className="md:hidden flex-1">
-        <Button>
+        <Button
+          onClick={() => setCurrentSheet({ open: true, content: 'sidebar' })}
+        >
           <Menu />
         </Button>
       </div>

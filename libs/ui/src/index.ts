@@ -4,3 +4,5 @@ export * from './lib/ui/input';
 export * from './lib/ui/label';
 export * from './lib/ui/dropdown-menu';
 export * from './lib/ui/popover';
+export * from './lib/store';
+export * from './lib/ui/sheet';
