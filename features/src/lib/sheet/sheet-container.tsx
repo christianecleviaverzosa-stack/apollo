@@ -1,4 +1,4 @@
-import { selectCurrentSheet } from '../../../../libs/ui/src/lib/store/selectors';
+import { selectCurrentSheet } from '@apollo/ui/src/lib/store/selectors';
 import { Suspense, lazy } from 'react';
 
 const Sidebar = lazy(
