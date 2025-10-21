@@ -7,3 +7,6 @@ export * from './lib/ui/popover';
 export * from './lib/store';
 export * from './lib/ui/sheet';
 export * from './lib/ui/accordion';
+export * from './lib/ui/use-mobile';
+export * from './lib/ui/sidebar';
+export * from './lib/ui/collapsible';

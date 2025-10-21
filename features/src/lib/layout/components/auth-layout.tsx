@@ -1,28 +1,24 @@
-import { Outlet } from 'react-router-dom';
 import { Header } from './header/header';
-import { Sidebar } from './sidebar/sidebar';
+import { AppSidebar } from './sidebar/app-sidebar';
 import { SheetContainer } from '../../sheet/sheet-container';
+import { SidebarProvider } from '@apollo/ui';
 
 export const AuthLayout = () => {
   return (
-    <>
+    <SidebarProvider>
       <SheetContainer />
       <div
         data-testid="auth-layout-container"
-        className="flex min-h-screen max-h-screen overflow-hidden"
+        className="flex min-h-screen w-full"
       >
-        {/* Sidebar */}
-        <Sidebar />
-        {/** Header & Scrollable Content */}
-        <div className="flex flex-col flex-1">
-          {/* Header */}
+        {/* App Sidebar */}
+        <AppSidebar />
+        {/* Main content */}
+        <main className="flex-1 overflow-auto">
           <Header />
-          {/* Scrollable Content Area */}
-          <main className="flex-1 overflow-y-auto p-4">
-            <Outlet />
-          </main>
-        </div>
+          <div className="bg-red-200">test</div>
+        </main>
       </div>
-    </>
+    </SidebarProvider>
   );
 };

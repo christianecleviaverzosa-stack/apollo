@@ -1,18 +1,12 @@
-import { selectCurrentSheet } from '@apollo/ui/src/lib/store/selectors';
-import { Suspense, lazy } from 'react';
-
-const Sidebar = lazy(
-  () => import('../layout/components/sidebar/sidebar-sheet')
-);
+import { Suspense } from 'react';
 
 const Component = () => {
-  const type = selectCurrentSheet();
-  switch (type) {
-    case 'sidebar':
-      return <Sidebar />;
-    default:
-      return null;
-  }
+  // const type = selectCurrentSheet();
+  // switch (type) {
+  //   default:
+  //     return null;
+  // }
+  return null;
 };
 
 // Global sheets

@@ -10,15 +10,15 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  setCurrentSheet,
+  SidebarTrigger,
 } from '@apollo/ui';
-import { User, Bell, Menu } from 'lucide-react';
+import { User, Bell } from 'lucide-react';
 
 const MyAccountDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>
+        <Button variant="link">
           My Account
           <User />
         </Button>
@@ -45,7 +45,7 @@ const NotificationPopover = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button>
+        <Button variant="link">
           <span className="hidden md:block">Notifications</span>
           <div className="relative">
             <Bell />
@@ -80,20 +80,14 @@ export const Header = () => {
   return (
     <header
       data-testid="header"
-      className="flex md:justify-end items-center bg-primary p-4 space-x-1"
+      className="flex md:justify-end items-center p-4 space-x-1 shadow"
     >
       {/** Mobile Sidebar Burger Menu */}
       <div className="md:hidden flex-1">
-        <Button
-          onClick={() => setCurrentSheet({ open: true, content: 'sidebar' })}
-        >
-          <Menu />
-        </Button>
+        <SidebarTrigger />
       </div>
       {/** Desktop: User Greeting */}
-      <h1 className="hidden md:block flex-1 text-primary-foreground">
-        Hi Christian, Welcome back!
-      </h1>
+      <h1 className="hidden md:block flex-1">Hi Christian, Welcome back!</h1>
       <NotificationPopover />
       <MyAccountDropdown />
     </header>
