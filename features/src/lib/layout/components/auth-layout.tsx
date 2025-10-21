@@ -2,6 +2,7 @@ import { Header } from './header/header';
 import { AppSidebar } from './sidebar/app-sidebar';
 import { SheetContainer } from '../../sheet/sheet-container';
 import { SidebarProvider } from '@apollo/ui';
+import { Outlet } from 'react-router-dom';
 
 export const AuthLayout = () => {
   return (
@@ -11,12 +12,16 @@ export const AuthLayout = () => {
         data-testid="auth-layout-container"
         className="flex min-h-screen w-full"
       >
-        {/* App Sidebar */}
+        {/* Sidebar */}
         <AppSidebar />
-        {/* Main content */}
-        <main className="flex-1 overflow-auto">
+        {/* Main area */}
+        <main className="flex flex-col flex-1 h-screen">
+          {/* Fixed Header */}
           <Header />
-          <div className="bg-red-200">test</div>
+          {/* Scrollable content below header */}
+          <div className="flex-1 p-4 overflow-y-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
     </SidebarProvider>

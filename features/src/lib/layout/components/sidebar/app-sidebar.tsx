@@ -168,7 +168,7 @@ const navLinks: NavGroup[] = [
 export const AppSidebar = () => {
   return (
     <Sidebar>
-      <p className="font-semibold text-xl mx-auto py-6">Megaton Logo</p>
+      <h2 className="font-semibold text-xl mx-auto py-6 text-foreground">Megaton</h2>
       <SidebarContent>
         {navLinks.map((group) => (
           <SidebarGroup key={group.group}>

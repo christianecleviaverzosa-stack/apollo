@@ -10,3 +10,5 @@ export * from './lib/ui/accordion';
 export * from './lib/ui/use-mobile';
 export * from './lib/ui/sidebar';
 export * from './lib/ui/collapsible';
+export * from './lib/ui/card';
+export * from './lib/ui/chart';

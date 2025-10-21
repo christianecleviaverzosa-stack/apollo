@@ -83,11 +83,12 @@ export const Header = () => {
       className="flex md:justify-end items-center p-4 space-x-1 shadow"
     >
       {/** Mobile Sidebar Burger Menu */}
-      <div className="md:hidden flex-1">
+      <div className="flex gap-2 items-center md:hidden flex-1">
         <SidebarTrigger />
+        <h1 className="font-semibold text-lg">Megaton</h1>
       </div>
       {/** Desktop: User Greeting */}
-      <h1 className="hidden md:block flex-1">Hi Christian, Welcome back!</h1>
+      <h2 className="hidden md:block flex-1">Hi Christian, Welcome back!</h2>
       <NotificationPopover />
       <MyAccountDropdown />
     </header>
