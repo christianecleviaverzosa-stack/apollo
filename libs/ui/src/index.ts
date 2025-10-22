@@ -12,3 +12,4 @@ export * from './lib/ui/sidebar';
 export * from './lib/ui/collapsible';
 export * from './lib/ui/card';
 export * from './lib/ui/chart';
+export * from './lib/ui/calendar';

@@ -1,3 +1,5 @@
+// TODO: This must be a dumb component, currently placeholder contents
+
 import {
   Card,
   CardContent,
@@ -7,6 +9,16 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+  Popover,
+  PopoverTrigger,
+  Button,
+  PopoverContent,
+  Calendar,
 } from '@apollo/ui';
 
 import {
@@ -20,7 +32,84 @@ import {
   Cell,
   ResponsiveContainer,
 } from 'recharts';
-import { TrendingUp, Users, DollarSign, Briefcase } from 'lucide-react';
+import {
+  TrendingUp,
+  Users,
+  DollarSign,
+  Briefcase,
+  CalendarIcon,
+} from 'lucide-react';
+import z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { cn } from '@apollo/utils';
+import { format } from 'date-fns';
+
+const dashboardFilterFormSchema = z.object({
+  date: z.date({
+    error: 'A date of birth is required.',
+  }),
+});
+type DashboardFilterFormValues = z.infer<typeof dashboardFilterFormSchema>;
+
+const FilterForm = () => {
+  const form = useForm<DashboardFilterFormValues>({
+    defaultValues: {
+      date: new Date(),
+    },
+    resolver: zodResolver(dashboardFilterFormSchema),
+  });
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit((data) => console.log(data))}
+        className="space-y-8"
+      >
+        <FormField
+          control={form.control}
+          name="date"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={'outline'}
+                      className={cn(
+                        'w-full md:w-[240px] pl-3 text-left font-normal',
+                        !field.value && 'text-muted-foreground'
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, 'PPP')
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date('1900-01-01')
+                    }
+                    captionLayout="dropdown"
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </form>
+    </Form>
+  );
+};
 
 export default function DashboardPage() {
   // Mock data
@@ -75,11 +164,10 @@ export default function DashboardPage() {
 
   return (
     <section data-testid="dashboard-page" className="space-y-6">
-      <h2 className="text-2xl font-semibold">Dashboard Overview</h2>
-      <p className="text-sm text-muted-foreground">
-        Get a quick snapshot of your platform’s performance — including user
-        activity, lead stats, and trading metrics.
-      </p>
+      <div className="flex flex-col gap-4 md:flex-row justify-between">
+        <h2 className="text-2xl font-semibold">Dashboard Overview</h2>
+        <FilterForm />
+      </div>
 
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
