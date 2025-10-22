@@ -80,7 +80,7 @@ export const Header = () => {
   return (
     <header
       data-testid="header"
-      className="flex md:justify-end items-center p-4 space-x-1 shadow"
+      className="flex md:justify-end items-center p-4 space-x-1 border-b"
     >
       {/** Mobile Sidebar Burger Menu */}
       <div className="flex gap-2 items-center md:hidden flex-1">

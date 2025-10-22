@@ -1,3 +1,5 @@
+// TODO: Needs improvement, placeholder for now. Sidebar nav items must be on app level.
+
 import * as React from 'react';
 import {
   Home,
@@ -29,6 +31,7 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from '@apollo/ui';
+import { RoutePath } from '@apollo/constants';
 
 // TODO: Improve type, find a way to move values to app level (settings to avoid circular)
 type NavChild = {
@@ -66,17 +69,17 @@ const navLinks: NavGroup[] = [
       {
         label: 'All Workers',
         icon: Users,
-        href: '/',
+        href: RoutePath.Workers,
       },
       {
         label: 'Role Management',
         icon: UserCog,
         collapsible: true,
         children: [
-          { label: 'Super Admin', href: '/' },
-          { label: 'Admin', href: '/' },
-          { label: 'Manager', href: '/' },
-          { label: 'Sales', href: '/' },
+          { label: 'Super Admin', href: RoutePath.Login },
+          { label: 'Admin', href: RoutePath.Login },
+          { label: 'Manager', href: RoutePath.Login },
+          { label: 'Sales', href: RoutePath.Login },
         ],
       },
       {
@@ -84,9 +87,9 @@ const navLinks: NavGroup[] = [
         icon: BarChart3,
         collapsible: true,
         children: [
-          { label: 'Leads Handled', href: '/' },
-          { label: 'FTD Reports', href: '/' },
-          { label: 'Conversion Stats', href: '/' },
+          { label: 'Leads Handled', href: RoutePath.Login },
+          { label: 'FTD Reports', href: RoutePath.Login },
+          { label: 'Conversion Stats', href: RoutePath.Login },
         ],
       },
     ],
@@ -94,11 +97,11 @@ const navLinks: NavGroup[] = [
   {
     group: 'Leads',
     items: [
-      { label: 'All Leads', icon: FileSpreadsheet, href: '/' },
-      { label: 'Import Leads', icon: Database, href: '/' },
-      { label: 'Lead Assignment', icon: ClipboardList, href: '/' },
-      { label: 'FTD Clients', icon: Wallet, href: '/' },
-      { label: 'Retention Clients', icon: Users, href: '/' },
+      { label: 'All Leads', icon: FileSpreadsheet, href: RoutePath.Login },
+      { label: 'Import Leads', icon: Database, href: RoutePath.Login },
+      { label: 'Lead Assignment', icon: ClipboardList, href: RoutePath.Login },
+      { label: 'FTD Clients', icon: Wallet, href: RoutePath.Login },
+      { label: 'Retention Clients', icon: Users, href: RoutePath.Login },
     ],
   },
   {
@@ -109,9 +112,9 @@ const navLinks: NavGroup[] = [
         icon: LineChart,
         collapsible: true,
         children: [
-          { label: 'Open Orders', href: '/' },
-          { label: 'Pending Orders', href: '/' },
-          { label: 'Closed Orders', href: '/' },
+          { label: 'Open Orders', href: RoutePath.Login },
+          { label: 'Pending Orders', href: RoutePath.Login },
+          { label: 'Closed Orders', href: RoutePath.Login },
         ],
       },
       {
@@ -119,24 +122,24 @@ const navLinks: NavGroup[] = [
         icon: Settings,
         collapsible: true,
         children: [
-          { label: 'Deposits', href: '/' },
-          { label: 'Withdrawals', href: '/' },
-          { label: 'Internal Transfers', href: '/' },
+          { label: 'Deposits', href: RoutePath.Login },
+          { label: 'Withdrawals', href: RoutePath.Login },
+          { label: 'Internal Transfers', href: RoutePath.Login },
         ],
       },
       {
         label: 'Client Trading Summary',
         icon: BarChart3,
-        href: '/',
+        href: RoutePath.Login,
       },
     ],
   },
   {
     group: 'Access & Permissions',
     items: [
-      { label: 'Role Access Control', icon: Shield, href: '/' },
-      { label: 'Activity Logs', icon: ClipboardList, href: '/' },
-      { label: 'Login Sessions', icon: Lock, href: '/' },
+      { label: 'Role Access Control', icon: Shield, href: RoutePath.Login },
+      { label: 'Activity Logs', icon: ClipboardList, href: RoutePath.Login },
+      { label: 'Login Sessions', icon: Lock, href: RoutePath.Login },
     ],
   },
   {
@@ -145,30 +148,29 @@ const navLinks: NavGroup[] = [
       {
         label: 'Platform Configuration',
         icon: Settings,
-        href: '/',
+        href: RoutePath.Login,
       },
       {
         label: 'Branding & Whitelabel',
         icon: Settings,
-        href: '/',
+        href: RoutePath.Login,
       },
       {
         label: 'Notification Settings',
         icon: Database,
-        href: '/',
+        href: RoutePath.Login,
       },
-      { label: 'API Integrations', icon: Shield, href: '/' },
+      { label: 'API Integrations', icon: Shield, href: RoutePath.Login },
     ],
   },
 ];
 
-/* -----------------------------
-   🧭 APP SIDEBAR COMPONENT
------------------------------- */
 export const AppSidebar = () => {
   return (
     <Sidebar>
-      <h2 className="font-semibold text-xl mx-auto py-6 text-foreground">Megaton</h2>
+      <h2 className="font-semibold text-xl mx-auto py-6 text-foreground">
+        Megaton
+      </h2>
       <SidebarContent>
         {navLinks.map((group) => (
           <SidebarGroup key={group.group}>

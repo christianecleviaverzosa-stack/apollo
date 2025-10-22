@@ -13,3 +13,8 @@ export * from './lib/ui/collapsible';
 export * from './lib/ui/card';
 export * from './lib/ui/chart';
 export * from './lib/ui/calendar';
+export * from './lib/ui/select';
+export * from './lib/ui/table';
+export * from './lib/ui/badge';
+export * from './lib/ui/pagination';
+export * from './lib/ui/scroll-area';
