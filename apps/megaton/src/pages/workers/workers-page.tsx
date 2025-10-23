@@ -25,6 +25,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  setCurrentDialog,
 } from '@apollo/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -296,7 +297,13 @@ const WorkersTable = () => {
             {/* Actions */}
             <TableCell className="flex justify-end">
               <div className="flex gap-2">
-                <Button variant="ghost" size="icon">
+                <Button
+                  onClick={() =>
+                    setCurrentDialog({ content: 'edit-worker', open: true })
+                  }
+                  variant="ghost"
+                  size="icon"
+                >
                   <Pencil className="h-4 w-4" />
                 </Button>
                 <Button variant="ghost" size="icon">

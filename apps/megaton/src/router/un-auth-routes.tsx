@@ -1,3 +1,4 @@
+import { Backdrop } from '@apollo/ui';
 import { lazy, Suspense } from 'react';
 import { RouteObject } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ export const unAuthRoutes: RouteObject[] = [
   {
     index: true,
     Component: () => (
-      <Suspense fallback={<>[login_page_loader]</>}>
+      <Suspense fallback={<Backdrop />}>
         <LoginPage />
       </Suspense>
     ),

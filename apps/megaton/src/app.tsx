@@ -1,7 +1,13 @@
 import { Outlet } from 'react-router-dom';
+import { PromptContainer } from '@apollo/features';
 
 export function App() {
-  return <Outlet />;
+  return (
+    <>
+      <PromptContainer />
+      <Outlet />
+    </>
+  );
 }
 
 export default App;

@@ -11,6 +11,12 @@
     },
     {
       "path": "./libs/utils"
+    },
+    {
+      "path": "./libs/types"
+    },
+    {
+      "path": "./features"
     }
   ]
 }

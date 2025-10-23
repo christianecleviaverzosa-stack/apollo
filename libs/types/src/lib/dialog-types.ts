@@ -1,0 +1,1 @@
+export type DialogTypes = 'edit-worker' | null;
