@@ -1,1 +1,1 @@
-export type DialogTypes = 'edit-worker' | null;
+export type DialogTypes = 'edit-worker' | 'suspend-worker' | null;

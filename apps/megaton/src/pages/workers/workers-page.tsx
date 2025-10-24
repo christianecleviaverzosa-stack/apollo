@@ -306,7 +306,13 @@ const WorkersTable = () => {
                 >
                   <Pencil className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon">
+                <Button
+                  onClick={() =>
+                    setCurrentDialog({ content: 'suspend-worker', open: true })
+                  }
+                  variant="ghost"
+                  size="icon"
+                >
                   <Power className="h-4 w-4" />
                 </Button>
                 <Button variant="ghost" size="icon">

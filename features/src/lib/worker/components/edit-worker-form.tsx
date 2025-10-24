@@ -13,6 +13,7 @@ import {
   Checkbox,
   SelectGroup,
   SelectLabel,
+  Badge,
 } from '@apollo/ui';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -220,33 +221,14 @@ export const EditWorkerForm = () => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Label>Account Status</Label>
-              <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="active">Active</SelectItem>
-                          <SelectItem value="suspended">Suspended</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
               <Label>Lead Limit / Quota</Label>
               <Input type="number" placeholder="Max leads assigned per day" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label>Account Status</Label>
+              <Badge variant="default" className="w-fit text-sm">
+                Active
+              </Badge>
             </div>
           </div>
         </div>

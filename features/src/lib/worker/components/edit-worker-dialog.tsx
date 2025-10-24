@@ -27,16 +27,16 @@ const EditWorkerDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent data-testid="edit-worker-dialog">
+      <DialogContent className='w-full' data-testid="edit-worker-dialog">
         <DialogTitle>Edit Worker</DialogTitle>
         <Separator />
         <EditWorkerForm />
         <Separator />
-        <DialogFooter>
-          <Button>Save Changes</Button>
+        <DialogFooter className="gap-2 md:gap-0">
           <Button onClick={closePrompt} variant="outline">
             Cancel
           </Button>
+          <Button>Save Changes</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
