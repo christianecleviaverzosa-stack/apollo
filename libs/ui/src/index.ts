@@ -23,3 +23,5 @@ export * from './lib/ui/skeleton';
 export * from './lib/store';
 export * from './lib/ui/spinner';
 export * from './lib/ui/backdrop';
+export * from './lib/ui/separator';
+export * from './lib/ui/checkbox';

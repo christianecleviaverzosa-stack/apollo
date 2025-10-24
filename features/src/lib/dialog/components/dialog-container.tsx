@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Backdrop, selectCurrentDialog } from '@apollo/ui';
 
 const EditWorker = lazy(
-  () => import('../../workers/components/edit-worker-dialog')
+  () => import('../../worker/components/edit-worker-dialog')
 );
 
 const Component = () => {
