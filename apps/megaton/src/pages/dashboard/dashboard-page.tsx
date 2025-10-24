@@ -13,7 +13,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
   Popover,
   PopoverTrigger,
   Button,
@@ -38,71 +37,98 @@ import {
   DollarSign,
   Briefcase,
   CalendarIcon,
+  X,
 } from 'lucide-react';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { cn } from '@apollo/utils';
 import { format } from 'date-fns';
 
 const dashboardFilterFormSchema = z.object({
-  date: z.date({
-    error: 'A date of birth is required.',
-  }),
+  dateRange: z
+    .object({
+      from: z.date(),
+      to: z.date().optional(),
+    })
+    .optional(),
 });
 type DashboardFilterFormValues = z.infer<typeof dashboardFilterFormSchema>;
 
 const FilterForm = () => {
   const form = useForm<DashboardFilterFormValues>({
     defaultValues: {
-      date: new Date(),
+      dateRange: {
+        from: new Date(),
+        to: new Date(),
+      },
     },
     resolver: zodResolver(dashboardFilterFormSchema),
   });
+
+  const watchedDate = form.watch('dateRange');
+  const defaultDate = form.formState.defaultValues?.dateRange;
+
+  const hasChanged =
+    watchedDate?.from?.getTime() !== defaultDate?.from?.getTime() ||
+    watchedDate?.to?.getTime() !== defaultDate?.to?.getTime();
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => console.log(data))}
-        className="space-y-8"
+        className="flex flex-1 gap-2 items-center justify-end"
       >
+        {hasChanged && (
+          <Button size="sm" onClick={() => form.reset()} variant="link">
+            <X className="text-xs" /> Reset Filter
+          </Button>
+        )}
+
         <FormField
           control={form.control}
-          name="date"
+          name="dateRange"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={'outline'}
-                      className={cn(
-                        'w-full md:w-[240px] pl-3 text-left font-normal',
-                        !field.value && 'text-muted-foreground'
-                      )}
+                      variant="outline"
+                      className="justify-start text-left font-normal"
                     >
-                      {field.value ? (
-                        format(field.value, 'PPP')
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value?.from ? (
+                        field.value.to ? (
+                          field.value.from.getTime() ===
+                          field.value.to.getTime() ? (
+                            format(field.value.from, 'LLL dd, y')
+                          ) : (
+                            <>
+                              {format(field.value.from, 'LLL dd, y')} -{' '}
+                              {format(field.value.to, 'LLL dd, y')}
+                            </>
+                          )
+                        ) : (
+                          format(field.value.from, 'LLL dd, y')
+                        )
                       ) : (
-                        <span>Pick a date</span>
+                        <span>Pick a date range</span>
                       )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="end">
                   <Calendar
-                    mode="single"
+                    mode="range"
                     selected={field.value}
                     onSelect={field.onChange}
                     disabled={(date) =>
                       date > new Date() || date < new Date('1900-01-01')
                     }
-                    captionLayout="dropdown"
+                    numberOfMonths={2}
                   />
                 </PopoverContent>
               </Popover>
-              <FormMessage />
             </FormItem>
           )}
         />

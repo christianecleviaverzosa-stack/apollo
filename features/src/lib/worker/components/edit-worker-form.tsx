@@ -237,26 +237,6 @@ export const EditWorkerForm = () => {
           <Label className="text-muted-foreground">Contact & System Info</Label>
           <div className="grid grid-cols-2 gap-4 items-start">
             <div className="flex flex-col gap-2">
-              <Label>Timezone</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a timezone" />
-                </SelectTrigger>
-                <SelectContent>
-                  {timezones.map((group) => (
-                    <SelectGroup key={group.label}>
-                      <SelectLabel>{group.label}</SelectLabel>
-                      {group.zones.map((zone) => (
-                        <SelectItem key={zone.value} value={zone.value}>
-                          {zone.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex flex-col gap-2">
               <Label>Country</Label>
               <Select>
                 <SelectTrigger>
@@ -269,6 +249,26 @@ export const EditWorkerForm = () => {
                       {region.list.map((country) => (
                         <SelectItem key={country.value} value={country.value}>
                           {country.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label>Timezone</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a timezone" />
+                </SelectTrigger>
+                <SelectContent>
+                  {timezones.map((group) => (
+                    <SelectGroup key={group.label}>
+                      <SelectLabel>{group.label}</SelectLabel>
+                      {group.zones.map((zone) => (
+                        <SelectItem key={zone.value} value={zone.value}>
+                          {zone.label}
                         </SelectItem>
                       ))}
                     </SelectGroup>

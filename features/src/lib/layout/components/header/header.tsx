@@ -1,4 +1,5 @@
 import {
+  Badge,
   Button,
   DropdownMenu,
   DropdownMenuContent,
@@ -19,12 +20,15 @@ const MyAccountDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="link">
-          My Account
+          Christian
           <User />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel className="flex gap-2 items-center justify-between">
+          <p>My Account</p>
+          <Badge>Admin</Badge>
+        </DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>My Profile</DropdownMenuItem>
           <DropdownMenuItem>Security</DropdownMenuItem>
@@ -87,8 +91,9 @@ export const Header = () => {
         <SidebarTrigger />
         <h1 className="font-semibold text-lg">Megaton</h1>
       </div>
-      {/** Desktop: User Greeting */}
-      <h2 className="hidden md:block flex-1">Hi Christian, Welcome back!</h2>
+      <div className="hidden md:block flex-1">
+        <Badge>Admin</Badge>
+      </div>
       <NotificationPopover />
       <MyAccountDropdown />
     </header>
