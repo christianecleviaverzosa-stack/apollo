@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🧱 Nx Build Guard: Validating buildable libs and affected apps..."
+
+# 1️⃣ Build all buildable libraries
+echo "🏗️ Building all buildable libraries..."
+npx nx run-many --target=build --all --skip-nx-cache
+if [ $? -ne 0 ]; then
+  echo "❌ Library build failed. Commit aborted."
+  npx nx daemon --stop > /dev/null 2>&1
+  exit 1
+fi
+
+# 2️⃣ Build only affected apps
+echo "🚀 Building affected apps..."
+npx nx affected --target=build --base=origin/main --head=HEAD --skip-nx-cache
+if [ $? -ne 0 ]; then
+  echo "❌ App build failed. Commit aborted."
+  npx nx daemon --stop > /dev/null 2>&1
+  exit 1
+fi
+
+# ✅ Success
+echo "✅ All builds passed. Proceeding with commit."
+
+# 🧹 Stop Nx daemon to prevent hanging shell
+npx nx daemon --stop > /dev/null 2>&1
+exit 0
