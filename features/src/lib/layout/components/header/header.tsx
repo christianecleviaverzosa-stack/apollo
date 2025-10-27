@@ -1,49 +1,11 @@
 import {
-  Badge,
   Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
   Popover,
   PopoverContent,
   PopoverTrigger,
   SidebarTrigger,
 } from '@apollo/ui';
-import { User, Bell } from 'lucide-react';
-
-const MyAccountDropdown = () => {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="link">
-          Christian
-          <User />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
-        <DropdownMenuLabel className="flex gap-2 items-center justify-between">
-          <p>My Account</p>
-          <Badge>Admin</Badge>
-        </DropdownMenuLabel>
-        <DropdownMenuGroup>
-          <DropdownMenuItem>My Profile</DropdownMenuItem>
-          <DropdownMenuItem>Security</DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>Terms & Conditions</DropdownMenuItem>
-          <DropdownMenuItem>About Megaton</DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Log out</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
+import { Bell } from 'lucide-react';
 
 const NotificationPopover = () => {
   return (
@@ -82,20 +44,11 @@ const NotificationPopover = () => {
 
 export const Header = () => {
   return (
-    <header
-      data-testid="header"
-      className="flex md:justify-end items-center p-4 space-x-1 border-b"
-    >
-      {/** Mobile Sidebar Burger Menu */}
-      <div className="flex gap-2 items-center md:hidden flex-1">
-        <SidebarTrigger />
-        <h1 className="font-semibold text-lg">Megaton</h1>
+    <header className="p-4 justify-between items-center flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+      <SidebarTrigger className="-ml-1" />
+      <div className="flex justify-end">
+        <NotificationPopover />
       </div>
-      <div className="hidden md:block flex-1">
-        <Badge>Admin</Badge>
-      </div>
-      <NotificationPopover />
-      <MyAccountDropdown />
     </header>
   );
 };
