@@ -203,6 +203,54 @@ const SummaryCards = ({...rest}:SummaryCardsProps) => {
         </div>
   )
 }
+
+const FtdAchievement = () => {
+
+  const radialData = [{ name: 'FTD', value: 72, fill: 'hsl(var(--chart-1))' }];
+
+  // Chart Configs (required by ChartContainer)
+  const radialConfig = {
+    FTD: {
+      label: 'FTD',
+      color: 'hsl(var(--chart-1))',
+    },
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>FTD Achievement</CardTitle>
+        <CardDescription>Target progress overview</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={radialConfig}
+          className="mx-auto aspect-square max-h-[250px]"
+        >
+          <RadialBarChart
+            data={radialData}
+            innerRadius="80%"
+            outerRadius="100%"
+            startAngle={180}
+            endAngle={0}
+          >
+            <RadialBar dataKey="value" cornerRadius={10} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+          </RadialBarChart>
+        </ChartContainer>
+        <div className="text-center mt-4">
+          <p className="text-3xl font-bold text-primary">72%</p>
+          <p className="text-xs text-muted-foreground">
+            of monthly deposit target reached
+          </p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
 export default function DashboardPage() {
   // Mock data
   const summaryStats = [
@@ -212,7 +260,7 @@ export default function DashboardPage() {
     { title: 'Conversion Rate', value: '34%', icon: TrendingUp },
   ];
 
-  const radialData = [{ name: 'FTD', value: 72, fill: 'hsl(var(--chart-1))' }];
+
 
   const volumeData = [
     { name: 'Mon', value: 2400 },
@@ -232,13 +280,7 @@ export default function DashboardPage() {
   ];
   const COLORS = ['#2563eb', '#f43f5e', '#facc15', '#10b981'];
 
-  // Chart Configs (required by ChartContainer)
-  const radialConfig = {
-    FTD: {
-      label: 'FTD',
-      color: 'hsl(var(--chart-1))',
-    },
-  };
+
 
   const barConfig = {
     value: {
@@ -267,38 +309,7 @@ export default function DashboardPage() {
       {/* Charts Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {/* Radial Chart */}
-        <Card>
-          <CardHeader>
-            <CardTitle>FTD Achievement</CardTitle>
-            <CardDescription>Target progress overview</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ChartContainer
-              config={radialConfig}
-              className="mx-auto aspect-square max-h-[250px]"
-            >
-              <RadialBarChart
-                data={radialData}
-                innerRadius="80%"
-                outerRadius="100%"
-                startAngle={180}
-                endAngle={0}
-              >
-                <RadialBar dataKey="value" cornerRadius={10} />
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-                />
-              </RadialBarChart>
-            </ChartContainer>
-            <div className="text-center mt-4">
-              <p className="text-3xl font-bold text-primary">72%</p>
-              <p className="text-xs text-muted-foreground">
-                of monthly deposit target reached
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+        <FtdAchievement />
 
         {/* Bar Chart */}
         <Card>
