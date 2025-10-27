@@ -26,3 +26,4 @@ export * from './lib/ui/backdrop';
 export * from './lib/ui/separator';
 export * from './lib/ui/checkbox';
 export * from './lib/ui/use-media-query';
+export * from './lib/ui/react-select';

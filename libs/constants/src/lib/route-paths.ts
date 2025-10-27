@@ -1,5 +1,6 @@
 export const RoutePath = {
   Login: '/',
   Dashboard: '/dashboard',
-  Workers: '/workers'
+  Workers: '/workers',
+  Leads: '/leads'
 };
