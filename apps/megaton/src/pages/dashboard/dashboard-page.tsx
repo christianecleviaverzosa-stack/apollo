@@ -195,7 +195,8 @@ const SummaryCards = ({ ...rest }: SummaryCardsProps) => {
   );
 };
 
-const FtdAchievement = () => {
+type FtdAchievementProps = HTMLAttributes<HTMLDivElement>;
+const FtdAchievement = ({ ...rest }: FtdAchievementProps) => {
   const radialData = [{ name: 'FTD', value: 72, fill: 'hsl(var(--chart-1))' }];
 
   // Chart Configs (required by ChartContainer)
@@ -207,7 +208,7 @@ const FtdAchievement = () => {
   };
 
   return (
-    <Card>
+    <Card {...rest}>
       <CardHeader>
         <CardTitle>FTD Achievement</CardTitle>
         <CardDescription>Target progress overview</CardDescription>
@@ -242,7 +243,8 @@ const FtdAchievement = () => {
   );
 };
 
-const WeeklyTradingVolume = () => {
+type WeeklyTradingVolumeProps = HTMLAttributes<HTMLDivElement>;
+const WeeklyTradingVolume = ({ ...rest }: WeeklyTradingVolumeProps) => {
   const barConfig = {
     value: {
       label: 'Trading Volume',
@@ -259,7 +261,7 @@ const WeeklyTradingVolume = () => {
     { name: 'Sun', value: 4300 },
   ];
   return (
-    <Card>
+    <Card {...rest}>
       <CardHeader>
         <CardTitle>Weekly Trading Volume</CardTitle>
         <CardDescription>In USD ($)</CardDescription>
@@ -279,7 +281,10 @@ const WeeklyTradingVolume = () => {
   );
 };
 
-const TradingAssetDistribution = () => {
+type TradingAssetDistributionProps = HTMLAttributes<HTMLDivElement>;
+const TradingAssetDistribution = ({
+  ...rest
+}: TradingAssetDistributionProps) => {
   const tradingAssets = [
     { name: 'Forex', value: 400 },
     { name: 'Crypto', value: 300 },
@@ -296,7 +301,7 @@ const TradingAssetDistribution = () => {
   };
 
   return (
-    <Card>
+    <Card {...rest}>
       <CardHeader>
         <CardTitle>Trading Asset Distribution</CardTitle>
         <CardDescription>By category</CardDescription>
