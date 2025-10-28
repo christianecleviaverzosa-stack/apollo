@@ -42,11 +42,35 @@ const workersFilterFormSchema = z.object({
 type WorkersFilterFormValues = z.infer<typeof workersFilterFormSchema>;
 
 const SearchKeywordInput = () => {
-  const {register} = useFormContext<WorkersFilterFormValues>();
+  const { register } = useFormContext<WorkersFilterFormValues>();
   return (
-    <Input
-      placeholder="Search name, email, or ID"
-      {...register('keyword')}
+    <Input placeholder="Search name, email, or ID" {...register('keyword')} />
+  );
+};
+
+const RoleSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="role"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Roles</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="manager">Manager</SelectItem>
+                <SelectItem value="sales">Sales</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
     />
   );
 };
@@ -65,27 +89,7 @@ const WorkersFilterForm = () => {
     <Form {...form}>
       <form className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
         <SearchKeywordInput />
-        <FormField
-          control={form.control}
-          name="role"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Roles</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="manager">Manager</SelectItem>
-                    <SelectItem value="sales">Sales</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <RoleSelectField />
         <FormField
           control={form.control}
           name="manager"
