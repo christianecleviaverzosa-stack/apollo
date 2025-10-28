@@ -42,11 +42,11 @@ const workersFilterFormSchema = z.object({
 type WorkersFilterFormValues = z.infer<typeof workersFilterFormSchema>;
 
 const SearchKeywordInput = () => {
-  const form = useFormContext<WorkersFilterFormValues>();
+  const {register} = useFormContext<WorkersFilterFormValues>();
   return (
     <Input
       placeholder="Search name, email, or ID"
-      {...form.register('keyword')}
+      {...register('keyword')}
     />
   );
 };
