@@ -186,9 +186,9 @@ const SummaryCards = ({ ...rest }: SummaryCardsProps) => {
   //
   return (
     <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-4')} {...rest}>
-      {summaryStats.map((stat) => {
+      {summaryStats.map((stat, index) => {
         return (
-          <SummaryCard title={stat.title} icon={stat.icon} value={stat.value} />
+          <SummaryCard key={index} title={stat.title} icon={stat.icon} value={stat.value} />
         );
       })}
     </div>
@@ -318,8 +318,8 @@ const TradingAssetDistribution = ({
                 outerRadius={80}
                 paddingAngle={4}
               >
-                {tradingAssets.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                {tradingAssets.map((_, index) => (
+                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
               <ChartTooltip content={<ChartTooltipContent />} />
