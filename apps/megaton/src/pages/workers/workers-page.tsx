@@ -31,6 +31,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFormContext } from 'react-hook-form';
 import z from 'zod';
 import { Pencil, Power, LogIn } from 'lucide-react';
+import { useContext } from 'react';
 
 const workersFilterFormSchema = z.object({
   keyword: z.string(),
@@ -42,11 +43,117 @@ const workersFilterFormSchema = z.object({
 type WorkersFilterFormValues = z.infer<typeof workersFilterFormSchema>;
 
 const SearchKeywordInput = () => {
-  const {register} = useFormContext<WorkersFilterFormValues>();
+  const { register } = useFormContext<WorkersFilterFormValues>();
   return (
-    <Input
-      placeholder="Search name, email, or ID"
-      {...register('keyword')}
+    <Input placeholder="Search name, email, or ID" {...register('keyword')} />
+  );
+};
+
+const RoleSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="role"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Roles</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="manager">Manager</SelectItem>
+                <SelectItem value="sales">Sales</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+};
+
+const AutoLeadRangeSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="leadRange"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Auto Lead Range</SelectItem>
+                <SelectItem value="1-20">1-20 Auto Leads</SelectItem>
+                <SelectItem value="21-40">21-40 Auto Leads</SelectItem>
+                <SelectItem value="41-60">41-60 Auto Leads</SelectItem>
+                <SelectItem value="61-80">61-80 Auto Leads</SelectItem>
+                <SelectItem value="80-100">80-100+ Auto Leads</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+};
+
+const ManagerSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="manager"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Managers</SelectItem>
+                <SelectItem value="mike">Mike Macabulos</SelectItem>
+                <SelectItem value="patrick">Patrick Manzon</SelectItem>
+                <SelectItem value="christian">Chrisitan Verzosa</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+};
+
+const WorkerStatusSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="status"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Account Status</SelectItem>
+                <SelectItem value="online">Active</SelectItem>
+                <SelectItem value="suspeneded">Suspended</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
     />
   );
 };
@@ -65,91 +172,10 @@ const WorkersFilterForm = () => {
     <Form {...form}>
       <form className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
         <SearchKeywordInput />
-        <FormField
-          control={form.control}
-          name="role"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Roles</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="manager">Manager</SelectItem>
-                    <SelectItem value="sales">Sales</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="manager"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Managers</SelectItem>
-                    <SelectItem value="mike">Mike Macabulos</SelectItem>
-                    <SelectItem value="patrick">Patrick Manzon</SelectItem>
-                    <SelectItem value="christian">Chrisitan Verzosa</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="leadRange"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Auto Lead Range</SelectItem>
-                    <SelectItem value="1-20">1-20 Auto Leads</SelectItem>
-                    <SelectItem value="21-40">21-40 Auto Leads</SelectItem>
-                    <SelectItem value="41-60">41-60 Auto Leads</SelectItem>
-                    <SelectItem value="61-80">61-80 Auto Leads</SelectItem>
-                    <SelectItem value="80-100">80-100+ Auto Leads</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Account Status</SelectItem>
-                    <SelectItem value="online">Active</SelectItem>
-                    <SelectItem value="suspeneded">Suspended</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <RoleSelectField />
+        <ManagerSelectField />
+        <AutoLeadRangeSelectField />
+        <WorkerStatusSelectField />
         <Button>Reset Filters</Button>
       </form>
     </Form>
@@ -252,83 +278,94 @@ const workersData: Worker[] = [
   },
 ];
 
+const WorkerTableHeader = () => {
+  return (
+    <TableHeader>
+      <TableRow>
+        <TableHead className="min-w-32 md:min-w-64">User</TableHead>
+        <TableHead>Role</TableHead>
+        <TableHead>Manager</TableHead>
+        <TableHead className="min-w-32">Auto Lead</TableHead>
+        <TableHead className="min-w-32">Active Leads</TableHead>
+        <TableHead className="min-w-32">Geo</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead />
+      </TableRow>
+    </TableHeader>
+  );
+};
+
+const WorkerTableBody = () => {
+  return (
+    <TableBody>
+      {workersData.map((worker) => (
+        <TableRow key={worker.id}>
+          {/* User */}
+          <TableCell className="flex flex-col">
+            <p className="text-sm">{worker.name}</p>
+            <a
+              href={`mailto:${worker.email}`}
+              className="text-xs text-blue-600 hover:underline"
+            >
+              {worker.email}
+            </a>
+          </TableCell>
+
+          {/* Role */}
+          <TableCell>{worker.role}</TableCell>
+
+          {/* Manager */}
+          <TableCell>{worker.manager}</TableCell>
+
+          {/* Auto Lead */}
+          <TableCell>{worker.autoLead}</TableCell>
+
+          {/* Active Leads */}
+          <TableCell>{worker.activeLeads}</TableCell>
+
+          {/* Geo */}
+          <TableCell>{worker.geo}</TableCell>
+
+          {/* Account Status */}
+          <TableCell>{worker.status}</TableCell>
+
+          {/* Actions */}
+          <TableCell className="flex justify-end">
+            <div className="flex gap-2">
+              <Button
+                onClick={() =>
+                  setCurrentDialog({ content: 'edit-worker', open: true })
+                }
+                variant="ghost"
+                size="icon"
+              >
+                <Pencil className="h-4 w-4" />
+              </Button>
+              <Button
+                onClick={() =>
+                  setCurrentDialog({ content: 'suspend-worker', open: true })
+                }
+                variant="ghost"
+                size="icon"
+              >
+                <Power className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <LogIn className="h-4 w-4" />
+              </Button>
+            </div>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  );
+};
 // ---------- Main Table ----------
 const WorkersTable = () => {
   return (
     <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="min-w-32 md:min-w-64">User</TableHead>
-          <TableHead>Role</TableHead>
-          <TableHead>Manager</TableHead>
-          <TableHead className="min-w-32">Auto Lead</TableHead>
-          <TableHead className="min-w-32">Active Leads</TableHead>
-          <TableHead className="min-w-32">Geo</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead />
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {workersData.map((worker) => (
-          <TableRow key={worker.id}>
-            {/* User */}
-            <TableCell className="flex flex-col">
-              <p className="text-sm">{worker.name}</p>
-              <a
-                href={`mailto:${worker.email}`}
-                className="text-xs text-blue-600 hover:underline"
-              >
-                {worker.email}
-              </a>
-            </TableCell>
-
-            {/* Role */}
-            <TableCell>{worker.role}</TableCell>
-
-            {/* Manager */}
-            <TableCell>{worker.manager}</TableCell>
-
-            {/* Auto Lead */}
-            <TableCell>{worker.autoLead}</TableCell>
-
-            {/* Active Leads */}
-            <TableCell>{worker.activeLeads}</TableCell>
-
-            {/* Geo */}
-            <TableCell>{worker.geo}</TableCell>
-
-            {/* Account Status */}
-            <TableCell>{worker.status}</TableCell>
-
-            {/* Actions */}
-            <TableCell className="flex justify-end">
-              <div className="flex gap-2">
-                <Button
-                  onClick={() =>
-                    setCurrentDialog({ content: 'edit-worker', open: true })
-                  }
-                  variant="ghost"
-                  size="icon"
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
-                <Button
-                  onClick={() =>
-                    setCurrentDialog({ content: 'suspend-worker', open: true })
-                  }
-                  variant="ghost"
-                  size="icon"
-                >
-                  <Power className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="icon">
-                  <LogIn className="h-4 w-4" />
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
+      <WorkerTableHeader />
+      <WorkerTableBody />
     </Table>
   );
 };
