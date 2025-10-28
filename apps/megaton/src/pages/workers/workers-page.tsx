@@ -28,7 +28,7 @@ import {
   setCurrentDialog,
 } from '@apollo/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 import z from 'zod';
 import { Pencil, Power, LogIn } from 'lucide-react';
 
@@ -41,6 +41,15 @@ const workersFilterFormSchema = z.object({
 });
 type WorkersFilterFormValues = z.infer<typeof workersFilterFormSchema>;
 
+const SearchKeywordInput = () => {
+  const {register} = useFormContext<WorkersFilterFormValues>();
+  return (
+    <Input
+      placeholder="Search name, email, or ID"
+      {...register('keyword')}
+    />
+  );
+};
 const WorkersFilterForm = () => {
   const form = useForm<WorkersFilterFormValues>({
     defaultValues: {
@@ -55,10 +64,7 @@ const WorkersFilterForm = () => {
   return (
     <Form {...form}>
       <form className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-        <Input
-          placeholder="Search name, email, or ID"
-          {...form.register('keyword')}
-        />
+        <SearchKeywordInput />
         <FormField
           control={form.control}
           name="role"
