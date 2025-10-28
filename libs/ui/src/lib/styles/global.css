@@ -23,25 +23,36 @@
     appearance: none;
     margin: 0;
   }
+
+  /* === LIGHT THEME === */
   :root {
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
+
+    /* Slightly softer blue-gray primary */
+    --sidebar-primary: 222 47% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  /* === DARK THEME === */
   .dark {
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    /* Softer dark sidebar tones */
+    --sidebar-background: 220 8% 14%;
+    --sidebar-foreground: 220 15% 90%;
+
+    /* Muted, balanced blue primary */
+    --sidebar-primary: 220 50% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --sidebar-accent: 220 10% 20%;
+    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-border: 220 10% 20%;
+    --sidebar-ring: 220 50% 55%;
   }
 }
 
