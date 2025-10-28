@@ -131,6 +131,32 @@ const ManagerSelectField = () => {
     />
   );
 };
+
+const WorkerStatusSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="status"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Account Status</SelectItem>
+                <SelectItem value="online">Active</SelectItem>
+                <SelectItem value="suspeneded">Suspended</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+};
 const WorkersFilterForm = () => {
   const form = useForm<WorkersFilterFormValues>({
     defaultValues: {
@@ -149,26 +175,7 @@ const WorkersFilterForm = () => {
         <RoleSelectField />
         <ManagerSelectField />
         <AutoLeadRangeSelectField />
-        <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Account Status</SelectItem>
-                    <SelectItem value="online">Active</SelectItem>
-                    <SelectItem value="suspeneded">Suspended</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <WorkerStatusSelectField />
         <Button>Reset Filters</Button>
       </form>
     </Form>
