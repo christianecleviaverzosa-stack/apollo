@@ -43,7 +43,7 @@ import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
-import {cn} from "@apollo/utils"
+import { cn } from '@apollo/utils';
 import { HTMLAttributes } from 'react';
 
 const dashboardFilterFormSchema = z.object({
@@ -139,73 +139,63 @@ const FilterForm = () => {
   );
 };
 
-
 type SummaryCardProps = HTMLAttributes<HTMLDivElement> & {
-  title: string,
-  value: number | string,
-  icon: string
-}
+  title: string;
+  value: number | string;
+  icon: string;
+};
 
-
-const SummaryCard = ({title, value, icon,...rest}: SummaryCardProps) => {
-
-  const common = "h-4 w-4 text-muted-foreground";
-  const iconLookup = (icon:string) => {
-      switch (icon) {
-        case 'users':
-          return <Users  className={common}/>;
-        case 'trending-up':
-          return <TrendingUp className={common}/>;
-        case 'dollar-sign':
-          return <DollarSign className={common}/>;
-        default:
-          return <Briefcase className={common}/>
-      }
-  }
+const SummaryCard = ({ title, value, icon, ...rest }: SummaryCardProps) => {
+  const common = 'h-4 w-4 text-muted-foreground';
+  const iconLookup = (icon: string) => {
+    switch (icon) {
+      case 'users':
+        return <Users className={common} />;
+      case 'trending-up':
+        return <TrendingUp className={common} />;
+      case 'dollar-sign':
+        return <DollarSign className={common} />;
+      default:
+        return <Briefcase className={common} />;
+    }
+  };
 
   return (
     <Card key={title} className="hover:shadow-md transition" {...rest}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium">
-          {title}
-        </CardTitle>
-        {iconLookup(icon) }
+        <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        {iconLookup(icon)}
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground">
-          Updated just now
-        </p>
+        <p className="text-xs text-muted-foreground">Updated just now</p>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-type SummaryCardsProps = HTMLAttributes<HTMLDivElement> 
+type SummaryCardsProps = HTMLAttributes<HTMLDivElement>;
 
-
-const SummaryCards = ({...rest}:SummaryCardsProps) => {
-  
-    const summaryStats = [
+const SummaryCards = ({ ...rest }: SummaryCardsProps) => {
+  const summaryStats = [
     { title: 'Total Leads', value: 502, icon: 'users' },
     { title: 'Active Clients', value: 132, icon: 'briefcase' },
     { title: 'FTD Deposits', value: '$58,200', icon: 'dollar-sign' },
     { title: 'Conversion Rate', value: '34%', icon: 'trending-up' },
   ];
-// 
+  //
   return (
-    <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-4')} {...rest} >
-          {summaryStats.map((stat) => {
-            return (
-             <SummaryCard title={stat.title} icon={stat.icon} value={stat.value} />
-            );
-          })}
-        </div>
-  )
-}
+    <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-4')} {...rest}>
+      {summaryStats.map((stat) => {
+        return (
+          <SummaryCard title={stat.title} icon={stat.icon} value={stat.value} />
+        );
+      })}
+    </div>
+  );
+};
 
 const FtdAchievement = () => {
-
   const radialData = [{ name: 'FTD', value: 72, fill: 'hsl(var(--chart-1))' }];
 
   // Chart Configs (required by ChartContainer)
@@ -249,11 +239,10 @@ const FtdAchievement = () => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const WeeklyTradingVolume = () => {
-
   const barConfig = {
     value: {
       label: 'Trading Volume',
@@ -281,17 +270,14 @@ const WeeklyTradingVolume = () => {
             <BarChart data={volumeData}>
               <XAxis dataKey="name" />
               <Bar dataKey="value" radius={[4, 4, 0, 0]} />
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent />}
-              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const TradingAssetDistribution = () => {
   const tradingAssets = [
@@ -309,37 +295,36 @@ const TradingAssetDistribution = () => {
     },
   };
 
-
-  return(
+  return (
     <Card>
-        <CardHeader>
-          <CardTitle>Trading Asset Distribution</CardTitle>
-          <CardDescription>By category</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={pieConfig} className="aspect-square">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={tradingAssets}
-                  dataKey="value"
-                  nameKey="name"
-                  innerRadius={50}
-                  outerRadius={80}
-                  paddingAngle={4}
-                >
-                  {tradingAssets.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                  ))}
-                </Pie>
-                <ChartTooltip content={<ChartTooltipContent />} />
-              </PieChart>
-            </ResponsiveContainer>
-          </ChartContainer>
-        </CardContent>
-      </Card>
-  )
-}
+      <CardHeader>
+        <CardTitle>Trading Asset Distribution</CardTitle>
+        <CardDescription>By category</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={pieConfig} className="aspect-square">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={tradingAssets}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={50}
+                outerRadius={80}
+                paddingAngle={4}
+              >
+                {tradingAssets.map((_, i) => (
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                ))}
+              </Pie>
+              <ChartTooltip content={<ChartTooltipContent />} />
+            </PieChart>
+          </ResponsiveContainer>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default function DashboardPage() {
   // Mock data
