@@ -294,72 +294,78 @@ const WorkerTableHeader = () => {
     </TableHeader>
   );
 };
+
+const WorkerTableBody = () => {
+  return (
+    <TableBody>
+      {workersData.map((worker) => (
+        <TableRow key={worker.id}>
+          {/* User */}
+          <TableCell className="flex flex-col">
+            <p className="text-sm">{worker.name}</p>
+            <a
+              href={`mailto:${worker.email}`}
+              className="text-xs text-blue-600 hover:underline"
+            >
+              {worker.email}
+            </a>
+          </TableCell>
+
+          {/* Role */}
+          <TableCell>{worker.role}</TableCell>
+
+          {/* Manager */}
+          <TableCell>{worker.manager}</TableCell>
+
+          {/* Auto Lead */}
+          <TableCell>{worker.autoLead}</TableCell>
+
+          {/* Active Leads */}
+          <TableCell>{worker.activeLeads}</TableCell>
+
+          {/* Geo */}
+          <TableCell>{worker.geo}</TableCell>
+
+          {/* Account Status */}
+          <TableCell>{worker.status}</TableCell>
+
+          {/* Actions */}
+          <TableCell className="flex justify-end">
+            <div className="flex gap-2">
+              <Button
+                onClick={() =>
+                  setCurrentDialog({ content: 'edit-worker', open: true })
+                }
+                variant="ghost"
+                size="icon"
+              >
+                <Pencil className="h-4 w-4" />
+              </Button>
+              <Button
+                onClick={() =>
+                  setCurrentDialog({ content: 'suspend-worker', open: true })
+                }
+                variant="ghost"
+                size="icon"
+              >
+                <Power className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <LogIn className="h-4 w-4" />
+              </Button>
+            </div>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  );
+};
 // ---------- Main Table ----------
 const WorkersTable = () => {
   return (
     <Table>
       <WorkerTableHeader />
-      <TableBody>
-        {workersData.map((worker) => (
-          <TableRow key={worker.id}>
-            {/* User */}
-            <TableCell className="flex flex-col">
-              <p className="text-sm">{worker.name}</p>
-              <a
-                href={`mailto:${worker.email}`}
-                className="text-xs text-blue-600 hover:underline"
-              >
-                {worker.email}
-              </a>
-            </TableCell>
-
-            {/* Role */}
-            <TableCell>{worker.role}</TableCell>
-
-            {/* Manager */}
-            <TableCell>{worker.manager}</TableCell>
-
-            {/* Auto Lead */}
-            <TableCell>{worker.autoLead}</TableCell>
-
-            {/* Active Leads */}
-            <TableCell>{worker.activeLeads}</TableCell>
-
-            {/* Geo */}
-            <TableCell>{worker.geo}</TableCell>
-
-            {/* Account Status */}
-            <TableCell>{worker.status}</TableCell>
-
-            {/* Actions */}
-            <TableCell className="flex justify-end">
-              <div className="flex gap-2">
-                <Button
-                  onClick={() =>
-                    setCurrentDialog({ content: 'edit-worker', open: true })
-                  }
-                  variant="ghost"
-                  size="icon"
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
-                <Button
-                  onClick={() =>
-                    setCurrentDialog({ content: 'suspend-worker', open: true })
-                  }
-                  variant="ghost"
-                  size="icon"
-                >
-                  <Power className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="icon">
-                  <LogIn className="h-4 w-4" />
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
+      <WorkerTableBody />
     </Table>
   );
 };
