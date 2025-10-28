@@ -278,22 +278,27 @@ const workersData: Worker[] = [
   },
 ];
 
+const WorkerTableHeader = () => {
+  return (
+    <TableHeader>
+      <TableRow>
+        <TableHead className="min-w-32 md:min-w-64">User</TableHead>
+        <TableHead>Role</TableHead>
+        <TableHead>Manager</TableHead>
+        <TableHead className="min-w-32">Auto Lead</TableHead>
+        <TableHead className="min-w-32">Active Leads</TableHead>
+        <TableHead className="min-w-32">Geo</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead />
+      </TableRow>
+    </TableHeader>
+  );
+};
 // ---------- Main Table ----------
 const WorkersTable = () => {
   return (
     <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="min-w-32 md:min-w-64">User</TableHead>
-          <TableHead>Role</TableHead>
-          <TableHead>Manager</TableHead>
-          <TableHead className="min-w-32">Auto Lead</TableHead>
-          <TableHead className="min-w-32">Active Leads</TableHead>
-          <TableHead className="min-w-32">Geo</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead />
-        </TableRow>
-      </TableHeader>
+      <WorkerTableHeader />
       <TableBody>
         {workersData.map((worker) => (
           <TableRow key={worker.id}>
