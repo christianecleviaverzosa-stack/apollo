@@ -76,6 +76,35 @@ const RoleSelectField = () => {
   );
 };
 
+const AutoLeadRangeSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="leadRange"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Auto Lead Range</SelectItem>
+                <SelectItem value="1-20">1-20 Auto Leads</SelectItem>
+                <SelectItem value="21-40">21-40 Auto Leads</SelectItem>
+                <SelectItem value="41-60">41-60 Auto Leads</SelectItem>
+                <SelectItem value="61-80">61-80 Auto Leads</SelectItem>
+                <SelectItem value="80-100">80-100+ Auto Leads</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+};
+
 const ManagerSelectField = () => {
   const { control } = useFormContext<WorkersFilterFormValues>();
   return (
@@ -118,30 +147,8 @@ const WorkersFilterForm = () => {
       <form className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
         <SearchKeywordInput />
         <RoleSelectField />
-        <ManagerSelectField/>
-        <FormField
-          control={form.control}
-          name="leadRange"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Auto Lead Range</SelectItem>
-                    <SelectItem value="1-20">1-20 Auto Leads</SelectItem>
-                    <SelectItem value="21-40">21-40 Auto Leads</SelectItem>
-                    <SelectItem value="41-60">41-60 Auto Leads</SelectItem>
-                    <SelectItem value="61-80">61-80 Auto Leads</SelectItem>
-                    <SelectItem value="80-100">80-100+ Auto Leads</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <ManagerSelectField />
+        <AutoLeadRangeSelectField />
         <FormField
           control={form.control}
           name="status"
