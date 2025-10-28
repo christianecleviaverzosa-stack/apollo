@@ -31,6 +31,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFormContext } from 'react-hook-form';
 import z from 'zod';
 import { Pencil, Power, LogIn } from 'lucide-react';
+import { useContext } from 'react';
 
 const workersFilterFormSchema = z.object({
   keyword: z.string(),
@@ -74,6 +75,33 @@ const RoleSelectField = () => {
     />
   );
 };
+
+const ManagerSelectField = () => {
+  const { control } = useFormContext<WorkersFilterFormValues>();
+  return (
+    <FormField
+      control={control}
+      name="manager"
+      render={({ field }) => (
+        <FormItem>
+          <FormControl>
+            <Select onValueChange={field.onChange} value={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Managers</SelectItem>
+                <SelectItem value="mike">Mike Macabulos</SelectItem>
+                <SelectItem value="patrick">Patrick Manzon</SelectItem>
+                <SelectItem value="christian">Chrisitan Verzosa</SelectItem>
+              </SelectContent>
+            </Select>
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  );
+};
 const WorkersFilterForm = () => {
   const form = useForm<WorkersFilterFormValues>({
     defaultValues: {
@@ -90,27 +118,7 @@ const WorkersFilterForm = () => {
       <form className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
         <SearchKeywordInput />
         <RoleSelectField />
-        <FormField
-          control={form.control}
-          name="manager"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Managers</SelectItem>
-                    <SelectItem value="mike">Mike Macabulos</SelectItem>
-                    <SelectItem value="patrick">Patrick Manzon</SelectItem>
-                    <SelectItem value="christian">Chrisitan Verzosa</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <ManagerSelectField/>
         <FormField
           control={form.control}
           name="leadRange"
