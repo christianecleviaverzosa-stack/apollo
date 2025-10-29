@@ -26,84 +26,150 @@ import {
   PaginationNext,
   PaginationPrevious,
   setCurrentDialog,
+  ReactSelectBase,
 } from '@apollo/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useFormContext } from 'react-hook-form';
+import { Controller, useForm, useFormContext } from 'react-hook-form';
 import z from 'zod';
 import { Pencil, Power, LogIn } from 'lucide-react';
 
+const roles = [
+  {
+    label: 'Worker Roles',
+    options: [
+      { value: 'admin', label: 'Admin' },
+      { value: 'manager', label: 'Manager' },
+      { value: 'sales', label: 'Sales' },
+    ],
+  },
+];
+
+const status = [
+  {
+    label: 'Worker Status',
+    options: [
+      { value: 'active', label: 'Active' },
+      { value: 'suspended', label: 'Suspended' },
+    ],
+  },
+];
+
+const managers = [
+  {
+    label: 'Worker Managers',
+    options: [
+      { value: 'mike', label: 'Mike Macabulos' },
+      { value: 'patrick', label: 'Patrick Manzon' },
+      { value: 'christian', label: 'Christian Verzosa' },
+    ],
+  },
+];
+
 const workersFilterFormSchema = z.object({
   keyword: z.string(),
-  role: z.string(),
-  status: z.string(),
-  manager: z.string(),
+  status: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    })
+  ),
+  managers: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    })
+  ),
   leadRange: z.string(),
+  roles: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    })
+  ),
 });
 type WorkersFilterFormValues = z.infer<typeof workersFilterFormSchema>;
 
 const SearchKeywordInput = () => {
-  const {register} = useFormContext<WorkersFilterFormValues>();
+  const { register } = useFormContext<WorkersFilterFormValues>();
   return (
-    <Input
-      placeholder="Search name, email, or ID"
-      {...register('keyword')}
-    />
+    <Input placeholder="Search name, email, or ID" {...register('keyword')} />
   );
 };
 const WorkersFilterForm = () => {
   const form = useForm<WorkersFilterFormValues>({
     defaultValues: {
-      role: 'all',
-      status: 'all',
-      manager: 'all',
+      status: [],
+      managers: [],
       leadRange: 'all',
+      roles: [],
     },
     resolver: zodResolver(workersFilterFormSchema),
   });
 
   return (
     <Form {...form}>
-      <form className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+      <form className="flex flex-col md:flex-row flex-wrap gap-2">
         <SearchKeywordInput />
         <FormField
           control={form.control}
-          name="role"
-          render={({ field }) => (
+          name="roles"
+          render={() => (
             <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Roles</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="manager">Manager</SelectItem>
-                    <SelectItem value="sales">Sales</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
+              <Controller
+                control={form.control}
+                name="roles"
+                render={({ field }) => (
+                  <ReactSelectBase
+                    {...field}
+                    isMulti
+                    placeholder="Select worker roles"
+                    options={roles}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name="manager"
-          render={({ field }) => (
+          name="status"
+          render={() => (
             <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Managers</SelectItem>
-                    <SelectItem value="mike">Mike Macabulos</SelectItem>
-                    <SelectItem value="patrick">Patrick Manzon</SelectItem>
-                    <SelectItem value="christian">Chrisitan Verzosa</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
+              <Controller
+                control={form.control}
+                name="status"
+                render={({ field }) => (
+                  <ReactSelectBase
+                    {...field}
+                    isMulti
+                    placeholder="Select worker status"
+                    options={status}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="managers"
+          render={() => (
+            <FormItem>
+              <Controller
+                control={form.control}
+                name="managers"
+                render={({ field }) => (
+                  <ReactSelectBase
+                    {...field}
+                    isMulti
+                    placeholder="Select worker managers"
+                    options={managers}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
             </FormItem>
           )}
         />
@@ -130,27 +196,9 @@ const WorkersFilterForm = () => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="status"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Account Status</SelectItem>
-                    <SelectItem value="online">Active</SelectItem>
-                    <SelectItem value="suspeneded">Suspended</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <Button>Reset Filters</Button>
+        <Button type="button" onClick={() => form.reset()} className="flex-1">
+          Reset Filters
+        </Button>
       </form>
     </Form>
   );
