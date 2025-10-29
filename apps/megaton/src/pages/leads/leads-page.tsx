@@ -22,8 +22,6 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-  ReactSelectClearIndicator,
-  ReactSelectDropdownIndicator,
   PopoverContent,
   Popover,
   PopoverTrigger,
@@ -31,12 +29,11 @@ import {
   TableBody,
   TableCell,
   Badge,
-  ReactSelectControl,
+  ReactSelectBase,
 } from '@apollo/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import z from 'zod';
-import ReactSelect from 'react-select';
 import { CalendarIcon, Edit, Eye, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 
@@ -263,19 +260,12 @@ export const LeadsFilterForm = () => {
                 control={form.control}
                 name="countries"
                 render={({ field }) => (
-                  <ReactSelect
-                    options={countries}
+                  <ReactSelectBase
+                    {...field}
                     isMulti
                     placeholder="Select countries"
-                    value={field.value}
+                    options={countries}
                     onChange={(val) => field.onChange(val)}
-                    className="text-sm min-w-48"
-                    components={{
-                      ClearIndicator: ReactSelectClearIndicator,
-                      DropdownIndicator: ReactSelectDropdownIndicator,
-                      Control: ReactSelectControl,
-                    }}
-                    {...field}
                   />
                 )}
               />
