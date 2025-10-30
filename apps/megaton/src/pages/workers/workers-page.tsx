@@ -52,9 +52,8 @@ const managers = [
   {
     label: 'Worker Managers',
     options: [
-      { value: 'mike', label: 'Mike Macabulos' },
-      { value: 'patrick', label: 'Patrick Manzon' },
-      { value: 'christian', label: 'Christian Verzosa' },
+      { value: 'manager-1', label: 'Manager 1' },
+      { value: 'manager-2', label: 'Manager 2' },
     ],
   },
 ];
@@ -100,7 +99,7 @@ const WorkersFilterForm = () => {
 
   return (
     <Form {...form}>
-      <form className="flex flex-col md:flex-row flex-wrap gap-2">
+      <form className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-2">
         <SearchKeywordInput />
         <FormField
           control={form.control}
@@ -165,7 +164,7 @@ const WorkersFilterForm = () => {
             </FormItem>
           )}
         />
-        <Button type="button" onClick={() => form.reset()} className="flex-1">
+        <Button type="button" onClick={() => form.reset()} >
           Reset Filters
         </Button>
       </form>
@@ -203,8 +202,8 @@ const workersData: Worker[] = [
   },
   {
     id: '2',
-    name: 'Mike Macabulos',
-    role: 'Manager',
+    name: 'Admin',
+    role: 'Admin',
     manager: '-',
     geo: 'AX, DZ, AD',
     autoLead: 100,
@@ -214,57 +213,57 @@ const workersData: Worker[] = [
   },
   {
     id: '3',
-    name: 'Patrick Manzon',
+    name: 'Manager 1',
     role: 'Manager',
     manager: '-',
     geo: 'AF, AL, DZ, DK, DE',
     autoLead: 2,
     activeLeads: 15,
-    email: 'patrick@email.com',
+    email: 'manager-1@email.com',
     status: 'Active',
   },
   {
     id: '4',
-    name: 'Christian Verzosa',
+    name: 'Manager 2',
     role: 'Manager',
     manager: '-',
     geo: 'AS, AD',
     autoLead: 5,
     activeLeads: 22,
-    email: 'christian@email.com',
+    email: 'manager-2@email.com',
     status: 'Active',
   },
   {
     id: '5',
-    name: 'Jannik Sinner',
+    name: 'Sales 1',
     role: 'Sales',
-    manager: 'Mike Macabulos',
+    manager: 'Manager 1',
     geo: 'AF, DE',
     autoLead: 8,
     activeLeads: 18,
-    email: 'jannik@email.com',
+    email: 'sales-1@email.com',
     status: 'Active',
   },
   {
     id: '6',
-    name: 'Henry Alcaraz',
+    name: 'Sales 2',
     role: 'Sales',
-    manager: 'Mike Macabulos',
+    manager: 'Manager 1',
     geo: 'AF, DE, FR',
     autoLead: 0,
     activeLeads: 0,
-    email: 'henry@email.com',
+    email: 'sales-2@email.com',
     status: 'Active',
   },
   {
     id: '7',
-    name: 'Oliva Sway',
+    name: 'Sales 3',
     role: 'Sales',
-    manager: 'Mike Macabulos',
+    manager: 'Manager 1',
     geo: 'AS',
     autoLead: 4,
     activeLeads: 12,
-    email: 'olivia@email.com',
+    email: 'sales-3@email.com',
     status: 'Suspended',
   },
 ];

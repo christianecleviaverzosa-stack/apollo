@@ -36,8 +36,20 @@ import { Controller, useForm } from 'react-hook-form';
 import z from 'zod';
 import { CalendarIcon, Eye, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '@apollo/constants';
+
+const agents = [
+  {
+    label: 'Agents',
+    options: [
+      { value: 'manager-1', label: 'Manager 1' },
+      { value: 'manager-2', label: 'Manager 2' },
+      { value: 'sales-1', label: 'Sales 1' },
+      { value: 'sales-2', label: 'Sales 2' },
+      { value: 'sales-3', label: 'Sales 3' },
+    ],
+  },
+];
 
 const countries = [
   {
@@ -103,15 +115,18 @@ const countries = [
 const leadsFilterFormSchema = z.object({
   keyword: z.string(),
   leadType: z.string(),
-  countries: z
-    .array(
-      z.object({
-        value: z.string(),
-        label: z.string(),
-      })
-    )
-    .min(1, { message: 'Please select at least one country.' }),
-  agent: z.string(),
+  countries: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    })
+  ),
+  agents: z.array(
+    z.object({
+      value: z.string(),
+      label: z.string(),
+    })
+  ),
   dateRange: z
     .object({
       from: z.date(),
@@ -128,7 +143,7 @@ export const LeadsFilterForm = () => {
     defaultValues: {
       keyword: '',
       leadType: 'all',
-      agent: 'all',
+      agents: [],
       countries: [],
       verified: 'all',
     },
@@ -137,29 +152,29 @@ export const LeadsFilterForm = () => {
 
   return (
     <Form {...form}>
-      <form className="flex flex-col md:flex-row flex-wrap gap-2">
+      <form className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2">
         <Input
           placeholder="Search name, email, or ID"
           {...form.register('keyword')}
         />
         <FormField
           control={form.control}
-          name="agent"
-          render={({ field }) => (
+          name="agents"
+          render={() => (
             <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="min-w-48">
-                    <SelectValue placeholder="All Agents" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Agents</SelectItem>
-                    <SelectItem value="agent-1">Agent 1</SelectItem>
-                    <SelectItem value="agent-2">Agent 2</SelectItem>
-                    <SelectItem value="agent-3">Agent 3</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
+              <Controller
+                control={form.control}
+                name="agents"
+                render={({ field }) => (
+                  <ReactSelectBase
+                    {...field}
+                    isMulti
+                    placeholder="Select angents"
+                    options={agents}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
             </FormItem>
           )}
         />
@@ -274,12 +289,10 @@ export const LeadsFilterForm = () => {
             </FormItem>
           )}
         />
-        <Button className="flex-1" onClick={() => form.reset()} type="button">
+        <Button onClick={() => form.reset()} type="button">
           Reset Filters
         </Button>
-        <Button className="flex-1" type="button">
-          Export Data
-        </Button>
+        <Button type="button">Export Data</Button>
       </form>
     </Form>
   );
@@ -293,9 +306,8 @@ const leadsData = [
     email: 'john.smith@example.com',
     phone: '+1 202 555 0183',
     country: 'United States',
-    agent: 'Jane Doe',
+    agent: 'Sales 1',
     status: 'New',
-    quality: 'Warm',
     createdAt: '2025-10-25',
   },
   {
@@ -305,9 +317,8 @@ const leadsData = [
     email: 'maria.garcia@example.com',
     phone: '+34 601 555 214',
     country: 'Spain',
-    agent: 'Michael Cruz',
+    agent: 'Sales 1',
     status: 'Follow-up',
-    quality: 'Hot',
     createdAt: '2025-10-20',
   },
   {
@@ -317,9 +328,8 @@ const leadsData = [
     email: 'james.lee@example.com',
     phone: '+63 917 555 8877',
     country: 'Philippines',
-    agent: 'Sarah Tan',
+    agent: 'Sales 1',
     status: 'Converted',
-    quality: 'Qualified',
     createdAt: '2025-10-18',
   },
   {
@@ -329,9 +339,8 @@ const leadsData = [
     email: 'sofia.martinez@example.com',
     phone: '+52 998 233 6744',
     country: 'Mexico',
-    agent: 'Robert Chan',
+    agent: 'Sales 1',
     status: 'Pending',
-    quality: 'Cold',
     createdAt: '2025-10-17',
   },
   {
@@ -341,9 +350,8 @@ const leadsData = [
     email: 'david.kim@example.com',
     phone: '+82 10 3456 7890',
     country: 'South Korea',
-    agent: 'Emily Zhao',
+    agent: 'Sales 1',
     status: 'Follow-up',
-    quality: 'Hot',
     createdAt: '2025-10-15',
   },
   {
@@ -353,9 +361,8 @@ const leadsData = [
     email: 'emma.johnson@example.com',
     phone: '+44 7700 900125',
     country: 'United Kingdom',
-    agent: 'Carlos Rivera',
+    agent: 'Sales 1',
     status: 'New',
-    quality: 'Warm',
     createdAt: '2025-10-14',
   },
   {
@@ -365,9 +372,8 @@ const leadsData = [
     email: 'ahmed.hassan@example.com',
     phone: '+971 50 123 4567',
     country: 'United Arab Emirates',
-    agent: 'Lisa Wong',
+    agent: 'Sales 1',
     status: 'Converted',
-    quality: 'Qualified',
     createdAt: '2025-10-12',
   },
   {
@@ -377,9 +383,8 @@ const leadsData = [
     email: 'luca.bianchi@example.com',
     phone: '+39 331 456 7890',
     country: 'Italy',
-    agent: 'Michael Cruz',
+    agent: 'Sales 1',
     status: 'Follow-up',
-    quality: 'Hot',
     createdAt: '2025-10-11',
   },
   {
@@ -389,9 +394,8 @@ const leadsData = [
     email: 'hiroshi.tanaka@example.com',
     phone: '+81 80 5555 1234',
     country: 'Japan',
-    agent: 'Sarah Tan',
+    agent: 'Sales 1',
     status: 'Pending',
-    quality: 'Cold',
     createdAt: '2025-10-10',
   },
   {
@@ -401,9 +405,8 @@ const leadsData = [
     email: 'olivia.brown@example.com',
     phone: '+61 400 222 333',
     country: 'Australia',
-    agent: 'Carlos Rivera',
+    agent: 'Sales 1',
     status: 'Converted',
-    quality: 'Qualified',
     createdAt: '2025-10-09',
   },
   {
@@ -413,9 +416,8 @@ const leadsData = [
     email: 'noah.davis@example.com',
     phone: '+1 416 555 7721',
     country: 'Canada',
-    agent: 'Jane Doe',
+    agent: 'Sales 1',
     status: 'New',
-    quality: 'Warm',
     createdAt: '2025-10-08',
   },
   {
@@ -425,9 +427,8 @@ const leadsData = [
     email: 'fatima.ali@example.com',
     phone: '+92 301 555 6677',
     country: 'Pakistan',
-    agent: 'Emily Zhao',
+    agent: 'Sales 1',
     status: 'Follow-up',
-    quality: 'Hot',
     createdAt: '2025-10-06',
   },
   {
@@ -437,9 +438,8 @@ const leadsData = [
     email: 'carlos.hernandez@example.com',
     phone: '+57 320 888 1122',
     country: 'Colombia',
-    agent: 'Robert Chan',
+    agent: 'Sales 1',
     status: 'Converted',
-    quality: 'Qualified',
     createdAt: '2025-10-05',
   },
   {
@@ -449,9 +449,8 @@ const leadsData = [
     email: 'anika.patel@example.com',
     phone: '+91 98765 43210',
     country: 'India',
-    agent: 'Lisa Wong',
+    agent: 'Sales 1',
     status: 'New',
-    quality: 'Cold',
     createdAt: '2025-10-03',
   },
   {
@@ -461,9 +460,8 @@ const leadsData = [
     email: 'mark.evans@example.com',
     phone: '+64 21 345 678',
     country: 'New Zealand',
-    agent: 'Carlos Rivera',
+    agent: 'Sales 1',
     status: 'Follow-up',
-    quality: 'Warm',
     createdAt: '2025-10-02',
   },
   {
@@ -473,9 +471,8 @@ const leadsData = [
     email: 'chen.wei@example.com',
     phone: '+86 138 0013 4567',
     country: 'China',
-    agent: 'Emily Zhao',
+    agent: 'Sales 1',
     status: 'Converted',
-    quality: 'Qualified',
     createdAt: '2025-09-30',
   },
   {
@@ -485,9 +482,8 @@ const leadsData = [
     email: 'julia.novak@example.com',
     phone: '+420 777 555 444',
     country: 'Czech Republic',
-    agent: 'Sarah Tan',
+    agent: 'Sales 1',
     status: 'Pending',
-    quality: 'Cold',
     createdAt: '2025-09-29',
   },
   {
@@ -497,99 +493,13 @@ const leadsData = [
     email: 'ali.khan@example.com',
     phone: '+971 56 777 8888',
     country: 'UAE',
-    agent: 'Lisa Wong',
+    agent: 'Sales 1',
     status: 'Follow-up',
-    quality: 'Hot',
     createdAt: '2025-09-27',
-  },
-  {
-    id: 'LD-019',
-    type: 'Demo',
-    name: 'Natalie Fischer',
-    email: 'natalie.fischer@example.com',
-    phone: '+49 160 987 6543',
-    country: 'Germany',
-    agent: 'Robert Chan',
-    status: 'New',
-    quality: 'Warm',
-    createdAt: '2025-09-26',
-  },
-  {
-    id: 'LD-020',
-    type: 'Trial',
-    name: 'Pedro Alvarez',
-    email: 'pedro.alvarez@example.com',
-    phone: '+55 11 99999 5555',
-    country: 'Brazil',
-    agent: 'Michael Cruz',
-    status: 'Converted',
-    quality: 'Qualified',
-    createdAt: '2025-09-25',
-  },
-  {
-    id: 'LD-021',
-    type: 'Active',
-    name: 'Isabella Rossi',
-    email: 'isabella.rossi@example.com',
-    phone: '+39 347 987 1111',
-    country: 'Italy',
-    agent: 'Carlos Rivera',
-    status: 'Follow-up',
-    quality: 'Hot',
-    createdAt: '2025-09-24',
-  },
-  {
-    id: 'LD-022',
-    type: 'Demo',
-    name: 'George Adams',
-    email: 'george.adams@example.com',
-    phone: '+1 305 555 2233',
-    country: 'United States',
-    agent: 'Jane Doe',
-    status: 'Pending',
-    quality: 'Cold',
-    createdAt: '2025-09-22',
-  },
-  {
-    id: 'LD-023',
-    type: 'Trial',
-    name: 'Tariq Rahman',
-    email: 'tariq.rahman@example.com',
-    phone: '+880 171 222 3344',
-    country: 'Bangladesh',
-    agent: 'Emily Zhao',
-    status: 'New',
-    quality: 'Warm',
-    createdAt: '2025-09-20',
-  },
-  {
-    id: 'LD-024',
-    type: 'Active',
-    name: 'Ethan Clark',
-    email: 'ethan.clark@example.com',
-    phone: '+1 917 555 8888',
-    country: 'United States',
-    agent: 'Robert Chan',
-    status: 'Converted',
-    quality: 'Qualified',
-    createdAt: '2025-09-19',
-  },
-  {
-    id: 'LD-025',
-    type: 'Demo',
-    name: 'Leila Haddad',
-    email: 'leila.haddad@example.com',
-    phone: '+212 622 333 444',
-    country: 'Morocco',
-    agent: 'Sarah Tan',
-    status: 'Follow-up',
-    quality: 'Hot',
-    createdAt: '2025-09-18',
   },
 ];
 
 const LeadsTable = () => {
-  const navigate = useNavigate();
   return (
     <Table>
       <TableHeader>
@@ -605,9 +515,6 @@ const LeadsTable = () => {
           </TableHead>
           <TableHead className="min-w-32 hidden md:table-cell">
             Status
-          </TableHead>
-          <TableHead className="min-w-32 hidden lg:table-cell">
-            Quality
           </TableHead>
           <TableHead className="min-w-40 hidden md:table-cell">
             Created At
@@ -628,7 +535,9 @@ const LeadsTable = () => {
                 {lead.type}
               </Badge>
             </TableCell>
-            <TableCell className="font-medium">{lead.name}</TableCell>
+            <TableCell className="font-medium">
+              <a href={`${RoutePath.Leads}/123456789`}>{lead.name}</a>
+            </TableCell>
             <TableCell className="hidden md:table-cell">{lead.email}</TableCell>
             <TableCell className="hidden lg:table-cell">{lead.phone}</TableCell>
             <TableCell>{lead.country}</TableCell>
@@ -636,21 +545,17 @@ const LeadsTable = () => {
             <TableCell className="hidden md:table-cell">
               <Badge variant="outline">{lead.status}</Badge>
             </TableCell>
-            <TableCell className="hidden lg:table-cell">
-              <Badge variant="outline">{lead.quality}</Badge>
-            </TableCell>
             <TableCell className="hidden md:table-cell text-muted-foreground">
               {lead.createdAt}
             </TableCell>
             <TableCell className="text-right">
               <div className="flex justify-end gap-1">
-                <Button
-                  onClick={() => navigate(`${RoutePath.Leads}/1213`)}
-                  size="icon"
-                  variant="ghost"
-                >
-                  <Eye className="h-4 w-4" />
-                </Button>
+                <a href={`${RoutePath.Leads}/123456789`}>
+                  <Button size="icon" variant="ghost">
+                    <Eye className="h-4 w-4" />
+                  </Button>
+                </a>
+
                 <Button size="icon" variant="ghost">
                   <Trash2 className="h-4 w-4" />
                 </Button>
