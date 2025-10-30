@@ -188,7 +188,12 @@ const SummaryCards = ({ ...rest }: SummaryCardsProps) => {
     <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-4')} {...rest}>
       {summaryStats.map((stat, index) => {
         return (
-          <SummaryCard key={index} title={stat.title} icon={stat.icon} value={stat.value} />
+          <SummaryCard
+            key={index}
+            title={stat.title}
+            icon={stat.icon}
+            value={stat.value}
+          />
         );
       })}
     </div>
@@ -332,16 +337,8 @@ const TradingAssetDistribution = ({
 };
 
 export default function DashboardPage() {
-  // Mock data
-  const summaryStats = [
-    { title: 'Total Leads', value: 502, icon: Users },
-    { title: 'Active Clients', value: 132, icon: Briefcase },
-    { title: 'FTD Deposits', value: '$58,200', icon: DollarSign },
-    { title: 'Conversion Rate', value: '34%', icon: TrendingUp },
-  ];
-
   return (
-    <section data-testid="dashboard-page" className="space-y-6">
+    <section data-testid="dashboard-page" className="p-4 space-y-6">
       <div className="flex flex-col gap-4 md:flex-row justify-between">
         <h2 className="text-2xl font-semibold">Dashboard Overview</h2>
         <FilterForm />

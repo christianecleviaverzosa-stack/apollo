@@ -9,9 +9,7 @@ export const AuthLayout = () => {
       <AppSidebar />
       <SidebarInset>
         <Header />
-        <div className="p-4">
-          <Outlet />
-        </div>
+        <Outlet />
       </SidebarInset>
     </SidebarProvider>
   );

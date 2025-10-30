@@ -34,8 +34,10 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import z from 'zod';
-import { CalendarIcon, Edit, Eye, Trash2 } from 'lucide-react';
+import { CalendarIcon, Eye, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '@apollo/constants';
 
 const countries = [
   {
@@ -272,15 +274,10 @@ export const LeadsFilterForm = () => {
             </FormItem>
           )}
         />
-        <Button
-          className="flex-1"
-          onClick={() => form.reset()}
-          type="button"
-          variant="outline"
-        >
+        <Button className="flex-1" onClick={() => form.reset()} type="button">
           Reset Filters
         </Button>
-        <Button className="flex-1" type="button" variant="outline">
+        <Button className="flex-1" type="button">
           Export Data
         </Button>
       </form>
@@ -592,6 +589,7 @@ const leadsData = [
 ];
 
 const LeadsTable = () => {
+  const navigate = useNavigate();
   return (
     <Table>
       <TableHeader>
@@ -646,11 +644,12 @@ const LeadsTable = () => {
             </TableCell>
             <TableCell className="text-right">
               <div className="flex justify-end gap-1">
-                <Button size="icon" variant="ghost">
+                <Button
+                  onClick={() => navigate(`${RoutePath.Leads}/1213`)}
+                  size="icon"
+                  variant="ghost"
+                >
                   <Eye className="h-4 w-4" />
-                </Button>
-                <Button size="icon" variant="ghost">
-                  <Edit className="h-4 w-4" />
                 </Button>
                 <Button size="icon" variant="ghost">
                   <Trash2 className="h-4 w-4" />
@@ -695,7 +694,7 @@ const TablePagination = () => {
 
 export default function LeadsPage() {
   return (
-    <section data-testid="workers-page" className="space-y-6">
+    <section data-testid="workers-page" className="p-4 space-y-6">
       <h2 className="text-2xl font-semibold">All Leads</h2>
       <LeadsFilterForm />
       <div className="relative w-full">

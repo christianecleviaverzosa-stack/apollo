@@ -4,13 +4,7 @@ import {
   Form,
   FormField,
   FormItem,
-  FormControl,
   Input,
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
   Button,
   Table,
   TableBody,
@@ -79,7 +73,6 @@ const workersFilterFormSchema = z.object({
       label: z.string(),
     })
   ),
-  leadRange: z.string(),
   roles: z.array(
     z.object({
       value: z.string(),
@@ -100,7 +93,6 @@ const WorkersFilterForm = () => {
     defaultValues: {
       status: [],
       managers: [],
-      leadRange: 'all',
       roles: [],
     },
     resolver: zodResolver(workersFilterFormSchema),
@@ -170,29 +162,6 @@ const WorkersFilterForm = () => {
                   />
                 )}
               />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="leadRange"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Auto Lead Range</SelectItem>
-                    <SelectItem value="1-20">1-20 Auto Leads</SelectItem>
-                    <SelectItem value="21-40">21-40 Auto Leads</SelectItem>
-                    <SelectItem value="41-60">41-60 Auto Leads</SelectItem>
-                    <SelectItem value="61-80">61-80 Auto Leads</SelectItem>
-                    <SelectItem value="80-100">80-100+ Auto Leads</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
             </FormItem>
           )}
         />
@@ -412,7 +381,7 @@ const TablePagination = () => {
 
 export default function WorkersPage() {
   return (
-    <section data-testid="workers-page" className="space-y-6">
+    <section data-testid="workers-page" className="p-4 space-y-6">
       <h2 className="text-2xl font-semibold">Workers List</h2>
       <WorkersFilterForm />
       <div className="relative w-full">
