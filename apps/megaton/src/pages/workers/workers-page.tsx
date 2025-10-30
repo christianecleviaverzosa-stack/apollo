@@ -31,7 +31,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useFormContext } from 'react-hook-form';
 import z from 'zod';
 import { Pencil, Power, LogIn } from 'lucide-react';
-import { useContext } from 'react';
 
 const workersFilterFormSchema = z.object({
   keyword: z.string(),
@@ -278,7 +277,7 @@ const workersData: Worker[] = [
   },
 ];
 
-const WorkerTableHeader = () => {
+const WorkersTableHeader = () => {
   return (
     <TableHeader>
       <TableRow>
@@ -295,11 +294,11 @@ const WorkerTableHeader = () => {
   );
 };
 
-const WorkerTableBody = () => {
+const WorkersTableBody = () => {
   return (
     <TableBody>
-      {workersData.map((worker) => (
-        <TableRow key={worker.id}>
+      {workersData.map((worker, index) => (
+        <TableRow key={index}>
           {/* User */}
           <TableCell className="flex flex-col">
             <p className="text-sm">{worker.name}</p>
