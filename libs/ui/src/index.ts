@@ -31,3 +31,4 @@ export * from './lib/ui/breadcrumb';
 export * from './lib/ui/theme-provider';
 export * from './lib/ui/mode-toggle';
 export * from './lib/ui/textarea';
+export * from './lib/ui/password-input';

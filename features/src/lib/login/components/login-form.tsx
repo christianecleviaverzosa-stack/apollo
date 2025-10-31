@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input, Button, Label } from '@apollo/ui';
+import { Input, Button, Label, PasswordInput } from '@apollo/ui';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '@apollo/constants';
 
@@ -42,7 +42,7 @@ export const LoginForm = () => {
       />
       {/** Password */}
       <Label requiredIndicator>Password</Label>
-      <Input
+      <PasswordInput
         placeholder="Enter your password"
         {...register('password')}
         error={errors.password?.message}
