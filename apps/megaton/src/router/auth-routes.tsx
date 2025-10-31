@@ -6,6 +6,7 @@ const DashboardPage = lazy(() => import('../pages/dashboard/dashboard-page'));
 const WorkersPage = lazy(() => import('../pages/workers/workers-page'));
 const LeadsPage = lazy(() => import('../pages/leads/leads-page'));
 const LeadPage = lazy(() => import('../pages/leads/lead-page'));
+const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
 
 export const authRoutes: RouteObject[] = [
   {
@@ -23,5 +24,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.Lead,
     Component: LeadPage,
+  },
+  {
+    path: RoutePath.ImportLeads,
+    Component: ImportLeadsPage,
   },
 ];

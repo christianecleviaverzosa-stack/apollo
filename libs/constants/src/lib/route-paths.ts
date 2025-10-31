@@ -4,4 +4,5 @@ export const RoutePath = {
   Workers: '/workers',
   Leads: '/leads',
   Lead: '/leads/:id',
+  ImportLeads: '/import-leads'
 };

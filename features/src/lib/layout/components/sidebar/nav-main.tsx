@@ -94,7 +94,7 @@ const navLinks: NavGroup[] = [
     group: 'Leads',
     items: [
       { label: 'All Leads', icon: FileSpreadsheet, href: RoutePath.Leads },
-      { label: 'Import Leads', icon: Database, href: RoutePath.Login },
+      { label: 'Import Leads', icon: Database, href: RoutePath.ImportLeads },
       { label: 'Lead Assignment', icon: ClipboardList, href: RoutePath.Login },
       { label: 'FTD Clients', icon: Wallet, href: RoutePath.Login },
       { label: 'Retention Clients', icon: Users, href: RoutePath.Login },
