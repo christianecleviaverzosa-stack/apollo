@@ -25,7 +25,6 @@ export * from './lib/ui/spinner';
 export * from './lib/ui/backdrop';
 export * from './lib/ui/separator';
 export * from './lib/ui/checkbox';
-export * from './lib/ui/use-media-query';
 export * from './lib/ui/react-select';
 export * from './lib/ui/avatar';
 export * from './lib/ui/breadcrumb';

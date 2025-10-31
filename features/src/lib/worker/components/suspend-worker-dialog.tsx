@@ -7,11 +7,11 @@ import {
   Separator,
   selectIsDialogOpen,
   setCurrentDialog,
-  useMediaQuery,
+  useIsMobile,
 } from '@apollo/ui';
 
 const SuspendWorkerDialog = () => {
-  const isDesktop = useMediaQuery('md');
+  const isMobile = useIsMobile();
   const isOpen = selectIsDialogOpen('suspend-worker');
 
   const closePrompt = () => {
@@ -26,7 +26,7 @@ const SuspendWorkerDialog = () => {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
-        style={{ maxWidth: isDesktop ? '600px' : '90vw' }}
+        style={{ maxWidth: isMobile ? '90vw' : '600px' }}
         data-testid="suspend-worker-dialog"
       >
         <DialogTitle>Suspend Worker</DialogTitle>

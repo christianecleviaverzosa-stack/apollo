@@ -12,6 +12,7 @@ import {
   Separator,
   SelectGroup,
   SelectLabel,
+  setCurrentDialog,
 } from '@apollo/ui';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -312,7 +313,14 @@ export const LeadClientForm = () => {
           </div>
         </div>
 
-        <Button size="sm" variant="outline" className="text-destructive">
+        <Button
+          size="sm"
+          variant="outline"
+          className="text-destructive"
+          onClick={() =>
+            setCurrentDialog({ content: 'delete-lead', open: true })
+          }
+        >
           Delete Lead
         </Button>
       </div>

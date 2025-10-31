@@ -9,6 +9,11 @@ const SuspendWorker = lazy(
   () => import('../../worker/components/suspend-worker-dialog')
 );
 
+/** Lead */
+const DeleteLead = lazy(
+  () => import('../../lead/components/delete-lead-dialog')
+);
+
 const Component = () => {
   const type = selectCurrentDialog();
 
@@ -17,6 +22,8 @@ const Component = () => {
       return <EditWorker />;
     case 'suspend-worker':
       return <SuspendWorker />;
+    case 'delete-lead':
+      return <DeleteLead />;
     default:
       return null;
   }
