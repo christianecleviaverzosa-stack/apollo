@@ -7,11 +7,11 @@ import {
   Database,
   ClipboardList,
   Wallet,
-  LineChart,
   Settings,
   Shield,
   Lock,
   ChevronRight,
+  BadgeDollarSign,
 } from 'lucide-react';
 
 import {
@@ -103,16 +103,7 @@ const navLinks: NavGroup[] = [
   {
     group: 'Trading Activity',
     items: [
-      {
-        label: 'Live Orders',
-        icon: LineChart,
-        collapsible: true,
-        children: [
-          { label: 'Open Orders', href: RoutePath.Login },
-          { label: 'Pending Orders', href: RoutePath.Login },
-          { label: 'Closed Orders', href: RoutePath.Login },
-        ],
-      },
+      { label: 'All Orders', icon: BadgeDollarSign, href: RoutePath.Orders },
       {
         label: 'Transaction History',
         icon: Settings,
@@ -143,11 +134,6 @@ const navLinks: NavGroup[] = [
     items: [
       {
         label: 'Platform Configuration',
-        icon: Settings,
-        href: RoutePath.Login,
-      },
-      {
-        label: 'Branding & Whitelabel',
         icon: Settings,
         href: RoutePath.Login,
       },

@@ -7,6 +7,8 @@ const WorkersPage = lazy(() => import('../pages/workers/workers-page'));
 const LeadsPage = lazy(() => import('../pages/leads/leads-page'));
 const LeadPage = lazy(() => import('../pages/leads/lead-page'));
 const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
+const OrdersPage = lazy(() => import('../pages/orders/orders-page'));
+const OrderPage = lazy(() => import('../pages/orders/order-page'));
 
 export const authRoutes: RouteObject[] = [
   {
@@ -28,5 +30,13 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.ImportLeads,
     Component: ImportLeadsPage,
+  },
+  {
+    path: RoutePath.Orders,
+    Component: OrdersPage,
+  },
+  {
+    path: RoutePath.Order,
+    Component: OrderPage,
   },
 ];

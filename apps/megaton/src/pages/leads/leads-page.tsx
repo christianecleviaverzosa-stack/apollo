@@ -30,6 +30,7 @@ import {
   TableCell,
   Badge,
   ReactSelectBase,
+  setCurrentDialog,
 } from '@apollo/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
@@ -522,7 +523,6 @@ const LeadsTable = () => {
           <TableHead className="w-[100px] text-right"></TableHead>
         </TableRow>
       </TableHeader>
-
       <TableBody>
         {leadsData.map((lead, i) => (
           <TableRow
@@ -556,7 +556,13 @@ const LeadsTable = () => {
                   </Button>
                 </a>
 
-                <Button size="icon" variant="ghost">
+                <Button
+                  onClick={() =>
+                    setCurrentDialog({ content: 'delete-lead', open: true })
+                  }
+                  size="icon"
+                  variant="ghost"
+                >
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
