@@ -28,7 +28,7 @@ import {
 } from '@apollo/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
-import { CalendarIcon, Eye, Trash2 } from 'lucide-react';
+import { CalendarIcon, Eye } from 'lucide-react';
 import { Controller, useForm } from 'react-hook-form';
 import z from 'zod';
 
@@ -450,7 +450,9 @@ const OrdersTable = () => {
           >
             <TableCell className="text-center font-medium">{i + 1}</TableCell>
 
-            <TableCell className="font-medium">{order.client}</TableCell>
+            <TableCell className="font-medium">
+              <a href={`${RoutePath.Orders}/123456789`}>{order.client}</a>
+            </TableCell>
 
             <TableCell>{order.symbol}</TableCell>
 
@@ -502,10 +504,6 @@ const OrdersTable = () => {
                     <Eye className="h-4 w-4" />
                   </Button>
                 </a>
-
-                <Button size="icon" variant="ghost">
-                  <Trash2 className="h-4 w-4" />
-                </Button>
               </div>
             </TableCell>
           </TableRow>
