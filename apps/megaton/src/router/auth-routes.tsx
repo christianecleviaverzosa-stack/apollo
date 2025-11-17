@@ -10,6 +10,9 @@ const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
 const OrdersPage = lazy(() => import('../pages/orders/orders-page'));
 const OrderPage = lazy(() => import('../pages/orders/order-page'));
 const FTDClientsPage = lazy(() => import('../pages/ftd/ftd-clients-page'));
+const RetentionClientsPage = lazy(
+  () => import('../pages/retention/retention-clients-page')
+);
 
 export const authRoutes: RouteObject[] = [
   {
@@ -43,5 +46,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.FTDClients,
     Component: FTDClientsPage,
+  },
+  {
+    path: RoutePath.RetentionClients,
+    Component: RetentionClientsPage,
   },
 ];
