@@ -13,6 +13,9 @@ const FTDClientsPage = lazy(() => import('../pages/ftd/ftd-clients-page'));
 const RetentionClientsPage = lazy(
   () => import('../pages/retention/retention-clients-page')
 );
+const LeadsAssignmentPage = lazy(
+  () => import('../pages/leads/leads-assignment-page')
+);
 
 export const authRoutes: RouteObject[] = [
   {
@@ -50,5 +53,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.RetentionClients,
     Component: RetentionClientsPage,
+  },
+  {
+    path: RoutePath.LeadsAssignment,
+    Component: LeadsAssignmentPage,
   },
 ];
