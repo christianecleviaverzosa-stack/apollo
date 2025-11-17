@@ -7,4 +7,5 @@ export const RoutePath = {
   ImportLeads: '/import-leads',
   Orders: '/orders',
   Order: '/orders/:id',
+  FTDClients: '/ftd-clients',
 };
