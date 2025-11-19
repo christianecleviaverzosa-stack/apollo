@@ -9,6 +9,7 @@ export const RoutePath = {
   Order: '/orders/:id',
   FTDClients: '/ftd-clients',
   FTDClient: '/ftd-clients/:id',
-  RetentionClients: 'retention-clients',
+  RetentionClients: '/retention-clients',
+  RetentionClient: '/retention-clients/:id',
   LeadsAssignment: '/leads-assignment',
 };

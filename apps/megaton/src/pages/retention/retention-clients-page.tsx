@@ -36,6 +36,7 @@ import { Controller, useForm } from 'react-hook-form';
 import z from 'zod';
 import { CalendarIcon, Eye, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
+import { RoutePath } from '@apollo/constants';
 
 // -----------------------------
 // Select Options (agents, countries, buyers)
@@ -769,7 +770,11 @@ const RetentionTable = () => {
           >
             <TableCell className="text-center font-medium">{i + 1}</TableCell>
 
-            <TableCell className="font-medium">{item.name}</TableCell>
+            <TableCell className="font-medium">
+              <a href={`${RoutePath.RetentionClients}/123456789`}>
+                {item.name}
+              </a>
+            </TableCell>
 
             <TableCell className="hidden md:table-cell">{item.email}</TableCell>
 
@@ -813,7 +818,9 @@ const RetentionTable = () => {
             <TableCell className="text-right">
               <div className="flex justify-end gap-1">
                 <Button size="icon" variant="ghost">
-                  <Eye className="h-4 w-4" />
+                  <a href={`${RoutePath.RetentionClients}/123456789`}>
+                    <Eye className="h-4 w-4" />
+                  </a>
                 </Button>
                 <Button size="icon" variant="ghost">
                   <Trash2 className="h-4 w-4" />
