@@ -42,7 +42,7 @@ export const LeadClientForm = () => {
     defaultValues: {
       accountId: 'LD-001',
       salesStatus: 'new',
-      manager: 'manager-1',
+      agent: 'manager-1',
       firstName: 'John',
       lastName: 'Smith',
       email: 'john.smith@example.com',
@@ -101,9 +101,9 @@ export const LeadClientForm = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Manager</Label>
+            <Label>Assigned Agent</Label>
             <Controller
-              name="manager"
+              name="agent"
               control={control}
               render={({ field }) => (
                 <Select onValueChange={field.onChange} value={field.value}>

@@ -29,7 +29,6 @@ import {
   TableCell,
   Badge,
   ReactSelectBase,
-  setCurrentDialog,
 } from '@apollo/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -39,8 +38,9 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import z from 'zod';
-import { CalendarIcon, Eye, Trash2 } from 'lucide-react';
+import { CalendarIcon, Eye } from 'lucide-react';
 import { format } from 'date-fns';
+import { RoutePath } from '@apollo/constants';
 
 // -----------------------------
 // Select Options (agents, countries, lead types, statuses)
@@ -755,7 +755,7 @@ const LeadAssignmentTable = () => {
                     </TableCell>
 
                     <TableCell className="font-medium truncate max-w-[220px]">
-                      {lead.name}
+                      <a href={`${RoutePath.Leads}/123456789`}>{lead.name}</a>
                     </TableCell>
 
                     <TableCell className="hidden md:table-cell truncate max-w-[300px]">
@@ -795,10 +795,9 @@ const LeadAssignmentTable = () => {
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-1">
                         <Button size="icon" variant="ghost">
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button size="icon" variant="ghost">
-                          <Trash2 className="h-4 w-4" />
+                          <a href={`${RoutePath.Leads}/123456789`}>
+                          <Eye className="h-4 w-4" /></a>
+                          
                         </Button>
                       </div>
                     </TableCell>

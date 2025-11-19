@@ -8,6 +8,7 @@ export const RoutePath = {
   Orders: '/orders',
   Order: '/orders/:id',
   FTDClients: '/ftd-clients',
+  FTDClient: '/ftd-clients/:id',
   RetentionClients: 'retention-clients',
   LeadsAssignment: '/leads-assignment',
 };
