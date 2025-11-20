@@ -107,8 +107,8 @@ export default function OrderDetailsPage() {
                     +$167.34
                   </span>,
                 ],
-                ['Commission', '$2.50'],
-                ['Swap', '-0.10'],
+                ['Lots', '1.00'],
+                ['Spread', '0.00012'],
                 ['Required Margin', '$289.78'],
                 ['Leverage', '1:100'],
               ].map(([label, value], idx) => (
