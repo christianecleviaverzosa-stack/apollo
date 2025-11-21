@@ -7,6 +7,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <!-- SCRIPTS -->
+    <script>
+      window.global = window;
+      window.appVersion = '{{appVersion}}';
+    </script>
+    <script src="/env.js?version={{appVersion}}" defer></script>
   </head>
   <body>
     <div id="root"></div>

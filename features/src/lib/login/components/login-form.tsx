@@ -4,6 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input, Button, Label, PasswordInput } from '@apollo/ui';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '@apollo/constants';
+import { useMutation } from '@tanstack/react-query';
+import { LoginPayload, LoginResponse } from '@apollo/types';
+import { login } from '@apollo/api';
+import { ENV_CONFIG } from '@apollo/config';
 
 const loginFormSchema = z.object({
   username: z.string().min(1, 'Please enter your username'),
@@ -22,9 +26,18 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
+  console.log(ENV_CONFIG);
+
+  const { mutate } = useMutation<LoginResponse, any, LoginPayload>({
+    mutationFn: login,
+  });
+
   const onSubmit = (data: LoginFormValues) => {
-    console.log('form data:', data);
-    navigate(RoutePath.Dashboard);
+    mutate(data, {
+      onSuccess: () => {
+        navigate(RoutePath.Dashboard);
+      },
+    });
   };
 
   return (
@@ -48,7 +61,9 @@ export const LoginForm = () => {
         error={errors.password?.message}
       />
       {/** Submit Button */}
-      <Button className="w-full">Login</Button>
+      <Button type="submit" className="w-full">
+        Login
+      </Button>
     </form>
   );
 };
