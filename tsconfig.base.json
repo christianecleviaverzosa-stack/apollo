@@ -19,6 +19,7 @@
       "@apollo/api": ["api/src/index.ts"],
       "@apollo/config": ["libs/config/src/index.ts"],
       "@apollo/constants": ["libs/constants/src/index.ts"],
+      "@apollo/features/dashboard": ["features/src/lib/dashboard/index.ts"],
       "@apollo/features": ["features/src/index.ts"],
       "@apollo/types": ["libs/types/src/index.ts"],
       "@apollo/ui": ["libs/ui/src/index.ts"],
