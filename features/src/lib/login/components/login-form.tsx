@@ -7,7 +7,6 @@ import { RoutePath } from '@apollo/constants';
 import { useMutation } from '@tanstack/react-query';
 import { LoginPayload, LoginResponse } from '@apollo/types';
 import { login } from '@apollo/api';
-import { ENV_CONFIG } from '@apollo/config';
 
 const loginFormSchema = z.object({
   username: z.string().min(1, 'Please enter your username'),
@@ -26,18 +25,19 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
-  console.log(ENV_CONFIG);
-
-  const { mutate } = useMutation<LoginResponse, any, LoginPayload>({
-    mutationFn: login,
-  });
+  // const { mutate } = useMutation<LoginResponse, any, LoginPayload>({
+  //   mutationFn: login,
+  // });
 
   const onSubmit = (data: LoginFormValues) => {
-    mutate(data, {
-      onSuccess: () => {
-        navigate(RoutePath.Dashboard);
-      },
-    });
+    console.log("form submitted values:", data);
+
+    return navigate(RoutePath.Dashboard);
+    // mutate(data, {
+    //   onSuccess: () => {
+    //     navigate(RoutePath.Dashboard);
+    //   },
+    // });
   };
 
   return (
