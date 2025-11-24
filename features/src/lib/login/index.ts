@@ -1,1 +1,1 @@
-export * from './components/login-page-content'
+export * from './components/login-form';

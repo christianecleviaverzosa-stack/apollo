@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { PromptContainer } from '@apollo/features';
+import { PromptContainer } from '@apollo/features/dialog';
 
 export function App() {
   return (

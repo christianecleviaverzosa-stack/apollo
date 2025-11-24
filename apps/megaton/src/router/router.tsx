@@ -7,7 +7,7 @@ import App from '../app';
 import { Suspense } from 'react';
 import { unAuthRoutes } from './un-auth-routes';
 import { authRoutes } from './auth-routes';
-import { AuthLayout, UnAuthLayout } from '@apollo/features';
+import { AuthLayout, UnAuthLayout } from '@apollo/features/layout';
 import { RoutePath } from '@apollo/constants';
 
 const routes: RouteObject[] = [
