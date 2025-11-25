@@ -4,6 +4,9 @@ import { RouteObject } from 'react-router-dom';
 
 const DashboardPage = lazy(() => import('../pages/dashboard/dashboard-page'));
 const WorkersPage = lazy(() => import('../pages/workers/workers-page'));
+const SuperAdminRolePage = lazy(
+  () => import('../pages/workers/super-admin-role-page')
+);
 const LeadsPage = lazy(() => import('../pages/leads/leads-page'));
 const LeadPage = lazy(() => import('../pages/leads/lead-page'));
 const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
@@ -54,7 +57,7 @@ export const authRoutes: RouteObject[] = [
     path: RoutePath.FTDClients,
     Component: FTDClientsPage,
   },
-    {
+  {
     path: RoutePath.FTDClient,
     Component: FTDClientPage,
   },
@@ -62,12 +65,16 @@ export const authRoutes: RouteObject[] = [
     path: RoutePath.RetentionClients,
     Component: RetentionClientsPage,
   },
-    {
+  {
     path: RoutePath.RetentionClient,
     Component: RetentionClientPage,
   },
   {
     path: RoutePath.LeadsAssignment,
     Component: LeadsAssignmentPage,
-  }
+  },
+  {
+    path: RoutePath.SuperAdminRole,
+    Component: SuperAdminRolePage,
+  },
 ];
