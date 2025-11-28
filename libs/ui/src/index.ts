@@ -33,3 +33,4 @@ export * from './lib/ui/mode-toggle';
 export * from './lib/ui/textarea';
 export * from './lib/ui/password-input';
 export * from './lib/ui/file-input';
+export * from './lib/ui/switch';    

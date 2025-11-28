@@ -2,7 +2,7 @@ export const RoutePath = {
   Login: '/',
   Dashboard: '/dashboard',
   Workers: '/workers',
-  SuperAdminRole: '/workers/super-admin-role',
+  SuperAdminRole: '/roles/super-admin',
   Leads: '/leads',
   Lead: '/leads/:id',
   ImportLeads: '/import-leads',

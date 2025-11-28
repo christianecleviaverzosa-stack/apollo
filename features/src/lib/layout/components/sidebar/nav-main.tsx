@@ -72,7 +72,7 @@ const navLinks: NavGroup[] = [
         icon: UserCog,
         collapsible: true,
         children: [
-          { label: 'Super Admin', href: RoutePath.Login },
+          { label: 'Super Admin', href: RoutePath.SuperAdminRole },
           { label: 'Admin', href: RoutePath.Login },
           { label: 'Manager', href: RoutePath.Login },
           { label: 'Sales', href: RoutePath.Login },
