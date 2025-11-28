@@ -73,9 +73,9 @@ const navLinks: NavGroup[] = [
         collapsible: true,
         children: [
           { label: 'Super Admin', href: RoutePath.SuperAdminRole },
-          { label: 'Admin', href: RoutePath.Login },
-          { label: 'Manager', href: RoutePath.Login },
-          { label: 'Sales', href: RoutePath.Login },
+          { label: 'Admin', href: RoutePath.AdminRole },
+          { label: 'Manager', href: RoutePath.ManagerRole },
+          { label: 'Sales', href: RoutePath.SalesRole },
         ],
       },
       {
@@ -95,9 +95,17 @@ const navLinks: NavGroup[] = [
     items: [
       { label: 'All Leads', icon: FileSpreadsheet, href: RoutePath.Leads },
       { label: 'Import Leads', icon: Database, href: RoutePath.ImportLeads },
-      { label: 'Lead Assignment', icon: ClipboardList, href: RoutePath.LeadsAssignment },
+      {
+        label: 'Lead Assignment',
+        icon: ClipboardList,
+        href: RoutePath.LeadsAssignment,
+      },
       { label: 'FTD Clients', icon: Wallet, href: RoutePath.FTDClients },
-      { label: 'Retention Clients', icon: Users, href: RoutePath.RetentionClients },
+      {
+        label: 'Retention Clients',
+        icon: Users,
+        href: RoutePath.RetentionClients,
+      },
     ],
   },
   {

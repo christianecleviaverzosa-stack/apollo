@@ -4,9 +4,10 @@ import { RouteObject } from 'react-router-dom';
 
 const DashboardPage = lazy(() => import('../pages/dashboard/dashboard-page'));
 const WorkersPage = lazy(() => import('../pages/workers/workers-page'));
-const SuperAdminPage = lazy(
-  () => import('../pages/roles/super-admin-page')
-);
+const SuperAdminPage = lazy(() => import('../pages/roles/super-admin-page'));
+const AdminPage = lazy(() => import('../pages/roles/admin-page'));
+const SalesPage = lazy(() => import('../pages/roles/sales-page'));
+const ManagerPage = lazy(() => import('../pages/roles/manager-page'));
 const LeadsPage = lazy(() => import('../pages/leads/leads-page'));
 const LeadPage = lazy(() => import('../pages/leads/lead-page'));
 const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
@@ -77,4 +78,16 @@ export const authRoutes: RouteObject[] = [
     path: RoutePath.SuperAdminRole,
     Component: SuperAdminPage,
   },
+    {
+    path: RoutePath.AdminRole,
+    Component: AdminPage,
+  },
+  {
+    path: RoutePath.SalesRole,
+    Component: SalesPage,
+  },
+  {
+    path: RoutePath.ManagerRole,
+    Component: ManagerPage,
+  }
 ];
