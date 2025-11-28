@@ -26,6 +26,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm, useFormContext } from 'react-hook-form';
 import z from 'zod';
 import { Pencil, Power, LogIn } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { RoutePath } from '@apollo/constants';
 
 const roles = [
   {
@@ -164,7 +166,7 @@ const WorkersFilterForm = () => {
             </FormItem>
           )}
         />
-        <Button type="button" onClick={() => form.reset()} >
+        <Button type="button" onClick={() => form.reset()}>
           Reset Filters
         </Button>
       </form>
@@ -319,15 +321,11 @@ const WorkersTable = () => {
             {/* Actions */}
             <TableCell className="flex justify-end">
               <div className="flex gap-2">
-                <Button
-                  onClick={() =>
-                    setCurrentDialog({ content: 'edit-worker', open: true })
-                  }
-                  variant="ghost"
-                  size="icon"
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
+                <Link to={`${RoutePath.Workers}/123456789`}>
+                  <Button variant="ghost" size="icon">
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                </Link>
                 <Button
                   onClick={() =>
                     setCurrentDialog({ content: 'suspend-worker', open: true })

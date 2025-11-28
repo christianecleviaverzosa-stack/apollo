@@ -4,6 +4,7 @@ import { RouteObject } from 'react-router-dom';
 
 const DashboardPage = lazy(() => import('../pages/dashboard/dashboard-page'));
 const WorkersPage = lazy(() => import('../pages/workers/workers-page'));
+const WorkerPage = lazy(() => import('../pages/workers/worker-page'));
 const SuperAdminPage = lazy(() => import('../pages/roles/super-admin-page'));
 const AdminPage = lazy(() => import('../pages/roles/admin-page'));
 const SalesPage = lazy(() => import('../pages/roles/sales-page'));
@@ -89,5 +90,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.ManagerRole,
     Component: ManagerPage,
+  },
+  {
+    path: RoutePath.Worker,
+    Component: WorkerPage
   }
 ];
