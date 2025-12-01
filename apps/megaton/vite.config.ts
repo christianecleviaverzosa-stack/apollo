@@ -2,11 +2,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { version } from './package.json';
+import path from 'path';
+import { writeVersion } from './plugins/write-version';
+
+const BUILD_PATH = path.resolve('./build');
+const BUILD_VERSION = `${version}.${Date.now()}`;
 
 export default defineConfig(({ command }) => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/apps/megaton',
-  base:  '/',
+  base: '/',
   server: {
     port: 3000,
     host: 'localhost',
@@ -15,7 +21,7 @@ export default defineConfig(({ command }) => ({
     port: 3000,
     host: 'localhost',
   },
-  plugins: [react(), nxViteTsPaths()],
+  plugins: [react(), nxViteTsPaths(), writeVersion(BUILD_PATH, BUILD_VERSION, version),],
   build: {
     outDir: './dist',
     emptyOutDir: true,

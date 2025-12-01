@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './assets/globals.css';
+import '@apollo/config/i18n';
 import { Routes } from './router/router';
 import { ThemeProvider } from '@apollo/ui';
 

@@ -18,6 +18,7 @@
     "paths": {
       "@apollo/api": ["api/src/index.ts"],
       "@apollo/config": ["libs/config/src/index.ts"],
+      "@apollo/config/*": ["libs/config/src/lib/*"],
       "@apollo/constants": ["libs/constants/src/index.ts"],
       "@apollo/features/dashboard": ["features/src/lib/dashboard/index.ts"],
       "@apollo/features/dialog": ["features/src/lib/dialog/index.ts"],
