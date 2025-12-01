@@ -117,7 +117,7 @@ const navLinks: NavGroup[] = [
         icon: Settings,
         collapsible: true,
         children: [
-          { label: 'Deposits', href: RoutePath.Login },
+          { label: 'Deposits', href: RoutePath.Deposits },
           { label: 'Withdrawals', href: RoutePath.Login },
           { label: 'Internal Transfers', href: RoutePath.Login },
         ],
