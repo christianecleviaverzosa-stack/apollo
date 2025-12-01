@@ -17,5 +17,6 @@ export const RoutePath = {
   RetentionClients: '/retention-clients',
   RetentionClient: '/retention-clients/:id',
   LeadsAssignment: '/leads-assignment',
-  Deposits: '/deposits'
+  Deposits: '/deposits',
+  Deposit: '/deposits/:id'
 };

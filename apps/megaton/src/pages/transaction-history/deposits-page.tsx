@@ -120,8 +120,6 @@ const depositsFilterSchema = z.object({
       to: z.date().optional(),
     })
     .optional(),
-
-  // new fields
   transactionType: z.string(),
   psp: z.string(),
   verification: z.string(),
@@ -308,7 +306,7 @@ export const DepositsFilterForm = () => {
           )}
         />
 
-        {/* NEW — Transaction Type */}
+        {/* Transaction Type */}
         <FormField
           control={form.control}
           name="transactionType"
@@ -332,7 +330,7 @@ export const DepositsFilterForm = () => {
           )}
         />
 
-        {/* NEW — PSP Provider */}
+        {/* PSP Provider */}
         <FormField
           control={form.control}
           name="psp"
@@ -356,7 +354,7 @@ export const DepositsFilterForm = () => {
           )}
         />
 
-        {/* NEW — Verification */}
+        {/* Verification */}
         <FormField
           control={form.control}
           name="verification"

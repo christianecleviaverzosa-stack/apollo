@@ -19,7 +19,12 @@ const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
 /** Orders */
 const OrdersPage = lazy(() => import('../pages/orders/orders-page'));
 const OrderPage = lazy(() => import('../pages/orders/order-page'));
-const DepositsPage = lazy(() => import('../pages/transaction-history/deposits-page'));
+const DepositsPage = lazy(
+  () => import('../pages/transaction-history/deposits-page')
+);
+const DepositPage = lazy(
+  () => import('../pages/transaction-history/deposit-page')
+);
 /** Leads */
 const FTDClientsPage = lazy(() => import('../pages/ftd/ftd-clients-page'));
 const FTDClientPage = lazy(() => import('../pages/ftd/ftd-client-page'));
@@ -86,7 +91,7 @@ export const authRoutes: RouteObject[] = [
     path: RoutePath.SuperAdminRole,
     Component: SuperAdminPage,
   },
-    {
+  {
     path: RoutePath.AdminRole,
     Component: AdminPage,
   },
@@ -100,10 +105,14 @@ export const authRoutes: RouteObject[] = [
   },
   {
     path: RoutePath.Worker,
-    Component: WorkerPage
+    Component: WorkerPage,
   },
   {
     path: RoutePath.Deposits,
-    Component: DepositsPage
-  }
+    Component: DepositsPage,
+  },
+  {
+    path: RoutePath.Deposit,
+    Component: DepositPage,
+  },
 ];
