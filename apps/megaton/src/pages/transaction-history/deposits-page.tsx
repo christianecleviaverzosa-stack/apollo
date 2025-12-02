@@ -36,7 +36,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CalendarIcon, Eye } from 'lucide-react';
 import { format } from 'date-fns';
 import z from 'zod';
-import { RoutePath } from '@apollo/constants';
+import { countries, RoutePath } from '@apollo/constants';
 
 const paymentMethods = [
   { value: 'all', label: 'All Payment Methods' },
@@ -79,24 +79,7 @@ const verificationFilter = [
   { value: 'unverified', label: 'Unverified Only' },
 ];
 
-const countriesSelect = [
-  {
-    label: 'North America',
-    options: [
-      { value: 'us', label: 'United States' },
-      { value: 'ca', label: 'Canada' },
-      { value: 'mx', label: 'Mexico' },
-    ],
-  },
-  {
-    label: 'Asia',
-    options: [
-      { value: 'ph', label: 'Philippines' },
-      { value: 'jp', label: 'Japan' },
-      { value: 'kr', label: 'South Korea' },
-    ],
-  },
-];
+
 
 const depositsFilterSchema = z.object({
   keyword: z.string().optional(),
@@ -243,8 +226,8 @@ export const DepositsFilterForm = () => {
                   <ReactSelectBase
                     {...field}
                     isMulti
-                    placeholder="Client Country"
-                    options={countriesSelect}
+                    placeholder="Country"
+                    options={countries}
                     onChange={(val) => field.onChange(val)}
                   />
                 )}

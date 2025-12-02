@@ -40,7 +40,7 @@ import {
 import z from 'zod';
 import { CalendarIcon, Eye } from 'lucide-react';
 import { format } from 'date-fns';
-import { RoutePath } from '@apollo/constants';
+import { countries, RoutePath } from '@apollo/constants';
 
 // -----------------------------
 // Select Options (agents, countries, lead types, statuses)
@@ -63,51 +63,7 @@ const agents = [
   },
 ];
 
-const countries = [
-  {
-    label: 'North America',
-    options: [
-      { value: 'us', label: 'United States' },
-      { value: 'ca', label: 'Canada' },
-      { value: 'mx', label: 'Mexico' },
-    ],
-  },
-  {
-    label: 'Europe',
-    options: [
-      { value: 'uk', label: 'United Kingdom' },
-      { value: 'de', label: 'Germany' },
-      { value: 'fr', label: 'France' },
-      { value: 'es', label: 'Spain' },
-      { value: 'it', label: 'Italy' },
-      { value: 'nl', label: 'Netherlands' },
-      { value: 'cz', label: 'Czech Republic' },
-    ],
-  },
-  {
-    label: 'Asia',
-    options: [
-      { value: 'cn', label: 'China' },
-      { value: 'jp', label: 'Japan' },
-      { value: 'kr', label: 'South Korea' },
-      { value: 'ph', label: 'Philippines' },
-      { value: 'sg', label: 'Singapore' },
-      { value: 'in', label: 'India' },
-      { value: 'pk', label: 'Pakistan' },
-      { value: 'ae', label: 'United Arab Emirates' },
-    ],
-  },
-  {
-    label: 'Oceania & LATAM',
-    options: [
-      { value: 'au', label: 'Australia' },
-      { value: 'nz', label: 'New Zealand' },
-      { value: 'co', label: 'Colombia' },
-      { value: 'cl', label: 'Chile' },
-      { value: 'br', label: 'Brazil' },
-    ],
-  },
-];
+
 
 const leadTypes = [
   { value: 'all', label: 'All Lead Types' },

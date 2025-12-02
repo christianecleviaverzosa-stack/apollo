@@ -36,7 +36,7 @@ import { Controller, useForm } from 'react-hook-form';
 import z from 'zod';
 import { CalendarIcon, Eye, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
-import { RoutePath } from '@apollo/constants';
+import { countries, RoutePath } from '@apollo/constants';
 
 // ---------------------------------------------
 // DUMMY SELECT OPTIONS (same as leads + buyers + deposit methods)
@@ -50,67 +50,6 @@ const agents = [
       { value: 'sales-1', label: 'Sales 1' },
       { value: 'sales-2', label: 'Sales 2' },
       { value: 'sales-3', label: 'Sales 3' },
-    ],
-  },
-];
-
-const countries = [
-  {
-    label: 'North America',
-    options: [
-      { value: 'us', label: 'United States' },
-      { value: 'ca', label: 'Canada' },
-      { value: 'mx', label: 'Mexico' },
-    ],
-  },
-  {
-    label: 'Europe',
-    options: [
-      { value: 'uk', label: 'United Kingdom' },
-      { value: 'de', label: 'Germany' },
-      { value: 'fr', label: 'France' },
-      { value: 'es', label: 'Spain' },
-      { value: 'it', label: 'Italy' },
-      { value: 'nl', label: 'Netherlands' },
-    ],
-  },
-  {
-    label: 'Asia',
-    options: [
-      { value: 'cn', label: 'China' },
-      { value: 'jp', label: 'Japan' },
-      { value: 'kr', label: 'South Korea' },
-      { value: 'ph', label: 'Philippines' },
-      { value: 'sg', label: 'Singapore' },
-      { value: 'in', label: 'India' },
-      { value: 'id', label: 'Indonesia' },
-    ],
-  },
-  {
-    label: 'Middle East & Africa',
-    options: [
-      { value: 'ae', label: 'United Arab Emirates' },
-      { value: 'sa', label: 'Saudi Arabia' },
-      { value: 'eg', label: 'Egypt' },
-      { value: 'za', label: 'South Africa' },
-      { value: 'ng', label: 'Nigeria' },
-    ],
-  },
-  {
-    label: 'Oceania',
-    options: [
-      { value: 'au', label: 'Australia' },
-      { value: 'nz', label: 'New Zealand' },
-      { value: 'fj', label: 'Fiji' },
-    ],
-  },
-  {
-    label: 'South America',
-    options: [
-      { value: 'br', label: 'Brazil' },
-      { value: 'ar', label: 'Argentina' },
-      { value: 'cl', label: 'Chile' },
-      { value: 'pe', label: 'Peru' },
     ],
   },
 ];
