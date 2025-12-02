@@ -52,7 +52,7 @@ export const authRoutes: RouteObject[] = [
     Component: LeadsPage,
   },
   {
-    path: RoutePath.Lead,
+    path: RoutePath.Lead(':id'),
     Component: LeadPage,
   },
   {

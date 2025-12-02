@@ -8,7 +8,7 @@ export const RoutePath = {
   SalesRole: '/roles/sales',
   ManagerRole: '/roles/manager',
   Leads: '/leads',
-  Lead: '/leads/:id',
+  Lead: (id: string) => `/leads/${id}`,
   ImportLeads: '/import-leads',
   Orders: '/orders',
   Order: '/orders/:id',
@@ -18,5 +18,5 @@ export const RoutePath = {
   RetentionClient: '/retention-clients/:id',
   LeadsAssignment: '/leads-assignment',
   Deposits: '/deposits',
-  Deposit: '/deposits/:id'
+  Deposit: '/deposits/:id',
 };

@@ -476,7 +476,7 @@ const LeadsTable = () => {
               </Badge>
             </TableCell>
             <TableCell className="font-medium">
-              <a href={`${RoutePath.Leads}/123456789`}>{lead.name}</a>
+              <a href={RoutePath.Lead('12345')}>{lead.name}</a>
             </TableCell>
             <TableCell className="hidden md:table-cell">{lead.email}</TableCell>
             <TableCell className="hidden lg:table-cell">{lead.phone}</TableCell>
@@ -490,7 +490,7 @@ const LeadsTable = () => {
             </TableCell>
             <TableCell className="text-right">
               <div className="flex justify-end gap-1">
-                <a href={`${RoutePath.Leads}/123456789`}>
+                <a href={RoutePath.Lead('12345')}>
                   <Button size="icon" variant="ghost">
                     <Eye className="h-4 w-4" />
                   </Button>
