@@ -4,6 +4,7 @@ export const RoutePath = {
   Workers: '/workers',
   Worker: '/workers/:id',
   CreateWorker: '/create/worker',
+  Roles: '/roles',
   Role: (id: string) => `/roles/${id}`,
   CreateRole: '/create/role',
   Leads: '/leads',

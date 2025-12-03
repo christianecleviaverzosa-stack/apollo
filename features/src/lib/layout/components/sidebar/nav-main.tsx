@@ -127,15 +127,17 @@ const navLinks: NavGroup[] = [
           { label: 'Create Worker', href: RoutePath.CreateWorker },
         ],
       },
+
       {
         label: 'Roles & Permissions',
         icon: UserCog,
         collapsible: true,
         children: [
+          { label: 'Roles', href: RoutePath.Roles },
+          { label: 'Create Role', href: RoutePath.CreateRole },
           { label: 'Admin', href: RoutePath.Role('admin') },
           { label: 'Manager', href: RoutePath.Role('manager') },
           { label: 'Sales', href: RoutePath.Role('sales') },
-          { label: 'Create Custom Role', href: RoutePath.Dashboard },
         ],
       },
       {
