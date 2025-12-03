@@ -7,12 +7,11 @@ const DashboardPage = lazy(() => import('../pages/dashboard/dashboard-page'));
 /** Workers */
 const WorkersPage = lazy(() => import('../pages/workers/workers-page'));
 const WorkerPage = lazy(() => import('../pages/workers/worker-page'));
-const CreateWorkerPage = lazy(() => import('../pages/workers/create-worker-page'));
+const CreateWorkerPage = lazy(
+  () => import('../pages/workers/create-worker-page')
+);
 /** Roles */
-const SuperAdminPage = lazy(() => import('../pages/roles/super-admin-page'));
-const AdminPage = lazy(() => import('../pages/roles/admin-page'));
-const SalesPage = lazy(() => import('../pages/roles/sales-page'));
-const ManagerPage = lazy(() => import('../pages/roles/manager-page'));
+const RolePage = lazy(() => import('../pages/roles/role-page'));
 /** Leads */
 const LeadsPage = lazy(() => import('../pages/leads/leads-page'));
 const LeadPage = lazy(() => import('../pages/leads/lead-page'));
@@ -89,22 +88,6 @@ export const authRoutes: RouteObject[] = [
     Component: LeadsAssignmentPage,
   },
   {
-    path: RoutePath.SuperAdminRole,
-    Component: SuperAdminPage,
-  },
-  {
-    path: RoutePath.AdminRole,
-    Component: AdminPage,
-  },
-  {
-    path: RoutePath.SalesRole,
-    Component: SalesPage,
-  },
-  {
-    path: RoutePath.ManagerRole,
-    Component: ManagerPage,
-  },
-  {
     path: RoutePath.Worker,
     Component: WorkerPage,
   },
@@ -119,5 +102,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.CreateWorker,
     Component: CreateWorkerPage,
+  },
+  {
+    path: RoutePath.Role(':id'),
+    Component: RolePage,
   },
 ];

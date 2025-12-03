@@ -54,9 +54,7 @@ const navLinks: NavGroup[] = [
   // ----------------------------------------------------
   {
     group: 'General',
-    items: [
-      { label: 'Dashboard', icon: Home, href: RoutePath.Dashboard },
-    ],
+    items: [{ label: 'Dashboard', icon: Home, href: RoutePath.Dashboard }],
   },
 
   // ----------------------------------------------------
@@ -100,9 +98,17 @@ const navLinks: NavGroup[] = [
     items: [
       { label: 'All Leads', icon: FileSpreadsheet, href: RoutePath.Leads },
       { label: 'Import Leads', icon: Database, href: RoutePath.ImportLeads },
-      { label: 'Lead Assignment', icon: ClipboardList, href: RoutePath.LeadsAssignment },
+      {
+        label: 'Lead Assignment',
+        icon: ClipboardList,
+        href: RoutePath.LeadsAssignment,
+      },
       { label: 'FTD Clients', icon: Wallet, href: RoutePath.FTDClients },
-      { label: 'Retention Clients', icon: Users, href: RoutePath.RetentionClients },
+      {
+        label: 'Retention Clients',
+        icon: Users,
+        href: RoutePath.RetentionClients,
+      },
     ],
   },
 
@@ -126,9 +132,9 @@ const navLinks: NavGroup[] = [
         icon: UserCog,
         collapsible: true,
         children: [
-          { label: 'Admin', href: RoutePath.AdminRole },
-          { label: 'Manager', href: RoutePath.ManagerRole },
-          { label: 'Sales', href: RoutePath.SalesRole },
+          { label: 'Admin', href: RoutePath.Role('admin') },
+          { label: 'Manager', href: RoutePath.Role('manager') },
+          { label: 'Sales', href: RoutePath.Role('sales') },
           { label: 'Create Custom Role', href: RoutePath.Dashboard },
         ],
       },
@@ -152,7 +158,11 @@ const navLinks: NavGroup[] = [
     group: 'Access & Permissions',
     items: [
       { label: 'Role Access Control', icon: Shield, href: RoutePath.Dashboard },
-      { label: 'Activity Logs', icon: ClipboardList, href: RoutePath.Dashboard },
+      {
+        label: 'Activity Logs',
+        icon: ClipboardList,
+        href: RoutePath.Dashboard,
+      },
       { label: 'Login Sessions', icon: Lock, href: RoutePath.Dashboard },
     ],
   },
@@ -163,14 +173,20 @@ const navLinks: NavGroup[] = [
   {
     group: 'System Settings',
     items: [
-      { label: 'Platform Configuration', icon: Settings, href: RoutePath.Dashboard },
-      { label: 'Notification Settings', icon: Database, href: RoutePath.Dashboard },
+      {
+        label: 'Platform Configuration',
+        icon: Settings,
+        href: RoutePath.Dashboard,
+      },
+      {
+        label: 'Notification Settings',
+        icon: Database,
+        href: RoutePath.Dashboard,
+      },
       { label: 'API Integrations', icon: Shield, href: RoutePath.Dashboard },
     ],
   },
 ];
-
-
 
 export const NavMain = () => {
   return (

@@ -15,11 +15,11 @@ export const RoleMetadataCoreFields = () => {
           {/* Static Display Fields */}
           <div className="space-y-1">
             <Label>Role Name</Label>
-            <p>{watch('role')}</p>
+            <p className='uppercase'>{watch('role')}</p>
           </div>
           <div className="space-y-1">
             <Label>Role ID</Label>
-            <p>{watch('roleId')}</p>
+            <p className='uppercase'>{watch('roleId')}</p>
           </div>
           <div className="space-y-1">
             <Label>Priority Level</Label>
