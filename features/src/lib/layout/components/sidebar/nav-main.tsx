@@ -49,33 +49,87 @@ type NavGroup = {
 };
 
 const navLinks: NavGroup[] = [
+  // ----------------------------------------------------
+  // GENERAL
+  // ----------------------------------------------------
   {
     group: 'General',
     items: [
+      { label: 'Dashboard', icon: Home, href: RoutePath.Dashboard },
+    ],
+  },
+
+  // ----------------------------------------------------
+  // TRADING
+  // ----------------------------------------------------
+  {
+    group: 'Trading Activity',
+    items: [
       {
-        label: 'Dashboard',
-        icon: Home,
-        href: '/dashboard',
+        label: 'Order Management',
+        icon: BadgeDollarSign,
+        collapsible: true,
+        children: [
+          { label: 'All Orders', href: RoutePath.Orders },
+          { label: 'Create Manual Order', href: RoutePath.Dashboard },
+        ],
+      },
+      {
+        label: 'Transaction History',
+        icon: ClipboardList,
+        collapsible: true,
+        children: [
+          { label: 'Deposits', href: RoutePath.Deposits },
+          { label: 'Withdrawals', href: RoutePath.Dashboard },
+          { label: 'Internal Transfers', href: RoutePath.Dashboard },
+        ],
+      },
+      {
+        label: 'Client Trading Summary',
+        icon: BarChart3,
+        href: RoutePath.Dashboard,
       },
     ],
   },
+
+  // ----------------------------------------------------
+  // LEADS
+  // ----------------------------------------------------
+  {
+    group: 'Leads',
+    items: [
+      { label: 'All Leads', icon: FileSpreadsheet, href: RoutePath.Leads },
+      { label: 'Import Leads', icon: Database, href: RoutePath.ImportLeads },
+      { label: 'Lead Assignment', icon: ClipboardList, href: RoutePath.LeadsAssignment },
+      { label: 'FTD Clients', icon: Wallet, href: RoutePath.FTDClients },
+      { label: 'Retention Clients', icon: Users, href: RoutePath.RetentionClients },
+    ],
+  },
+
+  // ----------------------------------------------------
+  // WORKERS
+  // ----------------------------------------------------
   {
     group: 'Workers',
     items: [
       {
-        label: 'All Workers',
+        label: 'Worker Management',
         icon: Users,
-        href: RoutePath.Workers,
+        collapsible: true,
+        children: [
+          { label: 'All Workers', href: RoutePath.Workers },
+          { label: 'Create Worker', href: RoutePath.CreateWorker },
+        ],
       },
       {
-        label: 'Role Management',
+        label: 'Roles & Permissions',
         icon: UserCog,
         collapsible: true,
         children: [
-          { label: 'Super Admin', href: RoutePath.SuperAdminRole },
           { label: 'Admin', href: RoutePath.AdminRole },
           { label: 'Manager', href: RoutePath.ManagerRole },
           { label: 'Sales', href: RoutePath.SalesRole },
+          { label: 'Create Custom Role', href: RoutePath.Dashboard },
         ],
       },
       {
@@ -83,77 +137,40 @@ const navLinks: NavGroup[] = [
         icon: BarChart3,
         collapsible: true,
         children: [
-          { label: 'Leads Handled', href: RoutePath.Login },
-          { label: 'FTD Reports', href: RoutePath.Login },
-          { label: 'Conversion Stats', href: RoutePath.Login },
+          { label: 'Leads Performance', href: RoutePath.Dashboard },
+          { label: 'FTD Reports', href: RoutePath.Dashboard },
+          { label: 'Conversion Stats', href: RoutePath.Dashboard },
         ],
       },
     ],
   },
-  {
-    group: 'Leads',
-    items: [
-      { label: 'All Leads', icon: FileSpreadsheet, href: RoutePath.Leads },
-      { label: 'Import Leads', icon: Database, href: RoutePath.ImportLeads },
-      {
-        label: 'Lead Assignment',
-        icon: ClipboardList,
-        href: RoutePath.LeadsAssignment,
-      },
-      { label: 'FTD Clients', icon: Wallet, href: RoutePath.FTDClients },
-      {
-        label: 'Retention Clients',
-        icon: Users,
-        href: RoutePath.RetentionClients,
-      },
-    ],
-  },
-  {
-    group: 'Trading Activity',
-    items: [
-      { label: 'All Orders', icon: BadgeDollarSign, href: RoutePath.Orders },
-      {
-        label: 'Transaction History',
-        icon: Settings,
-        collapsible: true,
-        children: [
-          { label: 'Deposits', href: RoutePath.Deposits },
-          { label: 'Withdrawals', href: RoutePath.Login },
-          { label: 'Internal Transfers', href: RoutePath.Login },
-        ],
-      },
-      {
-        label: 'Client Trading Summary',
-        icon: BarChart3,
-        href: RoutePath.Login,
-      },
-    ],
-  },
+
+  // ----------------------------------------------------
+  // ACCESS / AUDIT
+  // ----------------------------------------------------
   {
     group: 'Access & Permissions',
     items: [
-      { label: 'Role Access Control', icon: Shield, href: RoutePath.Login },
-      { label: 'Activity Logs', icon: ClipboardList, href: RoutePath.Login },
-      { label: 'Login Sessions', icon: Lock, href: RoutePath.Login },
+      { label: 'Role Access Control', icon: Shield, href: RoutePath.Dashboard },
+      { label: 'Activity Logs', icon: ClipboardList, href: RoutePath.Dashboard },
+      { label: 'Login Sessions', icon: Lock, href: RoutePath.Dashboard },
     ],
   },
+
+  // ----------------------------------------------------
+  // SYSTEM
+  // ----------------------------------------------------
   {
     group: 'System Settings',
     items: [
-      {
-        label: 'Platform Configuration',
-        icon: Settings,
-        href: RoutePath.Login,
-      },
-      {
-        label: 'Notification Settings',
-        icon: Database,
-        href: RoutePath.Login,
-      },
-      { label: 'API Integrations', icon: Shield, href: RoutePath.Login },
+      { label: 'Platform Configuration', icon: Settings, href: RoutePath.Dashboard },
+      { label: 'Notification Settings', icon: Database, href: RoutePath.Dashboard },
+      { label: 'API Integrations', icon: Shield, href: RoutePath.Dashboard },
     ],
   },
 ];
+
+
 
 export const NavMain = () => {
   return (

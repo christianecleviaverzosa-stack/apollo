@@ -3,6 +3,7 @@ export const RoutePath = {
   Dashboard: '/dashboard',
   Workers: '/workers',
   Worker: '/workers/:id',
+  CreateWorker: '/create/worker',
   SuperAdminRole: '/roles/super-admin',
   AdminRole: '/roles/admin',
   SalesRole: '/roles/sales',

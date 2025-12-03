@@ -7,6 +7,7 @@ const DashboardPage = lazy(() => import('../pages/dashboard/dashboard-page'));
 /** Workers */
 const WorkersPage = lazy(() => import('../pages/workers/workers-page'));
 const WorkerPage = lazy(() => import('../pages/workers/worker-page'));
+const CreateWorkerPage = lazy(() => import('../pages/workers/create-worker-page'));
 /** Roles */
 const SuperAdminPage = lazy(() => import('../pages/roles/super-admin-page'));
 const AdminPage = lazy(() => import('../pages/roles/admin-page'));
@@ -114,5 +115,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.Deposit,
     Component: DepositPage,
+  },
+  {
+    path: RoutePath.CreateWorker,
+    Component: CreateWorkerPage,
   },
 ];

@@ -11,16 +11,17 @@ import {
   SelectItem,
   SelectGroup,
   SelectLabel,
-  Badge,
   Switch,
   Form as ApolloForm,
-  setCurrentDialog,
   ReactSelectBase,
 } from '@apollo/ui';
 
 import { useForm, Controller } from 'react-hook-form';
 import { RolePermissionFields } from '@apollo/features/role';
 
+// -----------------------------
+// Shared Constants
+// -----------------------------
 const DEPARTMENTS = [
   { value: 'sales', label: 'Sales' },
   { value: 'retention', label: 'Retention' },
@@ -74,111 +75,47 @@ const timezones = [
       { value: 'wita', label: 'Indonesia Central Standard Time (WITA)' },
     ],
   },
-  {
-    label: 'Australia & Pacific',
-    zones: [
-      { value: 'awst', label: 'Australian Western Standard Time (AWST)' },
-      { value: 'acst', label: 'Australian Central Standard Time (ACST)' },
-      { value: 'aest', label: 'Australian Eastern Standard Time (AEST)' },
-      { value: 'nzst', label: 'New Zealand Standard Time (NZST)' },
-      { value: 'fjt', label: 'Fiji Time (FJT)' },
-    ],
-  },
-  {
-    label: 'South America',
-    zones: [
-      { value: 'art', label: 'Argentina Time (ART)' },
-      { value: 'bot', label: 'Bolivia Time (BOT)' },
-      { value: 'brt', label: 'Brasilia Time (BRT)' },
-      { value: 'clt', label: 'Chile Standard Time (CLT)' },
-    ],
-  },
 ];
 
 const countries = [
   {
-    label: 'North America',
-    list: [
-      { value: 'us', label: 'United States' },
-      { value: 'ca', label: 'Canada' },
-      { value: 'mx', label: 'Mexico' },
-    ],
-  },
-  {
-    label: 'Europe',
-    list: [
-      { value: 'uk', label: 'United Kingdom' },
-      { value: 'de', label: 'Germany' },
-      { value: 'fr', label: 'France' },
-      { value: 'es', label: 'Spain' },
-      { value: 'it', label: 'Italy' },
-      { value: 'nl', label: 'Netherlands' },
-    ],
-  },
-  {
     label: 'Asia',
     list: [
-      { value: 'cn', label: 'China' },
+      { value: 'ph', label: 'Philippines' },
       { value: 'jp', label: 'Japan' },
       { value: 'kr', label: 'South Korea' },
-      { value: 'ph', label: 'Philippines' },
       { value: 'sg', label: 'Singapore' },
-      { value: 'in', label: 'India' },
-      { value: 'id', label: 'Indonesia' },
-    ],
-  },
-  {
-    label: 'Middle East & Africa',
-    list: [
-      { value: 'ae', label: 'United Arab Emirates' },
-      { value: 'sa', label: 'Saudi Arabia' },
-      { value: 'eg', label: 'Egypt' },
-      { value: 'za', label: 'South Africa' },
-      { value: 'ng', label: 'Nigeria' },
-    ],
-  },
-  {
-    label: 'Oceania',
-    list: [
-      { value: 'au', label: 'Australia' },
-      { value: 'nz', label: 'New Zealand' },
-      { value: 'fj', label: 'Fiji' },
-    ],
-  },
-  {
-    label: 'South America',
-    list: [
-      { value: 'br', label: 'Brazil' },
-      { value: 'ar', label: 'Argentina' },
-      { value: 'cl', label: 'Chile' },
-      { value: 'pe', label: 'Peru' },
+      { value: 'cn', label: 'China' },
     ],
   },
 ];
 
+// -----------------------------
+// Default Values for CREATE
+// -----------------------------
 const defaultValues = {
-  email: 'alex.step@example.com',
-  fullName: 'Alex Step',
-  username: 'alex.step',
+  email: '',
+  fullName: '',
+  username: '',
   workerRole: 'sales',
   employmentType: 'full_time',
 
-  departments: ['sales'],
-  teams: ['sales_a'],
-  managerId: 'mike',
-  leadQuota: 40,
-  conversionTarget: 15,
+  departments: [],
+  teams: [],
+  managerId: '',
+  leadQuota: 0,
+  conversionTarget: 0,
 
-  country: 'ph',
-  timezone: 'pst',
-  whatsapp: '+63 900 123 4567',
-  telegram: '@alexstep',
-  discord: 'alex#3049',
+  country: '',
+  timezone: '',
+  whatsapp: '',
+  telegram: '',
+  discord: '',
 
   require2FA: false,
   enableIPWhitelist: false,
   ipWhitelist: '',
-  maxSessions: 2,
+  maxSessions: 1,
   sessionTimeout: 30,
 
   moduleScopes: {
@@ -191,8 +128,8 @@ const defaultValues = {
       manage_roles: false,
     },
     leads: {
-      read: true,
-      edit: true,
+      read: false,
+      edit: false,
       assign: false,
       delete: false,
       view_ftd: false,
@@ -224,142 +161,100 @@ const defaultValues = {
   },
 };
 
-export default function WorkerPage() {
+// =======================================================================
+// PAGE COMPONENT
+// =======================================================================
+export default function CreateWorkerPage() {
   const form = useForm({ defaultValues });
   const { register, control, watch } = form;
 
   const ipWhiteEnabled = watch('enableIPWhitelist');
 
-  const workerId = 'WKR-393021';
-  const createdAt = '2024-09-12 14:20';
-  const lastLogin = '2024-11-12 09:41';
-  const lastLoginIp = '185.199.22.11';
-  const accountStatus = 'Active';
-
   return (
-    <section data-testid="worker-page" className="relative space-y-6">
+    <section data-testid="create-worker-page" className="relative space-y-6">
+      {/* Sticky Header */}
       <div className="sticky top-0 flex flex-col bg-background z-10 shadow-sm">
         <div className="flex justify-between items-center p-4">
-          <h2 className="text-2xl font-semibold">Worker Profile</h2>
-          <Button form="worker-form" type="submit">
-            Save Changes
+          <h2 className="text-2xl font-semibold">Create Worker</h2>
+          <Button form="create-worker-form" type="submit">
+            Create Worker
           </Button>
         </div>
         <Separator />
       </div>
 
+      {/* Content */}
       <ApolloForm {...form}>
-        <form id="worker-form" className="flex flex-col gap-10 p-4">
+        <form id="create-worker-form" className="flex flex-col gap-10 p-4">
+          {/* Worker Information */}
           <div className="flex flex-col gap-4">
-            <Label className="text-muted-foreground">Worker Identity</Label>
+            <Label className="text-muted-foreground">Worker Information</Label>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Left column - static fields */}
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1">
-                  <Label>Worker ID</Label>
-                  <p className="text-sm font-medium">{workerId}</p>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <Label>Created At</Label>
-                  <p className="text-sm font-medium">{createdAt}</p>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <Label>Last Login</Label>
-                  <p className="text-sm font-medium">{lastLogin}</p>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <Label>Last Login IP</Label>
-                  <p className="text-sm font-medium">{lastLoginIp}</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col gap-1">
-                    <Label>Account Status</Label>
-                    <Badge className="w-fit">{accountStatus}</Badge>
-                  </div>
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant="outline"
-                    className="text-destructive"
-                    onClick={() =>
-                      setCurrentDialog({
-                        content: 'suspend-worker',
-                        open: true,
-                      })
-                    }
-                  >
-                    Suspend Worker
-                  </Button>
-                </div>
+              <div className="flex flex-col gap-2">
+                <Label>Email Address</Label>
+                <Input placeholder="email@example.com" {...register('email')} />
               </div>
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                  <Label>Email Address</Label>
-                  <Input
-                    placeholder="alex.step@example.com"
-                    {...register('email')}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Full Name</Label>
-                  <Input placeholder="Alex Step" {...register('fullName')} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Username</Label>
-                  <Input placeholder="alex.step" {...register('username')} />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Worker Role</Label>
-                  <Controller
-                    control={control}
-                    name="workerRole"
-                    render={({ field }) => (
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="manager">Manager</SelectItem>
-                          <SelectItem value="sales">Sales</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label>Employment Type</Label>
-                  <Controller
-                    control={control}
-                    name="employmentType"
-                    render={({ field }) => (
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="full_time">Full-Time</SelectItem>
-                          <SelectItem value="part_time">Part-Time</SelectItem>
-                          <SelectItem value="contractor">Contractor</SelectItem>
-                          <SelectItem value="intern">Intern</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Full Name</Label>
+                <Input placeholder="John Doe" {...register('fullName')} />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Username</Label>
+                <Input placeholder="johndoe" {...register('username')} />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Worker Role</Label>
+                <Controller
+                  control={control}
+                  name="workerRole"
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="admin">Admin</SelectItem>
+                        <SelectItem value="manager">Manager</SelectItem>
+                        <SelectItem value="sales">Sales</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Employment Type</Label>
+                <Controller
+                  control={control}
+                  name="employmentType"
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="full_time">Full-Time</SelectItem>
+                        <SelectItem value="part_time">Part-Time</SelectItem>
+                        <SelectItem value="contractor">Contractor</SelectItem>
+                        <SelectItem value="intern">Intern</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </div>
             </div>
           </div>
+
+          {/* Assignment & Performance */}
           <div className="flex flex-col gap-4">
             <Label className="text-muted-foreground">
               Assignment & Performance
             </Label>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
@@ -381,6 +276,7 @@ export default function WorkerPage() {
                     )}
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>Teams</Label>
                   <Controller
@@ -400,6 +296,7 @@ export default function WorkerPage() {
                     )}
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>Assigned Manager</Label>
                   <Controller
@@ -427,6 +324,7 @@ export default function WorkerPage() {
                   />
                 </div>
               </div>
+
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                   <Label>Daily Lead Quota</Label>
@@ -435,6 +333,7 @@ export default function WorkerPage() {
                     {...register('leadQuota', { valueAsNumber: true })}
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>Monthly Conversion Target</Label>
                   <Input
@@ -445,11 +344,15 @@ export default function WorkerPage() {
               </div>
             </div>
           </div>
+
+          {/* Contact & System Info */}
           <div className="flex flex-col gap-4">
             <Label className="text-muted-foreground">
               Contact & System Info
             </Label>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Contact left column */}
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                   <Label>Country</Label>
@@ -462,7 +365,7 @@ export default function WorkerPage() {
                         value={field.value}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a country" />
+                          <SelectValue placeholder="Select country" />
                         </SelectTrigger>
                         <SelectContent>
                           {countries.map((region) => (
@@ -480,6 +383,7 @@ export default function WorkerPage() {
                     )}
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>Timezone</Label>
                   <Controller
@@ -509,6 +413,7 @@ export default function WorkerPage() {
                     )}
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>WhatsApp</Label>
                   <Input
@@ -516,24 +421,30 @@ export default function WorkerPage() {
                     {...register('whatsapp')}
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>Telegram</Label>
                   <Input placeholder="@username" {...register('telegram')} />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>Discord</Label>
                   <Input placeholder="discord#0001" {...register('discord')} />
                 </div>
               </div>
+
+              {/* System right column */}
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                   <Label>Require 2FA</Label>
                   <Switch {...register('require2FA')} />
                 </div>
+
                 <div className="flex items-center justify-between">
                   <Label>Enable IP Whitelist</Label>
                   <Switch {...register('enableIPWhitelist')} />
                 </div>
+
                 {ipWhiteEnabled && (
                   <div className="flex flex-col gap-2">
                     <Label>IP Whitelist (comma separated)</Label>
@@ -544,6 +455,7 @@ export default function WorkerPage() {
                     />
                   </div>
                 )}
+
                 <div className="flex flex-col gap-2">
                   <Label>Max Concurrent Sessions</Label>
                   <Input
@@ -551,6 +463,7 @@ export default function WorkerPage() {
                     {...register('maxSessions', { valueAsNumber: true })}
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label>Session Timeout (minutes)</Label>
                   <Input
@@ -561,7 +474,8 @@ export default function WorkerPage() {
               </div>
             </div>
           </div>
-             {/* Role Permissions */}
+
+          {/* Role Permissions */}
           <RolePermissionFields />
         </form>
       </ApolloForm>
