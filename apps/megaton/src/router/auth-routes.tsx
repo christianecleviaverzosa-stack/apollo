@@ -12,6 +12,7 @@ const CreateWorkerPage = lazy(
 );
 /** Roles */
 const RolePage = lazy(() => import('../pages/roles/role-page'));
+const CreateRolePage = lazy(() => import('../pages/roles/create-role-page'));
 /** Leads */
 const LeadsPage = lazy(() => import('../pages/leads/leads-page'));
 const LeadPage = lazy(() => import('../pages/leads/lead-page'));
@@ -106,5 +107,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.Role(':id'),
     Component: RolePage,
+  },
+  {
+    path: RoutePath.CreateRole,
+    Component: CreateRolePage,
   },
 ];
