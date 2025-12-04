@@ -1,4 +1,3 @@
-// TODO: This must be a dumb component, currently placeholder contents
 import {
   Form,
   FormField,
@@ -32,12 +31,257 @@ import {
   ReactSelectBase,
   setCurrentDialog,
 } from '@apollo/ui';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import z from 'zod';
 import { CalendarIcon, Eye, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { countries, RoutePath } from '@apollo/constants';
+
+export const LeadsFilterForm = () => {
+  const form = useForm({
+    defaultValues: {
+      keyword: '',
+      leadType: '',
+      agents: [],
+      verified: '',
+      countries: [],
+      dateRange: undefined,
+      affiliate: '',
+      offerName: '',
+      deviceType: '',
+      lastContactRange: undefined,
+      sortBy: '',
+      leadStatus: '',
+    },
+  });
+
+  return (
+    <Form {...form}>
+      <form className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2">
+        <Input
+          placeholder="Search name, email, or ID"
+          {...form.register('keyword')}
+        />
+
+        <Input placeholder="Offer name" {...form.register('offerName')} />
+
+        <FormField
+          control={form.control}
+          name="leadType"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Lead Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="demo">Demo</SelectItem>
+                    <SelectItem value="trial">Trial</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="agents"
+          render={({ field }) => (
+            <FormItem>
+              <Controller
+                control={form.control}
+                name="agents"
+                render={({ field }) => (
+                  <ReactSelectBase
+                    {...field}
+                    isMulti
+                    placeholder="Select agents"
+                    options={agents}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="verified"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Verification Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">
+                      All (Verified & Unverified)
+                    </SelectItem>
+                    <SelectItem value="verified">Verified</SelectItem>
+                    <SelectItem value="email_verified">
+                      Email Verified
+                    </SelectItem>
+                    <SelectItem value="unverified">Unverified</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="countries"
+          render={({ field }) => (
+            <FormItem>
+              <Controller
+                control={form.control}
+                name="countries"
+                render={({ field }) => (
+                  <ReactSelectBase
+                    {...field}
+                    isMulti
+                    placeholder="Select country"
+                    options={countries}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="dateRange"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button variant="outline" className="justify-start">
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value?.from ? (
+                        field.value?.to ? (
+                          <>
+                            {format(field.value.from, 'LLL dd, y')} -{' '}
+                            {format(field.value.to, 'LLL dd, y')}
+                          </>
+                        ) : (
+                          format(field.value.from, 'LLL dd, y')
+                        )
+                      ) : (
+                        'Created Date (Range)'
+                      )}
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="end">
+                  <Calendar
+                    mode="range"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    numberOfMonths={2}
+                  />
+                </PopoverContent>
+              </Popover>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="lastContactRange"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button variant="outline" className="justify-start">
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value?.from ? (
+                        field.value?.to ? (
+                          <>
+                            {format(field.value.from, 'LLL dd, y')} -{' '}
+                            {format(field.value.to, 'LLL dd, y')}
+                          </>
+                        ) : (
+                          format(field.value.from, 'LLL dd, y')
+                        )
+                      ) : (
+                        'Last Contact Range'
+                      )}
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="range"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    numberOfMonths={2}
+                  />
+                </PopoverContent>
+              </Popover>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="leadStatus"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Lead Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="new">New</SelectItem>
+                    <SelectItem value="follow_up">Follow-up</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                    <SelectItem value="converted">Converted</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="deviceType"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Device Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="desktop">Desktop</SelectItem>
+                    <SelectItem value="mobile">Mobile</SelectItem>
+                    <SelectItem value="tablet">Tablet</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <Button type="button" onClick={() => form.reset()}>
+          Reset Filters
+        </Button>
+        <Button type="button">Export Data</Button>
+      </form>
+    </Form>
+  );
+};
 
 const agents = [
   {
@@ -52,391 +296,186 @@ const agents = [
   },
 ];
 
-
-const leadsFilterFormSchema = z.object({
-  keyword: z.string(),
-  leadType: z.string(),
-  countries: z.array(
-    z.object({
-      value: z.string(),
-      label: z.string(),
-    })
-  ),
-  agents: z.array(
-    z.object({
-      value: z.string(),
-      label: z.string(),
-    })
-  ),
-  dateRange: z
-    .object({
-      from: z.date(),
-      to: z.date().optional(),
-    })
-    .optional(),
-  verified: z.string(),
-});
-
-type LeadsFilterFormValues = z.infer<typeof leadsFilterFormSchema>;
-
-export const LeadsFilterForm = () => {
-  const form = useForm<LeadsFilterFormValues>({
-    defaultValues: {
-      keyword: '',
-      leadType: 'all',
-      agents: [],
-      countries: [],
-      verified: 'all',
-    },
-    resolver: zodResolver(leadsFilterFormSchema),
-  });
-
-  return (
-    <Form {...form}>
-      <form className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2">
-        <Input
-          placeholder="Search name, email, or ID"
-          {...form.register('keyword')}
-        />
-        <FormField
-          control={form.control}
-          name="agents"
-          render={() => (
-            <FormItem>
-              <Controller
-                control={form.control}
-                name="agents"
-                render={({ field }) => (
-                  <ReactSelectBase
-                    {...field}
-                    isMulti
-                    placeholder="Select angents"
-                    options={agents}
-                    onChange={(val) => field.onChange(val)}
-                  />
-                )}
-              />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="leadType"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="min-w-48">
-                    <SelectValue placeholder="All Lead Types" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Lead Types</SelectItem>
-                    <SelectItem value="demo">Demo</SelectItem>
-                    <SelectItem value="active">Active</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="verified"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger className="min-w-48">
-                    <SelectValue placeholder="Verified & Unverified" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Verified & Unverified</SelectItem>
-                    <SelectItem value="verified">
-                      KYC / Email Verified
-                    </SelectItem>
-                    <SelectItem value="unverified">Unverified</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="dateRange"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant="outline"
-                      className="justify-start text-left font-normal"
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {field.value?.from ? (
-                        field.value.to ? (
-                          field.value.from.getTime() ===
-                          field.value.to.getTime() ? (
-                            format(field.value.from, 'LLL dd, y')
-                          ) : (
-                            <>
-                              {format(field.value.from, 'LLL dd, y')} -{' '}
-                              {format(field.value.to, 'LLL dd, y')}
-                            </>
-                          )
-                        ) : (
-                          format(field.value.from, 'LLL dd, y')
-                        )
-                      ) : (
-                        <span>Created at (date range)</span>
-                      )}
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="end">
-                  <Calendar
-                    mode="range"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date('1900-01-01')
-                    }
-                    numberOfMonths={2}
-                  />
-                </PopoverContent>
-              </Popover>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="countries"
-          render={() => (
-            <FormItem>
-              <Controller
-                control={form.control}
-                name="countries"
-                render={({ field }) => (
-                  <ReactSelectBase
-                    {...field}
-                    isMulti
-                    placeholder="Select countries"
-                    options={countries}
-                    onChange={(val) => field.onChange(val)}
-                  />
-                )}
-              />
-            </FormItem>
-          )}
-        />
-        <Button onClick={() => form.reset()} type="button">
-          Reset Filters
-        </Button>
-        <Button type="button">Export Data</Button>
-      </form>
-    </Form>
-  );
-};
-
 const leadsData = [
   {
-    id: 'LD-001',
-    type: 'Demo',
-    name: 'John Smith',
+    id: '00000001',
+    leadType: 'Demo',
+    firstName: 'John',
+    lastName: 'Smith',
     email: 'john.smith@example.com',
     phone: '+1 202 555 0183',
     country: 'United States',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'New',
+    affiliate: 'Affiliate Pro',
+    offerName: 'Crypto Starter Pack',
+    ipAddress: '192.168.1.45',
+    device: 'Windows 11 · Chrome 127',
+    lastContacted: '2025-10-23',
+    lastNoteAt: '2025-10-24',
     createdAt: '2025-10-25',
   },
   {
-    id: 'LD-002',
-    type: 'Active',
-    name: 'Maria Garcia',
+    id: '00000002',
+    leadType: 'Active',
+    firstName: 'Maria',
+    lastName: 'Garcia',
     email: 'maria.garcia@example.com',
     phone: '+34 601 555 214',
     country: 'Spain',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'Follow-up',
+    affiliate: 'LeadBoost EU',
+    offerName: 'Forex Accelerator',
+    ipAddress: '83.45.201.12',
+    device: 'iPhone 14 · Safari',
+    lastContacted: '2025-10-21',
+    lastNoteAt: '2025-10-20',
     createdAt: '2025-10-20',
   },
   {
-    id: 'LD-003',
-    type: 'Demo',
-    name: 'James Lee',
+    id: '00000003',
+    leadType: 'Demo',
+    firstName: 'James',
+    lastName: 'Lee',
     email: 'james.lee@example.com',
     phone: '+63 917 555 8877',
     country: 'Philippines',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'Converted',
+    affiliate: 'Direct',
+    offerName: 'Welcome Bonus 50%',
+    ipAddress: '112.201.14.33',
+    device: 'Android 13 · Chrome Mobile',
+    lastContacted: '2025-10-18',
+    lastNoteAt: '2025-10-18',
     createdAt: '2025-10-18',
   },
   {
-    id: 'LD-004',
-    type: 'Trial',
-    name: 'Sofia Martinez',
+    id: '00000004',
+    leadType: 'Trial',
+    firstName: 'Sofia',
+    lastName: 'Martinez',
     email: 'sofia.martinez@example.com',
     phone: '+52 998 233 6744',
     country: 'Mexico',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'Pending',
+    affiliate: 'LATAM Leads',
+    offerName: 'Trial Funnel Entry',
+    ipAddress: '186.77.91.201',
+    device: 'Windows 10 · Edge',
+    lastContacted: '2025-10-17',
+    lastNoteAt: '2025-10-17',
     createdAt: '2025-10-17',
   },
   {
-    id: 'LD-005',
-    type: 'Active',
-    name: 'David Kim',
+    id: '00000005',
+    leadType: 'Active',
+    firstName: 'David',
+    lastName: 'Kim',
     email: 'david.kim@example.com',
     phone: '+82 10 3456 7890',
     country: 'South Korea',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'Follow-up',
+    affiliate: 'AsiaPrime',
+    offerName: 'K-Forex Lite',
+    ipAddress: '14.55.220.11',
+    device: 'Galaxy S22 · Samsung Browser',
+    lastContacted: '2025-10-15',
+    lastNoteAt: '2025-10-15',
     createdAt: '2025-10-15',
   },
   {
-    id: 'LD-006',
-    type: 'Demo',
-    name: 'Emma Johnson',
+    id: '00000006',
+    leadType: 'Demo',
+    firstName: 'Emma',
+    lastName: 'Johnson',
     email: 'emma.johnson@example.com',
     phone: '+44 7700 900125',
     country: 'United Kingdom',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'New',
+    affiliate: 'UKFunnels',
+    offerName: 'Beginner FX Bootcamp',
+    ipAddress: '51.39.88.72',
+    device: 'MacOS 14 · Chrome',
+    lastContacted: '2025-10-14',
+    lastNoteAt: '2025-10-14',
     createdAt: '2025-10-14',
   },
   {
-    id: 'LD-007',
-    type: 'Active',
-    name: 'Ahmed Hassan',
+    id: '00000007',
+    leadType: 'Active',
+    firstName: 'Ahmed',
+    lastName: 'Hassan',
     email: 'ahmed.hassan@example.com',
     phone: '+971 50 123 4567',
     country: 'United Arab Emirates',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'Converted',
+    affiliate: 'GCC Traffic Hub',
+    offerName: 'MENA FX Elite',
+    ipAddress: '92.96.44.201',
+    device: 'Windows 11 · Chrome',
+    lastContacted: '2025-10-12',
+    lastNoteAt: '2025-10-12',
     createdAt: '2025-10-12',
   },
   {
-    id: 'LD-008',
-    type: 'Demo',
-    name: 'Luca Bianchi',
+    id: '00000008',
+    leadType: 'Demo',
+    firstName: 'Luca',
+    lastName: 'Bianchi',
     email: 'luca.bianchi@example.com',
     phone: '+39 331 456 7890',
     country: 'Italy',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'Follow-up',
+    affiliate: 'EuroLeads',
+    offerName: 'FX Trial Conversion',
+    ipAddress: '95.233.77.19',
+    device: 'iPadOS · Safari',
+    lastContacted: '2025-10-11',
+    lastNoteAt: '2025-10-11',
     createdAt: '2025-10-11',
   },
   {
-    id: 'LD-009',
-    type: 'Trial',
-    name: 'Hiroshi Tanaka',
+    id: '00000009',
+    leadType: 'Active',
+    firstName: 'Hiroshi',
+    lastName: 'Tanaka',
     email: 'hiroshi.tanaka@example.com',
-    phone: '+81 80 5555 1234',
+    phone: '+81 90 1234 5678',
     country: 'Japan',
-    agent: 'Sales 1',
+    assignedAgent: 'Sales 1',
     status: 'Pending',
+    affiliate: 'ZenLeads JP',
+    offerName: 'JPY Starter Pack',
+    ipAddress: '133.203.17.22',
+    device: 'Android 14 · Chrome',
+    lastContacted: '2025-10-10',
+    lastNoteAt: '2025-10-10',
     createdAt: '2025-10-10',
   },
   {
-    id: 'LD-010',
-    type: 'Active',
-    name: 'Olivia Brown',
+    id: '00000010',
+    leadType: 'Trial',
+    firstName: 'Olivia',
+    lastName: 'Brown',
     email: 'olivia.brown@example.com',
-    phone: '+61 400 222 333',
-    country: 'Australia',
-    agent: 'Sales 1',
-    status: 'Converted',
+    phone: '+1 415 555 2299',
+    country: 'United States',
+    assignedAgent: 'Sales 1',
+    status: 'New',
+    affiliate: 'Direct',
+    offerName: 'Account Opening Promo',
+    ipAddress: '172.88.44.19',
+    device: 'MacOS · Safari',
+    lastContacted: '2025-10-09',
+    lastNoteAt: '2025-10-09',
     createdAt: '2025-10-09',
-  },
-  {
-    id: 'LD-011',
-    type: 'Demo',
-    name: 'Noah Davis',
-    email: 'noah.davis@example.com',
-    phone: '+1 416 555 7721',
-    country: 'Canada',
-    agent: 'Sales 1',
-    status: 'New',
-    createdAt: '2025-10-08',
-  },
-  {
-    id: 'LD-012',
-    type: 'Trial',
-    name: 'Fatima Ali',
-    email: 'fatima.ali@example.com',
-    phone: '+92 301 555 6677',
-    country: 'Pakistan',
-    agent: 'Sales 1',
-    status: 'Follow-up',
-    createdAt: '2025-10-06',
-  },
-  {
-    id: 'LD-013',
-    type: 'Active',
-    name: 'Carlos Hernandez',
-    email: 'carlos.hernandez@example.com',
-    phone: '+57 320 888 1122',
-    country: 'Colombia',
-    agent: 'Sales 1',
-    status: 'Converted',
-    createdAt: '2025-10-05',
-  },
-  {
-    id: 'LD-014',
-    type: 'Demo',
-    name: 'Anika Patel',
-    email: 'anika.patel@example.com',
-    phone: '+91 98765 43210',
-    country: 'India',
-    agent: 'Sales 1',
-    status: 'New',
-    createdAt: '2025-10-03',
-  },
-  {
-    id: 'LD-015',
-    type: 'Trial',
-    name: 'Mark Evans',
-    email: 'mark.evans@example.com',
-    phone: '+64 21 345 678',
-    country: 'New Zealand',
-    agent: 'Sales 1',
-    status: 'Follow-up',
-    createdAt: '2025-10-02',
-  },
-  {
-    id: 'LD-016',
-    type: 'Active',
-    name: 'Chen Wei',
-    email: 'chen.wei@example.com',
-    phone: '+86 138 0013 4567',
-    country: 'China',
-    agent: 'Sales 1',
-    status: 'Converted',
-    createdAt: '2025-09-30',
-  },
-  {
-    id: 'LD-017',
-    type: 'Demo',
-    name: 'Julia Novak',
-    email: 'julia.novak@example.com',
-    phone: '+420 777 555 444',
-    country: 'Czech Republic',
-    agent: 'Sales 1',
-    status: 'Pending',
-    createdAt: '2025-09-29',
-  },
-  {
-    id: 'LD-018',
-    type: 'Active',
-    name: 'Ali Khan',
-    email: 'ali.khan@example.com',
-    phone: '+971 56 777 8888',
-    country: 'UAE',
-    agent: 'Sales 1',
-    status: 'Follow-up',
-    createdAt: '2025-09-27',
   },
 ];
 
@@ -446,11 +485,36 @@ const LeadsTable = () => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-[60px] text-center">#</TableHead>
-          <TableHead className="min-w-32">Lead Type</TableHead>
-          <TableHead className="min-w-48">Name</TableHead>
+          <TableHead className="min-w-28">Lead Type</TableHead>
+          <TableHead className="min-w-40">First Name</TableHead>
+          <TableHead className="min-w-40">Last Name</TableHead>
           <TableHead className="min-w-56 hidden md:table-cell">Email</TableHead>
           <TableHead className="min-w-40 hidden lg:table-cell">Phone</TableHead>
-          <TableHead className="min-w-40">Country</TableHead>
+          <TableHead className="min-w-40 hidden lg:table-cell">
+            Country
+          </TableHead>
+
+          <TableHead className="min-w-40 hidden xl:table-cell">
+            Affiliate
+          </TableHead>
+          <TableHead className="min-w-48 hidden xl:table-cell">
+            Offer Name
+          </TableHead>
+
+          <TableHead className="min-w-40 hidden 2xl:table-cell">
+            IP Address
+          </TableHead>
+          <TableHead className="min-w-56 hidden 2xl:table-cell">
+            Device / OS / Browser
+          </TableHead>
+
+          <TableHead className="min-w-36 hidden lg:table-cell">
+            Last Note
+          </TableHead>
+          <TableHead className="min-w-36 hidden lg:table-cell">
+            Last Contact
+          </TableHead>
+
           <TableHead className="min-w-40 hidden md:table-cell">
             Assigned Agent
           </TableHead>
@@ -460,55 +524,112 @@ const LeadsTable = () => {
           <TableHead className="min-w-40 hidden md:table-cell">
             Created At
           </TableHead>
+
           <TableHead className="w-[100px] text-right"></TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
-        {leadsData.map((lead, i) => (
-          <TableRow
-            key={lead.id}
-            className="hover:bg-muted/50 transition-colors"
-          >
-            <TableCell className="text-center font-medium">{i + 1}</TableCell>
-            <TableCell>
-              <Badge variant="secondary" className="capitalize">
-                {lead.type}
-              </Badge>
-            </TableCell>
-            <TableCell className="font-medium">
-              <a href={RoutePath.Lead('12345')}>{lead.name}</a>
-            </TableCell>
-            <TableCell className="hidden md:table-cell">{lead.email}</TableCell>
-            <TableCell className="hidden lg:table-cell">{lead.phone}</TableCell>
-            <TableCell>{lead.country}</TableCell>
-            <TableCell className="hidden md:table-cell">{lead.agent}</TableCell>
-            <TableCell className="hidden md:table-cell">
-              <Badge variant="outline">{lead.status}</Badge>
-            </TableCell>
-            <TableCell className="hidden md:table-cell text-muted-foreground">
-              {lead.createdAt}
-            </TableCell>
-            <TableCell className="text-right">
-              <div className="flex justify-end gap-1">
-                <a href={RoutePath.Lead('12345')}>
-                  <Button size="icon" variant="ghost">
-                    <Eye className="h-4 w-4" />
-                  </Button>
-                </a>
 
-                <Button
-                  onClick={() =>
-                    setCurrentDialog({ content: 'delete-lead', open: true })
-                  }
-                  size="icon"
-                  variant="ghost"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
+      <TableBody>
+        {leadsData.map((lead) => {
+          return (
+            <TableRow
+              key={lead.id}
+              className="hover:bg-muted/50 transition-colors"
+            >
+              <TableCell className="text-center font-medium">
+                {lead.id}
+              </TableCell>
+
+              <TableCell>
+                <Badge variant="secondary" className="capitalize">
+                  {lead.leadType}
+                </Badge>
+              </TableCell>
+
+              <TableCell className="font-medium">
+                <a href={RoutePath.Lead(lead.id)}>{lead.firstName}</a>
+              </TableCell>
+
+              <TableCell className="font-medium">{lead.lastName}</TableCell>
+
+              <TableCell className="hidden md:table-cell">
+                {lead.email}
+              </TableCell>
+              <TableCell className="hidden lg:table-cell">
+                {lead.phone}
+              </TableCell>
+              <TableCell className="hidden lg:table-cell">
+                {lead.country}
+              </TableCell>
+
+              {/* Affiliate */}
+              <TableCell className="hidden xl:table-cell">
+                {lead.affiliate}
+              </TableCell>
+
+              {/* Offer Name */}
+              <TableCell className="hidden xl:table-cell">
+                {lead.offerName}
+              </TableCell>
+
+              {/* IP */}
+              <TableCell className="hidden 2xl:table-cell">
+                {lead.ipAddress}
+              </TableCell>
+
+              {/* Device */}
+              <TableCell className="hidden 2xl:table-cell">
+                {lead.device}
+              </TableCell>
+
+              {/* Last Note */}
+              <TableCell className="hidden lg:table-cell text-muted-foreground">
+                {lead.lastNoteAt}
+              </TableCell>
+
+              {/* Last Contact */}
+              <TableCell className="hidden lg:table-cell text-muted-foreground">
+                {lead.lastContacted}
+              </TableCell>
+
+              {/* Agent */}
+              <TableCell className="hidden md:table-cell">
+                {lead.assignedAgent}
+              </TableCell>
+
+              {/* Status */}
+              <TableCell className="hidden md:table-cell">
+                <Badge variant="outline">{lead.status}</Badge>
+              </TableCell>
+
+              {/* Created At */}
+              <TableCell className="hidden md:table-cell text-muted-foreground">
+                {lead.createdAt}
+              </TableCell>
+
+              {/* Actions */}
+              <TableCell className="text-right">
+                <div className="flex justify-end gap-1">
+                  <a href={RoutePath.Lead(lead.id)}>
+                    <Button size="icon" variant="ghost">
+                      <Eye className="h-4 w-4" />
+                    </Button>
+                  </a>
+
+                  <Button
+                    onClick={() =>
+                      setCurrentDialog({ content: 'delete-lead', open: true })
+                    }
+                    size="icon"
+                    variant="ghost"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              </TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   );
