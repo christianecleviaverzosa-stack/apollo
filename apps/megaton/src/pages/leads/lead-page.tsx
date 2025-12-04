@@ -13,8 +13,15 @@ import {
   SelectGroup,
   SelectLabel,
   setCurrentDialog,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Calendar,
 } from '@apollo/ui';
+
 import { useForm, Controller } from 'react-hook-form';
+import { CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
 
 const countries = [
   {
@@ -42,6 +49,9 @@ export const LeadClientForm = () => {
     defaultValues: {
       accountId: 'LD-001',
       salesStatus: 'new',
+      leadStatus: 'new',
+      lastContact: undefined,
+
       agent: 'manager-1',
       firstName: 'John',
       lastName: 'Smith',
@@ -49,9 +59,11 @@ export const LeadClientForm = () => {
       mobile: '+1 202 555 0183',
       country: 'us',
       age: 30,
+
       campaign: 'Demo Campaign',
       source: 'Ad Campaign',
       affiliate: 'affiliate-1',
+
       notes: '',
     },
   });
@@ -70,24 +82,46 @@ export const LeadClientForm = () => {
       {/* Lead Overview */}
       <div className="flex flex-col gap-4">
         <Label className="text-muted-foreground">Lead Overview</Label>
+
         <div className="grid grid-cols-2 gap-4">
+          {/* Account ID */}
           <div className="flex flex-col gap-2">
             <Label>Account ID</Label>
-            <Input
-              placeholder="Auto-generated or manual input"
-              {...register('accountId')}
+            <Input {...register('accountId')} />
+          </div>
+
+          {/* Lead Status (NEW field) */}
+          <div className="flex flex-col gap-2">
+            <Label>Lead Status</Label>
+            <Controller
+              name="leadStatus"
+              control={control}
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="new">New</SelectItem>
+                    <SelectItem value="follow_up">Follow-up</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                    <SelectItem value="converted">Converted</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
             />
           </div>
 
+          {/* Sales Status */}
           <div className="flex flex-col gap-2">
-            <Label>Sales Status</Label>
+            <Label>Sales Stage</Label>
             <Controller
               name="salesStatus"
               control={control}
               render={({ field }) => (
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select status" />
+                    <SelectValue placeholder="Select stage" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="new">New</SelectItem>
@@ -100,6 +134,7 @@ export const LeadClientForm = () => {
             />
           </div>
 
+          {/* Assigned Agent */}
           <div className="flex flex-col gap-2">
             <Label>Assigned Agent</Label>
             <Controller
@@ -108,7 +143,7 @@ export const LeadClientForm = () => {
               render={({ field }) => (
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select manager" />
+                    <SelectValue placeholder="Select agent" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="manager-1">Manager 1</SelectItem>
@@ -119,35 +154,61 @@ export const LeadClientForm = () => {
               )}
             />
           </div>
+
+          {/* Last Contacted (NEW — single date) */}
+          <div className="flex flex-col gap-2">
+            <Label>Last Contacted</Label>
+            <Controller
+              name="lastContact"
+              control={control}
+              render={({ field }) => (
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline" className="justify-start">
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value
+                        ? format(field.value, 'LLL dd, y')
+                        : 'Select date'}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) => date > new Date()}
+                    />
+                  </PopoverContent>
+                </Popover>
+              )}
+            />
+          </div>
         </div>
       </div>
 
       {/* Personal Info */}
       <div className="flex flex-col gap-4">
         <Label className="text-muted-foreground">Personal Information</Label>
+
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
             <Label>First Name</Label>
-            <Input placeholder="Enter first name" {...register('firstName')} />
+            <Input {...register('firstName')} />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label>Last Name</Label>
-            <Input placeholder="Enter last name" {...register('lastName')} />
+            <Input {...register('lastName')} />
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Email Address</Label>
-            <Input
-              type="email"
-              placeholder="Enter email address (e.g. alex.step@example.com)"
-              {...register('email')}
-            />
+            <Label>Email</Label>
+            <Input type="email" {...register('email')} />
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Mobile Number</Label>
-            <Input placeholder="+63 900 000 0000" {...register('mobile')} />
+            <Label>Mobile</Label>
+            <Input {...register('mobile')} />
           </div>
 
           <div className="flex flex-col gap-2">
@@ -156,9 +217,9 @@ export const LeadClientForm = () => {
               name="country"
               control={control}
               render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select a country" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {countries.map((region) => (
@@ -179,7 +240,7 @@ export const LeadClientForm = () => {
 
           <div className="flex flex-col gap-2">
             <Label>Age</Label>
-            <Input type="number" placeholder="Enter age" {...register('age')} />
+            <Input type="number" {...register('age')} />
           </div>
         </div>
       </div>
@@ -187,21 +248,16 @@ export const LeadClientForm = () => {
       {/* Campaign Info */}
       <div className="flex flex-col gap-4">
         <Label className="text-muted-foreground">Campaign Information</Label>
+
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-2">
-            <Label>Campaign Name</Label>
-            <Input
-              placeholder="Enter campaign name"
-              {...register('campaign')}
-            />
+            <Label>Campaign</Label>
+            <Input {...register('campaign')} />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label>Source</Label>
-            <Input
-              placeholder="e.g. Ad Campaign, Referral, Organic"
-              {...register('source')}
-            />
+            <Input {...register('source')} />
           </div>
 
           <div className="flex flex-col gap-2">
@@ -210,9 +266,9 @@ export const LeadClientForm = () => {
               name="affiliate"
               control={control}
               render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select Affiliate" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="affiliate-1">Affiliate 1</SelectItem>
@@ -231,6 +287,7 @@ export const LeadClientForm = () => {
         <Label className="text-muted-foreground">
           Financial & Account Info
         </Label>
+
         <div className="grid grid-cols-2 gap-4 bg-muted/30 p-4 rounded-lg border shadow-sm">
           {[
             { label: 'Balance', value: '$1,000.00' },
@@ -248,7 +305,7 @@ export const LeadClientForm = () => {
               <Label className="text-sm text-muted-foreground">
                 {item.label}
               </Label>
-              <p className={`font-medium ${item.color || 'text-foreground'}`}>
+              <p className={`font-medium ${item.color ?? 'text-foreground'}`}>
                 {item.value}
               </p>
             </div>
@@ -256,48 +313,47 @@ export const LeadClientForm = () => {
         </div>
       </div>
 
-      {/* Follow-up & Notes */}
+      {/* Notes */}
       <div className="flex flex-col gap-4">
         <Label className="text-muted-foreground">Follow-up & Notes</Label>
+
         <div className="bg-muted/30 border rounded-lg p-4 flex flex-col gap-4">
           <Textarea
             placeholder="Write your comment..."
             className="min-h-[100px] resize-none"
             {...register('notes')}
           />
+
           <div className="flex justify-end">
             <Button size="sm">Save Comment</Button>
           </div>
 
           <Separator />
+
           <div className="flex flex-col gap-3">
             <Label className="text-sm font-medium text-muted-foreground">
               History
             </Label>
+
             <div className="max-h-60 overflow-y-auto flex flex-col gap-3 pr-1">
               <div className="rounded-md bg-background border p-3 flex flex-col gap-1">
                 <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">
-                      admin
-                    </Badge>
-                    <span className="text-muted-foreground">
-                      2025-10-29 15:30
-                    </span>
-                  </div>
+                  <Badge variant="secondary">admin</Badge>
+                  <span className="text-muted-foreground">
+                    2025-10-29 15:30
+                  </span>
                 </div>
-                <p className="text-sm text-foreground mt-1">
-                  Test comment content here
-                </p>
+                <p className="text-sm mt-1">Test comment content here</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Status & Actions  */}
+      {/* Status & Actions */}
       <div className="flex flex-col gap-4">
         <Label className="text-muted-foreground">Status & Actions</Label>
+
         <div className="grid grid-cols-2 gap-4 items-center">
           <div className="flex flex-col gap-2">
             <Label>Lead Conversion</Label>
@@ -305,6 +361,7 @@ export const LeadClientForm = () => {
               Demo Lead
             </Badge>
           </div>
+
           <div className="flex flex-col gap-2">
             <Label>Account Status</Label>
             <Badge variant="default" className="w-fit">
@@ -338,6 +395,7 @@ export default function LeadPage() {
         </div>
         <Separator />
       </div>
+
       <LeadClientForm />
     </div>
   );
