@@ -28,6 +28,12 @@ const DepositsPage = lazy(
 const DepositPage = lazy(
   () => import('../pages/transaction-history/deposit-page')
 );
+const WithdrawalsPage = lazy(
+  () => import('../pages/transaction-history/withdrawals-page')
+);
+const InternalTransfersPage = lazy(
+  () => import('../pages/transaction-history/internal-transfers-page')
+);
 /** Leads */
 const FTDClientsPage = lazy(() => import('../pages/ftd/ftd-clients-page'));
 const FTDClientPage = lazy(() => import('../pages/ftd/ftd-client-page'));
@@ -121,5 +127,13 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.Roles,
     Component: RolesPage,
+  },
+  {
+    path: RoutePath.Withdrawals,
+    Component: WithdrawalsPage,
+  },
+  {
+    path: RoutePath.InternalTransfers,
+    Component: InternalTransfersPage,
   },
 ];

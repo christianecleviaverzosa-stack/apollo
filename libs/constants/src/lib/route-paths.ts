@@ -20,4 +20,8 @@ export const RoutePath = {
   LeadsAssignment: '/leads-assignment',
   Deposits: '/deposits',
   Deposit: '/deposits/:id',
+  Withdrawals: '/withdrawals',
+  Withdrawal: (id: string) => `/withdrawals/${id}`,
+  InternalTransfers: '/internal-transfers',
+  InternalTransfer: (id: string) => `/internal-transfers/${id}`
 };

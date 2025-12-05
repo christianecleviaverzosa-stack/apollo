@@ -78,7 +78,7 @@ const navLinks: NavGroup[] = [
         collapsible: true,
         children: [
           { label: 'Deposits', href: RoutePath.Deposits },
-          { label: 'Withdrawals', href: RoutePath.Dashboard },
+          { label: 'Withdrawals', href: RoutePath.Withdrawals },
           { label: 'Internal Transfers', href: RoutePath.Dashboard },
         ],
       },
