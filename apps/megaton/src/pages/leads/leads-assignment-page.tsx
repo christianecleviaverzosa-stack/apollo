@@ -401,6 +401,7 @@ const BulkActionBar = () => {
         isClearable
         placeholder="Assign to agent"
         options={agents}
+        menuPlacement="top"
       />
 
       <Button>Assign</Button>

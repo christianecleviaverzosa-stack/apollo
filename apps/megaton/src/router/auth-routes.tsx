@@ -21,6 +21,7 @@ const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
 /** Orders */
 const OrdersPage = lazy(() => import('../pages/orders/orders-page'));
 const OrderPage = lazy(() => import('../pages/orders/order-page'));
+const CreateOrderPage = lazy(() => import('../pages/orders/create-order-page'));
 const DepositsPage = lazy(
   () => import('../pages/transaction-history/deposits-page')
 );
@@ -70,6 +71,10 @@ export const authRoutes: RouteObject[] = [
     Component: OrderPage,
   },
   {
+    path: RoutePath.CreateOrder,
+    Component: CreateOrderPage,
+  },
+  {
     path: RoutePath.FTDClients,
     Component: FTDClientsPage,
   },
@@ -115,6 +120,6 @@ export const authRoutes: RouteObject[] = [
   },
   {
     path: RoutePath.Roles,
-    Component: RolesPage
-  }
+    Component: RolesPage,
+  },
 ];

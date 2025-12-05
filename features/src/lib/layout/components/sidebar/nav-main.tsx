@@ -69,7 +69,7 @@ const navLinks: NavGroup[] = [
         collapsible: true,
         children: [
           { label: 'All Orders', href: RoutePath.Orders },
-          { label: 'Create Manual Order', href: RoutePath.Dashboard },
+          { label: 'Create Manual Order', href: RoutePath.CreateOrder },
         ],
       },
       {

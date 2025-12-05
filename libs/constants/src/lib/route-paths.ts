@@ -11,6 +11,7 @@ export const RoutePath = {
   Lead: (id: string) => `/leads/${id}`,
   ImportLeads: '/import-leads',
   Orders: '/orders',
+  CreateOrder: '/create/order',
   Order: '/orders/:id',
   FTDClients: '/ftd-clients',
   FTDClient: '/ftd-clients/:id',
