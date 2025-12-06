@@ -79,7 +79,7 @@ const navLinks: NavGroup[] = [
         children: [
           { label: 'Deposits', href: RoutePath.Deposits },
           { label: 'Withdrawals', href: RoutePath.Withdrawals },
-          { label: 'Internal Transfers', href: RoutePath.Dashboard },
+          { label: 'Internal Transfers', href: RoutePath.InternalTransfers },
         ],
       },
       {
