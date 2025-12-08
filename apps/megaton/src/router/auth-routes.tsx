@@ -22,20 +22,17 @@ const ImportLeadsPage = lazy(() => import('../pages/leads/import-leads-page'));
 const OrdersPage = lazy(() => import('../pages/orders/orders-page'));
 const OrderPage = lazy(() => import('../pages/orders/order-page'));
 const CreateOrderPage = lazy(() => import('../pages/orders/create-order-page'));
-const DepositsPage = lazy(
-  () => import('../pages/transaction-history/deposits-page')
-);
-const DepositPage = lazy(
-  () => import('../pages/transaction-history/deposit-page')
-);
+/** Transactions */
+const DepositsPage = lazy(() => import('../pages/transactions/deposits-page'));
+const DepositPage = lazy(() => import('../pages/transactions/deposit-page'));
 const WithdrawalsPage = lazy(
-  () => import('../pages/transaction-history/withdrawals-page')
+  () => import('../pages/transactions/withdrawals-page')
 );
 const WithdrawalPage = lazy(
-  () => import('../pages/transaction-history/withdrawal-page')
+  () => import('../pages/transactions/withdrawal-page')
 );
 const InternalTransfersPage = lazy(
-  () => import('../pages/transaction-history/internal-transfers-page')
+  () => import('../pages/transactions/internal-transfers-page')
 );
 /** Leads */
 const FTDClientsPage = lazy(() => import('../pages/ftd/ftd-clients-page'));
@@ -76,7 +73,7 @@ export const authRoutes: RouteObject[] = [
     Component: OrdersPage,
   },
   {
-    path: RoutePath.Order,
+    path: RoutePath.Order(':id'),
     Component: OrderPage,
   },
   {

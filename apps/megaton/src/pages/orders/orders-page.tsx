@@ -451,7 +451,7 @@ const OrdersTable = () => {
             <TableCell className="text-center font-medium">{i + 1}</TableCell>
 
             <TableCell className="font-medium">
-              <a href={`${RoutePath.Orders}/123456789`}>{order.client}</a>
+              <a href={RoutePath.Order('123456789')}>{order.client}</a>
             </TableCell>
 
             <TableCell>{order.symbol}</TableCell>
@@ -499,7 +499,7 @@ const OrdersTable = () => {
 
             <TableCell className="text-right">
               <div className="flex justify-end gap-1">
-                <a href={`${RoutePath.Orders}/123456789`}>
+                <a href={RoutePath.Order('123456789')}>
                   <Button size="icon" variant="ghost">
                     <Eye className="h-4 w-4" />
                   </Button>
