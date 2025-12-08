@@ -11,6 +11,7 @@ import {
   Badge,
   Button,
   Separator,
+  setCurrentDialog,
 } from '@apollo/ui';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -324,7 +325,14 @@ export const SingleFtdClientForm = () => {
           </div>
         </div>
 
-        <Button size="sm" variant="outline" className="text-destructive">
+        <Button
+          onClick={() =>
+            setCurrentDialog({ content: 'delete-ftd', open: true })
+          }
+          size="sm"
+          variant="outline"
+          className="text-destructive"
+        >
           Delete FTD Record
         </Button>
       </div>

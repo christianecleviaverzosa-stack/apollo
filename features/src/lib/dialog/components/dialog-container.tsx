@@ -11,6 +11,10 @@ const DeleteLead = lazy(
   () => import('../../lead/components/delete-lead-dialog')
 );
 
+const DeleteFtd = lazy(
+  () => import('../../ftd/components/delete-ftd-dialog')
+);
+
 const Component = () => {
   const type = selectCurrentDialog();
 
@@ -19,6 +23,8 @@ const Component = () => {
       return <SuspendWorker />;
     case 'delete-lead':
       return <DeleteLead />;
+    case 'delete-ftd':
+      return <DeleteFtd />
     default:
       return null;
   }
