@@ -31,6 +31,9 @@ const DepositPage = lazy(
 const WithdrawalsPage = lazy(
   () => import('../pages/transaction-history/withdrawals-page')
 );
+const WithdrawalPage = lazy(
+  () => import('../pages/transaction-history/withdrawal-page')
+);
 const InternalTransfersPage = lazy(
   () => import('../pages/transaction-history/internal-transfers-page')
 );
@@ -135,5 +138,9 @@ export const authRoutes: RouteObject[] = [
   {
     path: RoutePath.InternalTransfers,
     Component: InternalTransfersPage,
+  },
+  {
+    path: RoutePath.Withdrawal(':id'),
+    Component: WithdrawalPage,
   },
 ];
