@@ -9,37 +9,37 @@ import {
   SelectValue,
   SelectContent,
   SelectItem,
-} from "@apollo/ui";
+} from '@apollo/ui';
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
 
 export default function SingleDepositPage() {
   const deposit = {
-    depositId: "DP-0001",
-    status: "Approved",
-    createdAt: "2025-02-14 10:32",
-    approvedAt: "2025-02-14 10:33",
-    transactionId: "TXN-934890234",
-    merchantReference: "MREF-20250214-1123",
-    provider: "Flutterwave",
-    paymentChannel: "Card Payment",
+    depositId: 'DP-0001',
+    status: 'Approved',
+    createdAt: '2025-02-14 10:32',
+    approvedAt: '2025-02-14 10:33',
+    transactionId: 'TXN-934890234',
+    merchantReference: 'MREF-20250214-1123',
+    provider: 'Flutterwave',
+    paymentChannel: 'Card Payment',
 
-    clientId: "CL-12093",
-    fullName: "John Smith",
-    email: "john.smith@example.com",
-    country: "United States",
-    agent: "Sales Agent 1",
+    clientId: 'CL-12093',
+    fullName: 'John Smith',
+    email: 'john.smith@example.com',
+    country: 'United States',
+    agent: 'Sales Agent 1',
 
-    depositAmount: "$500.00",
-    currency: "USD",
-    convertedAmount: "$500.00",
-    fee: "$0.00",
-    netAmount: "$500.00",
-    previousBalance: "$1,200.00",
-    newBalance: "$1,700.00",
+    depositAmount: '$500.00',
+    currency: 'USD',
+    convertedAmount: '$500.00',
+    fee: '$0.00',
+    netAmount: '$500.00',
+    previousBalance: '$1,200.00',
+    newBalance: '$1,700.00',
 
-    cardType: "Visa",
-    cardLast4: "4242",
+    cardType: 'Visa',
+    cardLast4: '4242',
     cryptoNetwork: null,
     walletAddress: null,
     txHash: null,
@@ -50,14 +50,14 @@ export default function SingleDepositPage() {
   const form = useForm({
     defaultValues: {
       status: deposit.status,
-      notes: "",
+      notes: '',
     },
   });
 
   const { control, register, handleSubmit } = form;
 
-  const onSubmit = (data: any) => {
-    console.log("Saving deposit updates...", data);
+  const onSubmit = (data) => {
+    console.log('Saving deposit updates...', data);
   };
 
   return (
@@ -70,7 +70,7 @@ export default function SingleDepositPage() {
           </h2>
 
           <div className="flex items-center gap-2">
-            <Button variant="outline">Refund</Button>
+            <Button variant="ghost">Refund</Button>
             <Button onClick={handleSubmit(onSubmit)}>Save Changes</Button>
           </div>
         </div>
@@ -116,17 +116,15 @@ export default function SingleDepositPage() {
 
             {/* The rest remain static */}
             {[
-              ["Created At", deposit.createdAt],
-              ["Approved At", deposit.approvedAt],
-              ["Transaction ID", deposit.transactionId],
-              ["Merchant Reference", deposit.merchantReference],
-              ["Payment Provider", deposit.provider],
-              ["Payment Channel", deposit.paymentChannel],
+              ['Created At', deposit.createdAt],
+              ['Approved At', deposit.approvedAt],
+              ['Transaction ID', deposit.transactionId],
+              ['Merchant Reference', deposit.merchantReference],
+              ['Payment Provider', deposit.provider],
+              ['Payment Channel', deposit.paymentChannel],
             ].map(([label, value], index) => (
               <div key={index} className="flex flex-col gap-1">
-                <Label className="text-sm text-muted-foreground">
-                  {label}
-                </Label>
+                <Label className="text-sm text-muted-foreground">{label}</Label>
                 <p className="font-medium">{value}</p>
               </div>
             ))}
@@ -139,16 +137,14 @@ export default function SingleDepositPage() {
 
           <div className="grid grid-cols-2 gap-4">
             {[
-              ["Client ID", deposit.clientId],
-              ["Full Name", deposit.fullName],
-              ["Email", deposit.email],
-              ["Country", deposit.country],
-              ["Assigned Agent", deposit.agent],
+              ['Client ID', deposit.clientId],
+              ['Full Name', deposit.fullName],
+              ['Email', deposit.email],
+              ['Country', deposit.country],
+              ['Assigned Agent', deposit.agent],
             ].map(([label, value]) => (
               <div key={label} className="flex flex-col gap-1">
-                <Label className="text-sm text-muted-foreground">
-                  {label}
-                </Label>
+                <Label className="text-sm text-muted-foreground">{label}</Label>
                 <p className="font-medium">{value}</p>
               </div>
             ))}
@@ -161,18 +157,16 @@ export default function SingleDepositPage() {
 
           <div className="grid grid-cols-2 gap-4 bg-muted/30 p-4 rounded-lg border shadow-sm">
             {[
-              ["Deposit Amount", deposit.depositAmount],
-              ["Currency", deposit.currency],
-              ["Converted Amount", deposit.convertedAmount],
-              ["Fee", deposit.fee],
-              ["Net Amount Credited", deposit.netAmount],
-              ["Previous Balance", deposit.previousBalance],
-              ["New Balance", deposit.newBalance],
+              ['Deposit Amount', deposit.depositAmount],
+              ['Currency', deposit.currency],
+              ['Converted Amount', deposit.convertedAmount],
+              ['Fee', deposit.fee],
+              ['Net Amount Credited', deposit.netAmount],
+              ['Previous Balance', deposit.previousBalance],
+              ['New Balance', deposit.newBalance],
             ].map(([label, value]) => (
               <div key={label} className="flex flex-col gap-1">
-                <Label className="text-sm text-muted-foreground">
-                  {label}
-                </Label>
+                <Label className="text-sm text-muted-foreground">{label}</Label>
                 <p className="font-medium">{value}</p>
               </div>
             ))}
@@ -214,7 +208,7 @@ export default function SingleDepositPage() {
             <Textarea
               placeholder="Write your comment..."
               className="min-h-[100px] resize-none"
-              {...register("notes")}
+              {...register('notes')}
             />
 
             <div className="flex justify-end">

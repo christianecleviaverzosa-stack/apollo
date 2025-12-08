@@ -34,6 +34,9 @@ const WithdrawalPage = lazy(
 const InternalTransfersPage = lazy(
   () => import('../pages/transactions/internal-transfers-page')
 );
+const InternalTransferPage = lazy(
+  () => import('../pages/transactions/internal-transfer-page')
+);
 /** Leads */
 const FTDClientsPage = lazy(() => import('../pages/ftd/ftd-clients-page'));
 const FTDClientPage = lazy(() => import('../pages/ftd/ftd-client-page'));
@@ -133,11 +136,15 @@ export const authRoutes: RouteObject[] = [
     Component: WithdrawalsPage,
   },
   {
+    path: RoutePath.Withdrawal(':id'),
+    Component: WithdrawalPage,
+  },
+  {
     path: RoutePath.InternalTransfers,
     Component: InternalTransfersPage,
   },
   {
-    path: RoutePath.Withdrawal(':id'),
-    Component: WithdrawalPage,
+    path: RoutePath.InternalTransfer(':id'),
+    Component: InternalTransferPage,
   },
 ];
