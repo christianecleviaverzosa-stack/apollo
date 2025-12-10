@@ -1,27 +1,39 @@
-import { writeFileSync } from 'fs';
+import { promises as fs } from 'fs';
 import path from 'path';
 import { Plugin } from 'vite';
 
 export function writeVersion(
-  buildPath: string,
+  outputDir: string,
   buildVersion: string,
-  version: string
+  appVersion: string
 ): Plugin {
   return {
-    apply: 'build',
     name: 'write-version',
-    transformIndexHtml(html) {
-      return html.replace(new RegExp(`{{appVersion}}`, 'g'), buildVersion);
-    },
-    closeBundle() {
-      const versionFile = path.join(buildPath, 'version.json');
-      const data = `{"version":"${version}"}`;
+    apply: 'build',
 
+    transformIndexHtml(html) {
+      return html.replace(/{{appVersion}}/g, buildVersion);
+    },
+
+    async closeBundle() {
       try {
-        writeFileSync(versionFile, data);
-        console.log(`Generated ${versionFile} (${version}) successfully!`);
-      } catch (error) {
-        console.error(`Error writing ${buildPath}: ${error}`);
+        const filePath = path.join(outputDir, 'version.json');
+
+        // Ensure directory exists
+        await fs.mkdir(outputDir, { recursive: true });
+
+        // Build version data
+        const data = JSON.stringify(
+          { version: appVersion, buildVersion },
+          null,
+          2
+        );
+
+        await fs.writeFile(filePath, data);
+
+        console.log(`✔ version.json generated at ${filePath}`);
+      } catch (err) {
+        console.error('⚠ Failed to write version file:', err);
       }
     },
   };

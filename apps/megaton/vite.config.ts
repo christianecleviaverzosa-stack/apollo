@@ -6,7 +6,7 @@ import { version } from './package.json';
 import path from 'path';
 import { writeVersion } from './plugins/write-version';
 
-const BUILD_PATH = path.resolve('./build');
+const BUILD_PATH = path.resolve('./dist');
 const BUILD_VERSION = `${version}.${Date.now()}`;
 
 export default defineConfig(({ command }) => ({
@@ -21,7 +21,7 @@ export default defineConfig(({ command }) => ({
     port: 3000,
     host: 'localhost',
   },
-  plugins: [react(), nxViteTsPaths(), writeVersion(BUILD_PATH, BUILD_VERSION, version),],
+  plugins: [react(), nxViteTsPaths(), writeVersion(BUILD_PATH, BUILD_VERSION, version)],
   build: {
     outDir: './dist',
     emptyOutDir: true,
