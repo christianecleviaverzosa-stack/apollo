@@ -1,5 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@apollo/ui';
-import { TrendingUp, Users, DollarSign, Briefcase } from 'lucide-react';
+import {
+  TrendingUp,
+  Users,
+  DollarSign,
+  Briefcase,
+  ArrowDownCircle,
+  ArrowUpCircle,
+  Activity,
+  AlertTriangle,
+  BarChart3,
+} from 'lucide-react';
 import { cn } from '@apollo/utils';
 import { HTMLAttributes } from 'react';
 
@@ -15,10 +25,22 @@ const SummaryCard = ({ title, value, icon, ...rest }: SummaryCardProps) => {
     switch (icon) {
       case 'users':
         return <Users className={common} />;
-      case 'trending-up':
-        return <TrendingUp className={common} />;
+      case 'briefcase':
+        return <Briefcase className={common} />;
       case 'dollar-sign':
         return <DollarSign className={common} />;
+      case 'arrow-up':
+        return <ArrowUpCircle className={common} />;
+      case 'arrow-down':
+        return <ArrowDownCircle className={common} />;
+      case 'activity':
+        return <Activity className={common} />;
+      case 'alert':
+        return <AlertTriangle className={common} />;
+      case 'bar-chart':
+        return <BarChart3 className={common} />;
+      case 'trending-up':
+        return <TrendingUp className={common} />;
       default:
         return <Briefcase className={common} />;
     }
@@ -38,27 +60,30 @@ const SummaryCard = ({ title, value, icon, ...rest }: SummaryCardProps) => {
   );
 };
 
-type SummaryCardsProps = HTMLAttributes<HTMLDivElement>;
-export const SummaryCards = ({ ...rest }: SummaryCardsProps) => {
+export const SummaryCards = ({ ...rest }) => {
   const summaryStats = [
     { title: 'Total Leads', value: 502, icon: 'users' },
     { title: 'Active Clients', value: 132, icon: 'briefcase' },
-    { title: 'FTD Deposits', value: '$58,200', icon: 'dollar-sign' },
+    { title: 'FTD Count', value: 89, icon: 'dollar-sign' },
+    { title: 'Total Deposits', value: '$182,000', icon: 'arrow-up' },
+    { title: 'Total Withdrawals', value: '$76,500', icon: 'arrow-down' },
     { title: 'Conversion Rate', value: '34%', icon: 'trending-up' },
+    { title: 'Active Traders Today', value: 42, icon: 'activity' },
+    { title: 'Open Trades Count', value: 128, icon: 'bar-chart' },
+    { title: 'Closed Trades Count', value: 311, icon: 'bar-chart' },
+    { title: 'Margin Call Alerts', value: 6, icon: 'alert' },
   ];
 
   return (
-    <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-4')} {...rest}>
-      {summaryStats.map((stat, index) => {
-        return (
-          <SummaryCard
-            key={index}
-            title={stat.title}
-            icon={stat.icon}
-            value={stat.value}
-          />
-        );
-      })}
+    <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-5')} {...rest}>
+      {summaryStats.map((stat, index) => (
+        <SummaryCard
+          key={index}
+          title={stat.title}
+          icon={stat.icon}
+          value={stat.value}
+        />
+      ))}
     </div>
   );
 };

@@ -3,3 +3,5 @@ export * from './components/summary-cards';
 export * from './components/ftd-achievements';
 export * from './components/weekly-trading-volume';
 export * from './components/trading-assets-distribution';
+export * from './components/most-traded-asset-chart';
+export * from './components/order-types-used-chart';

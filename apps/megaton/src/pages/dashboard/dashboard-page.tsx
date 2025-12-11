@@ -1,14 +1,17 @@
 import {
   DashboardFilterForm,
-  FTDAchievements,
   SummaryCards,
-  TradingAssetsDistribution,
+  FTDAchievements,
   WeeklyTradingVolume,
+  TradingAssetsDistribution,
+  MostTradedAssetsChart,
+  OrderTypesUsedChart,
 } from '@apollo/features/dashboard';
 
 export default function DashboardPage() {
   return (
     <section data-testid="dashboard-page" className="p-4 space-y-6">
+      {/* Header Row */}
       <div className="flex flex-col gap-4 md:flex-row justify-between">
         <h2 className="text-2xl font-semibold">Dashboard Overview</h2>
         <DashboardFilterForm />
@@ -17,16 +20,23 @@ export default function DashboardPage() {
       {/* Summary Cards */}
       <SummaryCards />
 
-      {/* Charts Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {/* Radial Chart */}
+        {/* FTD Progress */}
         <FTDAchievements />
 
-        {/* Bar Chart */}
+        {/* Weekly Trading Volume */}
         <WeeklyTradingVolume />
 
-        {/* Pie Chart */}
+        {/* Trading Asset Categories */}
         <TradingAssetsDistribution />
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* Most Traded Assets */}
+        <MostTradedAssetsChart />
+
+        {/* Order Types Used: Market, Limit, Stop, etc */}
+        <OrderTypesUsedChart />
       </div>
     </section>
   );
