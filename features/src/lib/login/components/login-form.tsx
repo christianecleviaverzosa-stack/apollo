@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input, Button, Label, PasswordInput } from '@apollo/ui';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '@apollo/constants';
+import { useTranslation } from 'react-i18next';
 
 const loginFormSchema = z.object({
   username: z.string().min(1, 'Please enter your username'),
@@ -12,6 +13,7 @@ const loginFormSchema = z.object({
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
 export const LoginForm = () => {
+  const { t } = useTranslation('components/login');
   const navigate = useNavigate();
 
   const {
@@ -27,7 +29,7 @@ export const LoginForm = () => {
   // });
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log("form submitted values:", data);
+    console.log('form submitted values:', data);
 
     return navigate(RoutePath.Dashboard);
     // mutate(data, {
@@ -44,22 +46,22 @@ export const LoginForm = () => {
       id="login-form"
     >
       {/** Username */}
-      <Label requiredIndicator>Username</Label>
+      <Label requiredIndicator>{t('login_form.fields.username.label')}</Label>
       <Input
-        placeholder="Enter your username"
+        placeholder={t('login_form.fields.username.placeholder')}
         {...register('username')}
         error={errors.username?.message}
       />
       {/** Password */}
-      <Label requiredIndicator>Password</Label>
+      <Label requiredIndicator>{t('login_form.fields.password.label')}</Label>
       <PasswordInput
-        placeholder="Enter your password"
+        placeholder={t('login_form.fields.password.placeholder')}
         {...register('password')}
         error={errors.password?.message}
       />
       {/** Submit Button */}
       <Button type="submit" className="w-full">
-        Login
+        {t('login_button')}
       </Button>
     </form>
   );
