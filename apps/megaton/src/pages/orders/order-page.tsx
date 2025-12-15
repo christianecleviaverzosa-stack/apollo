@@ -42,7 +42,6 @@ export default function OrderDetailsPage() {
             </Badge>
 
             <Button
-              size="sm"
               variant="ghost"
               onClick={() => navigator.clipboard?.writeText('ORD-1007')}
             >
@@ -167,9 +166,7 @@ export default function OrderDetailsPage() {
                 </div>
 
                 <div className="flex justify-end">
-                  <Button size="sm" disabled={false}>
-                    Save SL/TP
-                  </Button>
+                  <Button>Save SL/TP</Button>
                 </div>
               </form>
             </Form>
@@ -245,7 +242,7 @@ export default function OrderDetailsPage() {
               />
 
               <div className="flex justify-end">
-                <Button size="sm">Save Comment</Button>
+                <Button>Save Comment</Button>
               </div>
 
               <Separator />

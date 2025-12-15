@@ -9,10 +9,7 @@ import {
   ChartTooltipContent,
 } from '@apollo/ui';
 
-import {
-  RadialBar,
-  RadialBarChart,
-} from 'recharts';
+import { RadialBar, RadialBarChart } from 'recharts';
 import { HTMLAttributes } from 'react';
 
 type FTDAchievementsProps = HTMLAttributes<HTMLDivElement>;
@@ -28,15 +25,15 @@ export const FTDAchievements = ({ ...rest }: FTDAchievementsProps) => {
   };
 
   return (
-    <Card {...rest}>
+    <Card className="flex flex-col" {...rest}>
       <CardHeader>
         <CardTitle>FTD Achievement</CardTitle>
         <CardDescription>Target progress overview</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="relative flex flex-1 flex-col items-center justify-center">
         <ChartContainer
           config={radialConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square w-[250px]"
         >
           <RadialBarChart
             data={radialData}
@@ -52,7 +49,7 @@ export const FTDAchievements = ({ ...rest }: FTDAchievementsProps) => {
             />
           </RadialBarChart>
         </ChartContainer>
-        <div className="text-center mt-4">
+        <div className="text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-8">
           <p className="text-3xl font-bold text-primary">72%</p>
           <p className="text-xs text-muted-foreground">
             of monthly deposit target reached

@@ -1,0 +1,40 @@
+{
+    "general": "General",
+    "trading_activity": "Trading Activity",
+    "leads": "Leads",
+    "all_leads": "All Leads",
+    "import_leads": "Import Leads",
+    "leads_assignment": "Leads Assignment",
+    "ftd_clients": "FTD Clients",
+    "retention_clients": "Retention Clients",
+    "workers": "Workers",
+    "access_permissions": "Access & Permissions",
+    "system_settings": "System Settings",
+    "activity_logs": "Activity Logs",
+    "login_sessions": "Login Sessions",
+    "platform_configuration": "Platform Configuration",
+    "notification_settings": "Notification Settings",
+    "api_integrations": "API Integrations",
+    "dashboard": "Dashboard",
+    "order_management": {
+        "label": "Order Management",
+        "all_orders": "All Orders",
+        "create_manual_order": "Create Manual Order"
+    },
+    "transaction_history": {
+        "label": "Transaction History",
+        "deposits": "Deposits",
+        "withdrawals": "Withdrawals",
+        "internal_transfers": "Internal Transfers"
+    },
+    "worker_management": {
+        "label": "Worker Management",
+        "all_workers": "All Workers",
+        "create_worker": "Create Worker"
+    },
+    "roles_permissions": {
+        "label": "Roles & Permissions",
+        "roles": "Roles",
+        "create_role": "Create Role"
+    }
+}

@@ -10,7 +10,6 @@ import {
   AlertTriangle,
   BarChart3,
 } from 'lucide-react';
-import { cn } from '@apollo/utils';
 import { HTMLAttributes } from 'react';
 
 type SummaryCardProps = HTMLAttributes<HTMLDivElement> & {
@@ -60,7 +59,7 @@ const SummaryCard = ({ title, value, icon, ...rest }: SummaryCardProps) => {
   );
 };
 
-export const SummaryCards = ({ ...rest }) => {
+export const SummaryCards = () => {
   const summaryStats = [
     { title: 'Total Leads', value: 502, icon: 'users' },
     { title: 'Active Clients', value: 132, icon: 'briefcase' },
@@ -74,16 +73,12 @@ export const SummaryCards = ({ ...rest }) => {
     { title: 'Margin Call Alerts', value: 6, icon: 'alert' },
   ];
 
-  return (
-    <div className={cn('grid gap-4 sm:grid-cols-2 lg:grid-cols-5')} {...rest}>
-      {summaryStats.map((stat, index) => (
-        <SummaryCard
-          key={index}
-          title={stat.title}
-          icon={stat.icon}
-          value={stat.value}
-        />
-      ))}
-    </div>
-  );
+  return summaryStats.map((stat, index) => (
+    <SummaryCard
+      key={index}
+      title={stat.title}
+      icon={stat.icon}
+      value={stat.value}
+    />
+  ));
 };

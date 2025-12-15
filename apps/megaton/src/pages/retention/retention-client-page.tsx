@@ -1,11 +1,4 @@
-import {
-  Label,
-  Input,
-  Textarea,
-  Badge,
-  Button,
-  Separator,
-} from '@apollo/ui';
+import { Label, Input, Textarea, Badge, Button, Separator } from '@apollo/ui';
 import { useForm } from 'react-hook-form';
 
 // These would come from your Retention Table row selection
@@ -238,7 +231,7 @@ export const SingleRetentionClientForm = () => {
               <span className="text-muted-foreground">{d.date}</span>
             </div>
           ))}
-          <Button variant="outline" size="sm" className="mt-2">
+          <Button variant="outline" className="mt-2">
             View Full History
           </Button>
         </div>
@@ -256,7 +249,7 @@ export const SingleRetentionClientForm = () => {
               <span className="text-muted-foreground">{w.date}</span>
             </div>
           ))}
-          <Button variant="outline" size="sm" className="mt-2">
+          <Button variant="outline" className="mt-2">
             View Full History
           </Button>
         </div>
@@ -274,9 +267,7 @@ export const SingleRetentionClientForm = () => {
             {...register('notes')}
           />
           <div className="flex justify-end">
-            <Button size="sm" onClick={handleSubmit(onSaveNotes)}>
-              Save Comment
-            </Button>
+            <Button onClick={handleSubmit(onSaveNotes)}>Save Comment</Button>
           </div>
 
           <Separator />

@@ -38,7 +38,7 @@ const ClearFilterButton = () => {
 
   return (
     hasChanged && (
-      <Button size="sm" onClick={() => reset()} variant="link">
+      <Button onClick={() => reset()} variant="link">
         <X className="text-xs" /> Reset Filter
       </Button>
     )

@@ -163,7 +163,7 @@ export const LeadsFilterForm = () => {
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
-                    <Button variant="outline" className="justify-start">
+                    <Button variant="outline" className="justify-start font-normal">
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {field.value?.from ? (
                         field.value?.to ? (
@@ -201,7 +201,7 @@ export const LeadsFilterForm = () => {
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
-                    <Button variant="outline" className="justify-start">
+                    <Button variant="outline" className="justify-start font-normal">
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {field.value?.from ? (
                         field.value?.to ? (

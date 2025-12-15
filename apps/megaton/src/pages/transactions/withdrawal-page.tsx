@@ -285,7 +285,7 @@ export default function WithdrawalPage() {
               />
 
               <div className="flex justify-end">
-                <Button size="sm" type="submit">
+                <Button type="submit">
                   Save Comment
                 </Button>
               </div>

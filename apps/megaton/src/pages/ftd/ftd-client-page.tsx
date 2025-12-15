@@ -272,7 +272,7 @@ export const SingleFtdClientForm = () => {
             {...register('notes')}
           />
           <div className="flex justify-end">
-            <Button size="sm">Save Note</Button>
+            <Button>Save Note</Button>
           </div>
 
           <Separator />
@@ -329,7 +329,6 @@ export const SingleFtdClientForm = () => {
           onClick={() =>
             setCurrentDialog({ content: 'delete-ftd', open: true })
           }
-          size="sm"
           variant="outline"
           className="text-destructive"
         >

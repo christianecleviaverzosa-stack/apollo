@@ -36,13 +36,13 @@ export const WeeklyTradingVolume = ({ ...rest }: WeeklyTradingVolumeProps) => {
     { name: 'Sun', value: 4300 },
   ];
   return (
-    <Card {...rest}>
+    <Card className='flex flex-col' {...rest}>
       <CardHeader>
         <CardTitle>Weekly Trading Volume</CardTitle>
         <CardDescription>In USD ($)</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={barConfig} className="aspect-[2/1]">
+      <CardContent className='flex-1 flex items-center justify-center'>
+        <ChartContainer config={barConfig} className="aspect-[2/1] w-[250px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={volumeData}>
               <XAxis dataKey="name" />

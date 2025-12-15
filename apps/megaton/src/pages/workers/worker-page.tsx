@@ -278,7 +278,6 @@ export default function WorkerPage() {
                   </div>
                   <Button
                     type="button"
-                    size="sm"
                     variant="outline"
                     className="text-destructive"
                     onClick={() =>

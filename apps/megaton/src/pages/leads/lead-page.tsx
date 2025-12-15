@@ -325,7 +325,7 @@ export const LeadClientForm = () => {
           />
 
           <div className="flex justify-end">
-            <Button size="sm">Save Comment</Button>
+            <Button>Save Comment</Button>
           </div>
 
           <Separator />
@@ -371,7 +371,6 @@ export const LeadClientForm = () => {
         </div>
 
         <Button
-          size="sm"
           variant="outline"
           className="text-destructive"
           onClick={() =>

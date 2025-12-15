@@ -212,7 +212,7 @@ export default function SingleDepositPage() {
             />
 
             <div className="flex justify-end">
-              <Button size="sm">Save Comment</Button>
+              <Button>Save Comment</Button>
             </div>
 
             <Separator />
