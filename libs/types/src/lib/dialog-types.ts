@@ -1,1 +1,1 @@
-export type DialogTypes =  'suspend-worker' | 'delete-lead'  | 'delete-ftd' | null;
+export type DialogTypes = 'suspend-worker' | 'delete-lead' | 'delete-ftd' | 'delete-role' | null;

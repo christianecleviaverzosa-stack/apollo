@@ -6,6 +6,11 @@ const SuspendWorker = lazy(
   () => import('../../worker/components/suspend-worker-dialog')
 );
 
+/** Role */
+const DeleteRole = lazy(
+  () => import('../../role/components/delete-role-dialog')
+);
+
 /** Lead */
 const DeleteLead = lazy(
   () => import('../../lead/components/delete-lead-dialog')
@@ -24,7 +29,9 @@ const Component = () => {
     case 'delete-lead':
       return <DeleteLead />;
     case 'delete-ftd':
-      return <DeleteFtd />
+      return <DeleteFtd />;
+    case 'delete-role': 
+      return <DeleteRole />
     default:
       return null;
   }

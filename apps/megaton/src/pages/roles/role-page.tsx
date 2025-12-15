@@ -1,4 +1,9 @@
-import { Button, Separator, Form as ApolloForm } from '@apollo/ui';
+import {
+  Button,
+  Separator,
+  Form as ApolloForm,
+  setCurrentDialog,
+} from '@apollo/ui';
 import { useForm } from 'react-hook-form';
 import {
   RoleMetadataCoreFields,
@@ -67,9 +72,7 @@ export default function RolePage() {
       <div className="sticky top-0 flex flex-col bg-background z-10 shadow-sm">
         <div className="flex justify-between items-center p-4">
           <h2 className="text-2xl font-semibold capitalize">{id}</h2>
-            <Button type='button'>
-              Save Changes
-            </Button>
+          <Button type="button">Save Changes</Button>
         </div>
         <Separator />
       </div>
@@ -77,7 +80,16 @@ export default function RolePage() {
         <form id="super-admin-form" className="space-y-10 p-4">
           <RoleMetadataCoreFields />
           <RolePermissionFields />
-          <Button className='text-destructive' variant='link'>Delete Role</Button>
+          <Button
+            onClick={() =>
+              setCurrentDialog({ content: 'delete-role', open: true })
+            }
+            className="text-destructive"
+            variant="link"
+            type='button'
+          >
+            Delete Role
+          </Button>
         </form>
       </ApolloForm>
     </section>
